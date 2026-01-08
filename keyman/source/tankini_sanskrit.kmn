@@ -19,8 +19,8 @@ store(MatraKeys)    'A'    'i'    'I'    'u'    'U'    'R'    'e'    'E'    'o' 
 store(Matras)       'ा'    'ि'    'ी'    'ु'    'ू'    'ृ'    'े'    'े'    'ो'    'ो'
 
 c Consonant Keys (For Buffer Logic)
-store(ConsonantKeys) 'k' 'g' 'c' 'j' 'T' 'D' 'N' 't' 'd' 'n' 'p' 'b' 'm' 'y' 'r' 'l' 'v' 'w' 's' 'h' 'L' 'K' 'G' 'C' 'J' 'S' 'P' 'B' 'x' 'Y'
-store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न' 'प' 'ब' 'म' 'य' 'र' 'ल' 'व' 'व' 'स' 'ह' 'ळ' 'ख' 'घ' 'छ' 'झ' 'श' 'फ' 'भ' 'क्ष' 'ञ'
+store(ConsonantKeys) 'k' 'g' 'c' 'j' 'T' 'D' 'N' 't' 'd' 'n' 'p' 'b' 'm' 'y' 'r' 'l' 'v' 'w' 's' 'h' 'L' 'K' 'G' 'C' 'J' 'S' 'P' 'B' 'x'
+store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न' 'प' 'ब' 'म' 'य' 'र' 'ल' 'व' 'व' 'स' 'ह' 'ळ' 'ख' 'घ' 'छ' 'झ' 'श' 'फ' 'भ' 'क्ष'
 
 c All Devanagari Consonants (For Matra/Vowel Context Rules)
 store(AllDevaConsonants) 'क' 'ख' 'ग' 'घ' 'ङ' 'च' 'छ' 'ज' 'झ' 'ञ' 'ट' 'ठ' 'ड' 'ढ' 'ण' 'त' 'थ' 'द' 'ध' 'न' 'प' 'फ' 'ब' 'भ' 'म' 'य' 'र' 'ल' 'व' 'श' 'ष' 'स' 'ह' 'क्ष' 'ज्ञ' 'ळ'
@@ -190,7 +190,17 @@ c Special Special
 'न' '्' + 'g' > 'ङ' '्'
 'न' '्' + 'j' > 'ञ' '्'
 'ग' '्' + 'Y' > 'ज्ञ' '्'
-'ल' '्' + 'R' > 'ऌ' 
+'ल' '्' + 'R' > 'ऌ'
+
+c Explicit Y (Nya) Logic
++ 'Y' > 'ञ'
+'ञ' + 'a' > 'ञ'
+any(AllDevaConsonants) + 'Y' > index(AllDevaConsonants, 1) '्' 'ञ'
+
+c Jnya Formation (j/g + Y)
+'ज' '्' + 'Y' > 'ज्ञ' '्'
+'ग' '्' + 'Y' > 'ज्ञ' '्'
+'ज्ञ' '्' + 'a' > 'ज्ञ' 
 
 c Numbers
 + any(NumberKeys) > index(Numbers, 1)
