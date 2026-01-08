@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Tankini Sanskrit Automation Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        #log {
+            white-space: pre-wrap;
+            background: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .pass {
+            color: green;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            font-family: 'Times New Roman', serif;
+            font-size: 24px;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script src='https://s.keyman.com/kmw/engine/18.0.245/keymanweb.js'></script>
+</head>
+
+<body>
+    <h1>Tankini Sanskrit Test Harness</h1>
+    <textarea id="ta1" placeholder="Type here..."></textarea>
+    <div id="controls">
+        <button onclick="window.runFailed()">Retry Failed Tests</button>
+    </div>
+    <div id="status">Initializing...</div>
+    <div id="log"></div>
+
+    <script>
+        window.failedTests = [];
+
+        window.runTests = async function () {
+            const log = document.getElementById('log');
+            const ta = document.getElementById('ta1');
+            const kmw = window.keyman;
+
+            if (!kmw) {
+                log.innerHTML += "<div class='fail'>KeymanWeb not found!</div>";
+                return;
+            }
+
+            console.log("Registering keyboard...");
+            kmw.addKeyboards({
+                id: 'Keyboard_tankini_sanskrit',
+                name: 'Tankini Sanskrit',
+                languages: {
+                    id: 'sa',
+                    name: 'Sanskrit'
+                },
+                filename: '../build/tankini_sanskrit.js'
+            });
+
+            console.log("Setting active keyboard...");
+            let activated = false;
+            for (let attempt = 0; attempt < 10; attempt++) {
+                try {
+                    await kmw.setActiveKeyboard('Keyboard_tankini_sanskrit', 'sa');
+                    activated = true;
+                    log.innerHTML += `<div>Keyboard activated.</div>`;
+                    break;
+                } catch (e) {
+                    console.log(`Attempt ${attempt + 1} failed: ${e.message}`);
+                    await new Promise(r => setTimeout(r, 500));
+                }
+            }
+
+            if (!activated) {
+                log.innerHTML += `<div class='fail'>Error activating keyboard: Timed out waiting for keyboard registration.</div>`;
+                return;
+            }
+
+            const activeKp = kmw.getActiveKeyboard();
+            log.innerHTML += `<div>Active Keyboard: ${activeKp ? activeKp : 'None'}</div>`;
+
+            let passes = 0;
+            let fails = 0;
+            window.failedTests = [];
+
+            // Fetch tests
+            let response = await fetch('test_cases.json');
+            let tests = await response.json();
+
+            // Add manual tests
+            tests.unshift(
+                { seq: 'k', expect: 'क्', desc: 'Simple Consonant' },
+                { seq: 'ka', expect: 'क', desc: 'Implicit A (ka -> k)' },
+                { seq: 'ki', expect: 'कि', desc: 'Matra i' },
+                { seq: 'kai', expect: 'कै', desc: 'Matra ai (deadkey logic)' },
+                { seq: 'kau', expect: 'कौ', desc: 'Matra au (k+a+u)' }
+            );
+
+            // Batch Logic
+            const runBatch = async (batch, offset) => {
+                const codeMap = {
+                    '.': 'Period',
+                    '-': 'Minus',
+                    ' ': 'Space',
+                    ',': 'Comma',
+                    '?': 'Slash',
+                    '!': 'Digit1',
+                    '@': 'Digit2',
+                    '#': 'Digit3',
+                    '$': 'Digit4',
+                    '%': 'Digit5',
+                    '^': 'Digit6',
+                    '&': 'Digit7',
+                    '*': 'Digit8',
+                    '(': 'Digit9',
+                    ')': 'Digit0',
+                    '_': 'Minus',
+                    '+': 'Equal',
+                    '=': 'Equal',
+                    ':': 'Semicolon',
+                    ';': 'Semicolon',
+                    '"': 'Quote',
+                    "'": 'Quote',
+                    '\\': 'Backslash',
+                    '\n': 'Enter'
+                };
+
+                const shiftChars = "!@#$%^&*()_+{}:\"<>?~|";
+
+                for (let i = 0; i < batch.length; i++) {
+                    let t = batch[i];
+                    kmw.setActiveElement(ta);
+                    ta.value = '';
+                    ta.focus();
+
+                    let seq = t.seq || "";
+
+                    for (let char of seq) {
+                        let isUpper = (char === char.toUpperCase() && char !== char.toLowerCase()) || shiftChars.includes(char);
+                        let key = char;
+                        let code = codeMap[char] || ('Key' + char.toUpperCase());
+
+                        let charCode = char.charCodeAt(0);
+                        let keyCode = char.toUpperCase().charCodeAt(0);
+
+                        // Adjust keyCode
+                        if (char === '.') keyCode = 190;
+                        if (char === '-') keyCode = 189;
+                        if (char === ' ') keyCode = 32;
+                        if (char === '\n') keyCode = 13;
+                        if (char === '\\') keyCode = 220;
+                        if (codeMap[char] && codeMap[char].startsWith('Digit')) keyCode = char.charCodeAt(0);
+
+                        // Simulate Shift Down
+                        if (isUpper) {
+                            ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift', code: 'ShiftLeft', keyCode: 16, which: 16, shiftKey: true, bubbles: true }));
+                        }
+
+                        ta.dispatchEvent(new KeyboardEvent('keydown', { key: key, code: code, charCode: 0, keyCode: keyCode, which: keyCode, shiftKey: isUpper, bubbles: true }));
+                        ta.dispatchEvent(new KeyboardEvent('keypress', { key: key, charCode: charCode, keyCode: charCode, which: charCode, shiftKey: isUpper, bubbles: true }));
+                        ta.dispatchEvent(new KeyboardEvent('keyup', { key: key, keyCode: keyCode, which: keyCode, shiftKey: isUpper, bubbles: true }));
+
+                        // Simulate Shift Up
+                        if (isUpper) {
+                            ta.dispatchEvent(new KeyboardEvent('keyup', { key: 'Shift', code: 'ShiftLeft', keyCode: 16, which: 16, shiftKey: false, bubbles: true }));
+                        }
+
+                        await new Promise(r => setTimeout(r, 50)); // Slower typing for stability
+                    }
+
+                    await new Promise(r => setTimeout(r, 50));
+
+                    let actual = ta.value.trim();
+                    let expected = t.expect.trim();
+
+                    if (actual === expected) {
+                        // Only log failures to keep log clean for large batches
+                        // log.innerHTML += `<div class='pass'>PASS: ${t.desc}</div>`;
+                        passes++;
+                    } else {
+                        log.innerHTML += `<div class='fail'>FAIL: ${t.desc} <br>Input: ${t.seq}<br>Expected: '${expected}'<br>Got:      '${actual}'</div>`;
+                        fails++;
+                        window.failedTests.push(t);
+                    }
+
+                    // Progress update every 10 tests
+                    if ((i + 1) % 10 === 0) {
+                        document.getElementById('status').innerText = `Running... (${offset + i + 1}/${tests.length})`;
+                        await new Promise(r => setTimeout(r, 0)); // Yield to UI
+                    }
+                }
+            };
+
+            // Staged Execution Strategy: 10 -> 50 -> 100 -> All
+            const stages = [10, 50, 100, tests.length];
+            let currentOffset = 0;
+
+            for (let limit of stages) {
+                if (currentOffset >= tests.length) break;
+
+                let count = Math.min(limit - currentOffset, tests.length - currentOffset);
+                if (count <= 0) continue;
+
+                log.innerHTML += `<div><strong>Starting batch of ${count} tests (Total so far: ${currentOffset + count})...</strong></div>`;
+
+                let batch = tests.slice(currentOffset, currentOffset + count);
+                await runBatch(batch, currentOffset);
+
+                currentOffset += count;
+                let rate = passes / currentOffset;
+
+                log.innerHTML += `<div>Batch Result: ${passes}/${currentOffset} passed. (Failed: ${fails})</div>`;
+
+                // Stop if failure rate is too high (e.g. < 90%)
+                if (rate < 0.90 && currentOffset < tests.length) {
+                    log.innerHTML += `<div class='fail'>Success rate low (${Math.round(rate * 100)}%). Aborting further tests.</div>`;
+                    break;
+                }
+
+                await new Promise(r => setTimeout(r, 500));
+            }
+
+            document.getElementById('status').innerText = `Tests Complete. Total Pass: ${passes}, Fail: ${fails}`;
+            log.innerHTML += `<div><strong>Tests Complete. Total Pass: ${passes}, Fail: ${fails}</strong></div>`;
+
+            // Expose helper to retry failed
+            window.runFailed = async function () {
+                if (window.failedTests.length === 0) {
+                    alert("No failed tests to retry.");
+                    return;
+                }
+                log.innerHTML = "";
+                log.innerHTML += `<div><strong>Retrying ${window.failedTests.length} failed tests...</strong></div>`;
+                passes = 0; fails = 0;
+                let retryBatch = [...window.failedTests]; // copy
+                window.failedTests = []; // reset for new failures
+                await runBatch(retryBatch, 0);
+                document.getElementById('status').innerText = `Retry Complete. Pass: ${passes}, Fail: ${fails}`;
+                log.innerHTML += `<div><strong>Retry Complete. Pass: ${passes}, Fail: ${fails}</strong></div>`;
+            };
+        };
+
+        window.onload = function () {
+            if (window.keyman) {
+                window.keyman.init({ attachType: 'auto' }).then(function () {
+                    setTimeout(window.runTests, 1000);
+                });
+            } else {
+                document.getElementById('status').innerText = "Keyman not loaded";
+            }
+        };
+    </script>
+</body>
+
+</html>

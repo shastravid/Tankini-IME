@@ -1,0 +1,100 @@
+// This file specifis the mapping to input itrans / baraha keystrokes and get devanagari unicode output. 
+// The swara support is mostly specific to the chandas font, 
+// since it is not supported at all by the unicode standard.
+
+
+// svaras which should only be output when in the default state. i.e. not in conjunct state
+// note that "conjunct" has no special meaning outside of this file. It is simply some logical state.
+// The input stream can be in only one state at a time. For devanagari unicode, this suffices.
+// [state] specifies "state" or "default-state".
+
+
+		: [AUM]		: #x0950	:	: 
+		: [a-hrasva]	: #x0061	:	: 
+		: [a-dirgha]	: #x0101 	:	: 
+		: [i-hrasva]	: #x0069	:	: 
+		: [i-dirgha]	: #x012B	:	: 
+		: [u-hrasva]	: #x0075	:	: 
+		: [u-dirgha]	: #x016B	:	: 
+		: [R-hrasva]	: #x1E5B	:	: 
+		: [L-hrasva]	: #x1E37	:	: 
+		: [e-dirgha]	: #x0065	:	: 
+		: [ai]		: #x0061+#x0069	:	: 
+		: [o-dirgha]	: #x006F	:	: 
+		: [au]		: #x0061+#x0075	:	: 
+		: [R-dirgha]	: #x1E5D	:	: 
+		: [L-dirgha]	: #x1E39	:	: 
+
+// numbers and symbols which can be output either in default state, or in conjunct state
+
+		: [0]		: #x0030	:	: 
+		: [1]		: #x0031	:	: 
+		: [2]		: #x0032	:	: 
+		: [3]		: #x0033	:	: 
+		: [4]		: #x0034	:	: 
+		: [5]		: #x0035	:	: 
+		: [6]		: #x0036	:	: 
+		: [7]		: #x0037	:	: 
+		: [8]		: #x0038	:	: 
+		: [9]		: #x0039	:	: 
+		: [|]		: #x007C	: 	: 
+//[CONJUNCT]	: [||]		: #x0041	: 	: 
+
+
+	: [k]		: #x006B	: 	: 
+	: [kh]		: #x006B+#x0068	: 	: 
+	: [g]		: #x0067	: 	: 
+	: [gh]		: #x0067+#x0068	: 	: 
+	: [~N]		: #x1E45	: 	: 
+	: [ch]		: #x0063	: 	: 
+	: [Ch]		: #x0063+#x0068	: 	: 
+	: [j]		: #x006A	: 	: 
+	: [GY]		: #x006A+#x00F1	: 	: 
+	: [jh]		: #x006A+#x0068	: 	: 
+	: [~n]		: #x00F1	: 	: 
+	: [T]		: #x1E6D	: 	: 
+	: [Th]		: #x1E6D+#x0068	: 	: 
+	: [D]		: #x1E0D	: 	: 
+	: [Dh]		: #x1E0D+#x0068	: 	: 
+	: [N]		: #x1E47	: 	: 
+	: [t]		: #x0074	: 	: 
+	: [th]		: #x0074+#x0068	: 	: 
+	: [d]		: #x0064	: 	: 
+	: [dh]		: #x0064+#x0068	: 	: 
+	: [n]		: #x006E	: 	: 
+	: [p]		: #x0070	: 	: 
+	: [ph]		: #x0070+#x0068	: 	: 
+	: [b]		: #x0062	: 	: 
+	: [bh]		: #x0062+#x0068	: 	: 
+	: [m]		: #x006D	:	:
+	: [y]		: #x0079	:	:
+	: [r]		: #x0072	:	:
+	: [l]		: #x006C	:	:
+	: [L]		: #x1E3B	:	:
+	: [v]		: #x0076	:	:
+	: [sh]		: #x015B	:	:
+	: [shh]		: #x1E63	:	:
+	: [s]		: #x0073	:	:
+	: [h]		: #x0068	:	:
+	: [x]		: #x006B+#x1E63	:	:
+
+
+
+// non-joiner, joiner, and other punctuation. 
+// Once aplied, we are in the default (non-conjunct state)
+
+	: [ZWNJ]	: 	: 	: 
+	: [ZWJ]		: 	: 	: 
+
+	: [M]		: #x1E41	:	: 
+	: [M]		: #x1E43	:	: OUTPUTONLY
+	: [.N], [gM], [ggM]	: #xF141	:	: 
+	: [.a]		: #x0027	:	: 
+	: [H]		: #x1E25	:	:
+
+
+	: [']		: #x030D	: 	: 
+	: [_]		: #x0331	: 	: 
+	: ["]		: #x030E	: 	: 
+
+

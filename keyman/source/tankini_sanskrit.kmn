@@ -1,0 +1,145 @@
+store(&VERSION) '10.0'
+store(&NAME) 'Tankini Sanskrit'
+store(&TARGETS) 'any'
+store(&COPYRIGHT) '© 2026'
+store(&KEYBOARDVERSION) '1.0'
+c store(&VISUALKEYBOARD) 'tankini_sanskrit.kvks'
+c store(&LAYOUTFILE) 'tankini_sanskrit.keyman-touch-layout'
+
+begin Unicode > use(main)
+
+c ----------------------------------------------------------------------------
+c Stores
+c ----------------------------------------------------------------------------
+
+store(VowelKeys)    'a'    'i'    'u'    'R'    'e'    'o'    'A'    'I'    'U'    'E'    'O'
+store(Vowels)       'अ'    'इ'    'उ'    'ऋ'    'ए'    'ओ'    'आ'    'ई'    'ऊ'    'ए'    'ओ'
+
+store(MatraKeys)    'A'    'i'    'I'    'u'    'U'    'R'    'e'    'E'    'o'    'O'
+store(Matras)       'ा'    'ि'    'ी'    'ु'    'ू'    'ृ'    'े'    'े'    'ो'    'ो'
+
+c Consonant Keys (Standard)
+c Removed 'X' as it is Svarita, not a consonant base for virama logic.
+store(ConsonantKeys) 'k' 'g' 'c' 'j' 'T' 'D' 'N' 't' 'd' 'n' 'p' 'b' 'm' 'y' 'r' 'l' 'v' 'w' 's' 'h' 'L' 'K' 'G' 'C' 'J' 'S' 'P' 'B' 'x'
+store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न' 'प' 'ब' 'म' 'य' 'र' 'ल' 'व' 'व' 'स' 'ह' 'ळ' 'ख' 'घ' 'छ' 'झ' 'श' 'फ' 'भ' 'क्ष' 'ठ' 'ढ' 'थ' 'ध' 'ङ' 'ञ' 'ज्ञ' 'ष'
+
+store(NumberKeys) '0'..'9'
+store(Numbers)    '०'..'९'
+
+group(main) using keys
+
+c ----------------------------------------------------------------------------
+c Vowels (Independent)
+c ----------------------------------------------------------------------------
++ 'a' > 'अ'
+'अ' + 'a' > 'आ'
++ 'A' > 'आ'
++ 'i' > 'इ'
+'इ' + 'i' > 'ई'
++ 'I' > 'ई'
+'e' + 'e' > 'ई'
++ 'u' > 'उ'
+'उ' + 'u' > 'ऊ'
++ 'U' > 'ऊ'
+'o' + 'o' > 'ऊ'
++ 'R' > 'ऋ'
+'ऋ' + 'R' > 'ॠ'
++ 'e' > 'ए'
++ 'E' > 'ए'
+
++ 'o' > 'ओ'
++ 'O' > 'ओ'
+
+'अ' + 'i' > 'ऐ'
+'अ' + 'u' > 'औ'
+
+c 'l' + 'R' > 'ऌ' c Handled below
+
+c ----------------------------------------------------------------------------
+c Modifiers
+c ----------------------------------------------------------------------------
++ 'M' > 'ं'
++ 'H' > 'ः'
++ '\' > '्'
+'ं' + '.' > 'ँ'
+
+c ----------------------------------------------------------------------------
+c Special & Vedic
+c ----------------------------------------------------------------------------
++ 'q' > '॰'
++ 'z' > '॰'
++ '.' > '।'
+'।' + '.' > '॥'
+'।' + 'a' > 'ऽ'
+'.' + 'a' > 'ऽ'
+'ओ' + 'M' > 'ॐ'
+'औ' + 'm' > 'ॐ'
+'आ' 'ऊ' + 'M' > 'ॐ'
+
++ '_' > '॒'
++ 'X' > '॑'
+'॑' + 'X' > '᳚'
+
+c ----------------------------------------------------------------------------
+c Halant-Default Logic
+c ----------------------------------------------------------------------------
+
+c 1. Aspirates (Context: Consonant + Virama + 'h')
+c Note: We match the DISPLAYED chars from previous rule
+'क' '्' + 'h' > 'ख' '्' 
+'ग' '्' + 'h' > 'घ' '्'
+'च' '्' + 'h' > 'छ' '्'
+'ज' '्' + 'h' > 'झ' '्'
+'ट' '्' + 'h' > 'ठ' '्'
+'ड' '्' + 'h' > 'ढ' '्'
+'त' '्' + 'h' > 'थ' '्'
+'द' '्' + 'h' > 'ध' '्'
+'प' '्' + 'h' > 'फ' '्'
+'ब' '्' + 'h' > 'भ' '्'
+'स' '्' + 'h' > 'श' '्'
+'श' '्' + 'h' > 'ष' '्'
+
+c Special Special
+'न' '्' + 'g' > 'ङ' '्'
+'न' '्' + 'j' > 'ञ' '्'
+'ग' '्' + 'Y' > 'ज्ञ' '्'
+'ल' '्' + 'R' > 'ऌ' 
+
+c 2. Implicit A (Removes Virama)
+'्' + 'a' > nul
+
+c 3. Matras (Remove Virama, Add Matra)
+'्' + any(MatraKeys) > index(Matras, 2)
+
+c 4. Generic Consonants (Always output with Virama)
++ any(ConsonantKeys) > index(Consonants, 1) '्'
+
+c 6. AI / AU / Double Vowel Logic
+c Note: 'k' -> 'क्'. 'k'+'a' -> 'क'.
+c 'k'+'a'+'i' -> 'क'+'i' -> 'कै'
+c New multi-input support: aa->A, ii->I, uu->U, ee->I, oo->U.
+
+any(Consonants) + 'i' > context 'ै'
+any(Consonants) + 'u' > context 'ौ'
+
+c aa -> A (After full consonant)
+c If we simply type 'a', it falls back to 'अ'. But if preceded by full consonant, it means 'aa' -> 'ा'.
+any(Consonants) + 'a' > context 'ा'
+
+c aa -> A (Independent / Initial logic handled by 'a'+'a')
+'अ' + 'a' > 'आ'
+
+c ii -> I (matra)
+'ि' + 'i' > 'ी'
+
+c uu -> U (matra)
+'ु' + 'u' > 'ू'
+
+c ee -> I (matra, alt) (Usually 'e' is 'े')
+'े' + 'e' > 'ी'
+
+c oo -> U (matra, alt) (Usually 'o' is 'ो')
+'ो' + 'o' > 'ू'
+
+c 7. Numbers
++ any(NumberKeys) > index(Numbers, 1)

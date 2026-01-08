@@ -1,0 +1,112 @@
+// svaras which should only be output when in the default state. i.e. not in conjunct state
+// note that "conjunct" has no special meaning outside of this file. It is simply some logical state.
+// The input stream can be in only one state at a time. For devanagari unicode, this suffices.
+// [state] specifies "state" or "default-state".
+
+//TODO
+		: [AUM]		: #x0BD0	:	: 
+
+		: [a-hrasva]	: #x0B85 	:	: 
+		: [a-dirgha]	: #x0B86 	:	: 
+		: [i-hrasva]	: #x0B87	:	: 
+		: [i-dirgha]	: #x0B88	:	: 
+		: [u-hrasva]	: #x0B89	:	: 
+		: [u-dirgha]	: #x0B8A	:	: 
+//		: [R-hrasva]	: #x090B	:	: 
+//		: [L-hrasva]	: #x090C	:	: 
+		: [e-hrasva]	: #x0B8E	:	: 
+		: [e-dirgha]	: #x0B8F	:	: 
+		: [ai]		: #x0B90	:	: 
+		: [o-hrasva]	: #x0B92	:	: 
+		: [o-dirgha]	: #x0B93	:	: 
+		: [au]		: #x0B94	:	: 
+//		: [R-dirgha]	: #x0960	:	: 
+//		: [L-dirgha]	: #x0961	:	: 
+
+		: [R-hrasva]	: #x0BB0+#x0BC1	: 	: 
+		: [R-dirgha]	: #x0BB0+#x0BC2	: 	: 
+		: [L-hrasva]	: #x0BB2+#x0BC1	: 	: 
+		: [L-dirgha]	: #x0BB2+#x0BC1	: 	: 
+
+
+// numbers and symbols which can be output either in default state, or in conjunct state
+
+//[CONJUNCT]	: [0]		: #x0966	:	: 
+//[CONJUNCT]	: [1]		: #x0967	:	: 
+//[CONJUNCT]	: [2]		: #x0968	:	: 
+//[CONJUNCT]	: [3]		: #x0969	:	: 
+//[CONJUNCT]	: [4]		: #x096A	:	: 
+//[CONJUNCT]	: [5]		: #x096B	:	: 
+//[CONJUNCT]	: [6]		: #x096C	:	: 
+//[CONJUNCT]	: [7]		: #x096D	:	: 
+//[CONJUNCT]	: [8]		: #x096E	:	: 
+//[CONJUNCT]	: [9]		: #x096F	:	: 
+//[CONJUNCT]	: [|]		: #x0964	: 	: 
+//[CONJUNCT]	: [||]		: #x0965	: 	: 
+
+// basic character glyphs which can be output either in default state, or in conjuct state.
+// the virama modifier #x0B82 is output, and the result is always the conjunct state.
+
+[CONJUNCT]	: [k],[kh],[g],[gh]	: #x0B95+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [~N]		: #x0B99+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [ch],[Ch]		: #x0B9A+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [j],[jh]		: #x0B9C+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [GY]		: #x0B9C+#x0BCD+#x0B9E+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [~n]		: #x0B9E+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [T],[Th],[D],[Dh]	: #x0B9F+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [N]		: #x0BA3+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [t],[th],[d],[dh]	: #x0BA4+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [n]		: #x0BA8+#x0BCD	: CONJUNCT	: 
+// NNNA 0ba9?
+
+[CONJUNCT]	: [p],[ph],[b],[bh]	: #x0BAA+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [m],[M]		: #x0BAE+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [y]		: #x0BAF+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [r]		: #x0BB0+#x0BCD	: CONJUNCT	: 
+// RRA?
+[CONJUNCT]	: [l]		: #x0BB2+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [L]		: #x0BB3+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [z]		: #x0BB4+#x0BCD	: CONJUNCT	: 
+// LLLA ?
+[CONJUNCT]	: [v]		: #x0BB5+#x0BCD	: CONJUNCT	: 
+
+// not all fonts support sh and shh
+[CONJUNCT]	: [sh]		: #x0BB6+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [shh]		: #x0BB7+#x0BCD	: CONJUNCT	: 
+[CONJUNCT]	: [s]		: #x0BB8+#x0BCD	: CONJUNCT	: 
+
+//[CONJUNCT]	: [sh],[shh],[s]	: #x0BB8+#x0BCD	: CONJUNCT	: 
+
+
+[CONJUNCT]	: [h]		: #x0BB9+#x0BCD	: CONJUNCT	: 
+
+[CONJUNCT]	: [x]		: #x0B95+#x0BCD+#x0BB7+#x0BCD : CONJUNCT	:
+
+// non-joiner, joiner, and other punctuation. 
+// Once aplied, we are in the default (non-conjunct state)
+
+[CONJUNCT]	: [ZWNJ]		: #x200C	: 	: 
+[CONJUNCT]	: [ZWJ]		: #x200D	: 	:
+[CONJUNCT]	: [\.]		: #x0970	: 	: 
+		: [H]		: #x0B83	: 	: 
+
+// swaras. Note that #x08 is a logical backspace which removes the virama
+// logically a part of the simple "k", "kh" etc rules. A real backspace is not emitted,
+// but it is simpler to reason about it this way.
+
+CONJUNCT	: [a-hrasva]	: #x08		:	: 
+CONJUNCT	: [a-dirgha]	: #x08+#x0BBE	: 	: 
+CONJUNCT	: [i-hrasva]	: #x08+#x0BBF	: 	: 
+CONJUNCT	: [i-dirgha]	: #x08+#x0BC0	: 	: 
+CONJUNCT	: [u-hrasva]	: #x08+#x0BC1	: 	: 
+CONJUNCT	: [u-dirgha]	: #x08+#x0BC2	: 	: 
+CONJUNCT	: [R-hrasva]	: #x0BB0+#x0BC1	: 	: 
+CONJUNCT	: [R-dirgha]	: #x0BB0+#x0BC2	: 	: 
+CONJUNCT	: [L-hrasva]	: #x0BB2+#x0BC1	: 	: 
+CONJUNCT	: [L-dirgha]	: #x0BB2+#x0BC1	: 	: 
+CONJUNCT	: [e-hrasva]	: #x08+#x0BC6	: 	: 
+CONJUNCT	: [e-dirgha]	: #x08+#x0BC7	: 	: 
+CONJUNCT	: [ai]		: #x08+#x0BC8	: 	: 
+CONJUNCT	: [o-hrasva]	: #x08+#x0BCA	: 	: 
+CONJUNCT	: [o-dirgha]	: #x08+#x0BCB	: 	: 
+CONJUNCT	: [au]		: #x08+#x0BCC	: 	: 

@@ -1,0 +1,213 @@
+// This file specifis the mapping to input itrans / baraha keystrokes and get devanagari unicode output. 
+// The swara support is mostly specific to the chandas font, 
+// since it is not supported at all by the unicode standard.
+// svaras which should only be output when in the default state. i.e. not in conjunct state
+// note that "conjunct" has no special meaning outside of this file. It is simply some logical state.
+// The input stream can be in only one state at a time. For devanagari unicode, this suffices.
+// [state] specifies "state" or "default-state".
+
+
+		: [AUM]		: #x11350	:	: 
+		: [a-hrasva]	: #x11305 	:	: 
+		: [a-dirgha]	: #x11306 	:	: 
+		: [i-hrasva]	: #x11307	:	: 
+		: [i-dirgha]	: #x11308	:	: 
+		: [u-hrasva]	: #x11309	:	: 
+		: [u-dirgha]	: #x1130A	:	: 
+		: [R-hrasva]	: #x1130B	:	: 
+		: [L-hrasva]	: #x1130C	:	: 
+		: [e-dirgha]	: #x1130F	:	: 
+		: [ai]		: #x11310	:	: 
+		: [o-dirgha]	: #x11313	:	: 
+		: [au]		: #x11314	:	: 
+		: [R-dirgha]	: #x11360	:	: 
+		: [L-dirgha]	: #x11361	:	: 
+
+// numbers and symbols which can be output either in default state, or in conjunct state
+
+[CONJUNCT]	: [0]		: #x0966	:	: 
+[CONJUNCT]	: [1]		: #x0967	:	: 
+[CONJUNCT]	: [2]		: #x0968	:	: 
+[CONJUNCT]	: [3]		: #x0969	:	: 
+[CONJUNCT]	: [4]		: #x096A	:	: 
+[CONJUNCT]	: [5]		: #x096B	:	: 
+[CONJUNCT]	: [6]		: #x096C	:	: 
+[CONJUNCT]	: [7]		: #x096D	:	: 
+[CONJUNCT]	: [8]		: #x096E	:	: 
+[CONJUNCT]	: [9]		: #x096F	:	: 
+[CONJUNCT]	: [|]		: #x0964	: 	: 
+[CONJUNCT]	: [||]		: #x0965	: 	: 
+
+// basic character glyphs which can be output either in default state, or in conjuct state.
+// the virama modifier #x094d is output, and the result is always the conjunct state.
+
+[CONJUNCT]	: [k]		: #x0915+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [kh]		: #x0916+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [g]		: #x0917+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [gh]		: #x0918+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [~N]		: #x0919+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [ch]		: #x091A+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [Ch]		: #x091B+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [j]		: #x091C+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [GY]		: #x091c+#x1134D+#x091E+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [jh]		: #x091D+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [~n]		: #x091E+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [T]		: #x091F+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [Th]		: #x0920+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [D]		: #x0921+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [Dh]		: #x0922+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [N]		: #x0923+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [t]		: #x0924+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [th]		: #x0925+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [d]		: #x0926+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [dh]		: #x0927+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [n]		: #x0928+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [p]		: #x092A+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [ph]		: #x092B+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [b]		: #x092C+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [bh]		: #x092D+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [m]		: #x092E+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [y]		: #x092F+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [r]		: #x0930+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [l]		: #x0932+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [L]		: #x0933+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [v]		: #x0935+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [sh]		: #x0936+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [shh]		: #x0937+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [s]		: #x0938+#x1134D	: CONJUNCT	: 
+[CONJUNCT]	: [h]		: #x0939+#x1134D	: CONJUNCT	: 
+
+[CONJUNCT]	: [x]		: #x0915+#x1134D+#x0937+#x1134D : CONJUNCT	:
+//[CONJUNCT]	: [x], [k]+[shh]: #x0916+#x094D+#x0937+#x094D : CONJUNCT	: INPUTONLY
+
+//[CONJUNCT]	: [x]		: #x0916+#x094D+#x0937+#x094D : CONJUNCT	: INPUTONLY
+
+
+// non-joiner, joiner, and other punctuation. 
+// Once aplied, we are in the default (non-conjunct state)
+
+[CONJUNCT]	: [ZWNJ]	: #x200C	: 	: 
+[CONJUNCT]	: [ZWJ]		: #x200D	: 	: 
+
+[CONJUNCT]	: [M]		: #xF150	:	: OUTPUTONLY
+[CONJUNCT]	: [M]		: #x0902	:	: 
+[CONJUNCT]	: [.N]		: #x0901	:	: 
+[CONJUNCT]	: [.a]		: #x093D	:	: 
+[CONJUNCT]	: [.a]+[.a]	: #xF11D	: 	: 
+
+[CONJUNCT]	: [\.]		: #x0970	: 	: 
+
+// default unicode swaras, which only work if a virama is not specified
+// OUTPUTONLY --> not used to generate devanagari. However, when going from 
+// devanagari to transliteration, this rule is also applied.
+
+		: [']		: #x0951	:	:
+		: [']		: #xF175	: 	: OUTPUTONLY
+		: [_]		: #x0952	: 	: 
+		: ["]		: #xF176	: 	: 
+[CONJUNCT]	: ''', "'	: #xF1FA	:	:
+
+// chandas specific swaras, which work after a virama. This is not supported by unicode. 
+
+CONJUNCT	: [']		: #xF175	:	:
+CONJUNCT	: [_]		: #xF1A2	: 	: 
+CONJUNCT	: ["]		: #xF176	:	: 
+
+
+// chandas specific gM, ggM, guru, laghu and sama veda swaras. This can be output anytime.
+// this is not supported by unicode.
+
+[CONJUNCT]	: [gM]		: #xF159	: 	: 
+[CONJUNCT]	: [ggM]		: #xF204	: 	: 
+[CONJUNCT]	: [\g]		: #xF178	: 	: 
+[CONJUNCT]	: [\l]		: #xF179	: 	: 
+[CONJUNCT]	: [\1]		: #xF184	: 	: 
+[CONJUNCT]	: [\3]		: #xF185	: 	: 
+
+[CONJUNCT]	: \s1		: #xF186	: 	: 
+[CONJUNCT]	: \s2		: #xF187	: 	: 
+[CONJUNCT]	: \s3		: #xF188	: 	: 
+[CONJUNCT]	: \s4		: #xF189	: 	: 
+[CONJUNCT]	: \s5		: #xF18A	: 	: 
+[CONJUNCT]	: \s6		: #xF18B	: 	: 
+[CONJUNCT]	: \s7		: #xF18C	: 	: 
+[CONJUNCT]	: \s8		: #xF18D	: 	: 
+[CONJUNCT]	: \s9		: #xF18E	: 	: 
+[CONJUNCT]	: \s0		: #xF18F	: 	: 
+[CONJUNCT]	: \sr		: #xF191	: 	: 
+[CONJUNCT]	: \sk		: #xF192	: 	: 
+[CONJUNCT]	: \su		: #xF193	: 	: 
+[CONJUNCT]	: \s.a		: #xF194	: 	: 
+[CONJUNCT]	: \s1r		: #xF195	: 	: 
+[CONJUNCT]	: \s2r		: #xF196	: 	: 
+[CONJUNCT]	: \s3r		: #xF197	: 	: 
+[CONJUNCT]	: \s4r		: #xF198	: 	: 
+[CONJUNCT]	: \s5r		: #xF199	: 	: 
+[CONJUNCT]	: \sr.		: #xF19A	: 	: 
+[CONJUNCT]	: \s1r.		: #xF19B	: 	: 
+[CONJUNCT]	: \s2r.		: #xF19C	: 	: 
+[CONJUNCT]	: \s3r.		: #xF19D	: 	: 
+[CONJUNCT]	: \s4r.		: #xF19E	: 	: 
+[CONJUNCT]	: \s5r.		: #xF19F	: 	: 
+[CONJUNCT]	: \s2u		: #xF1A0	: 	: 
+[CONJUNCT]	: \s3k		: #xF1A1	: 	: 
+[CONJUNCT]	: \p		: #xF195	: 	: 
+[CONJUNCT]	: \s		:#xF196	: 	: 
+[CONJUNCT]	: \11		:#xF197	: 	: 
+
+// chandas specific swaras are used before the visarga. Otherwise, it does not display correctly
+// even with a ZWJ in place
+
+		: [']+[H]	: #x0951+#xE003 : 	: 
+		: [_]+[H]	: #x0952+#xE003 : 	: 
+		: ["]+[H]	: #xF176+#xE003 : 	: 
+		: '''+[H]	: #xF202+#xE003	:	:
+		: [H]		: #x0903	: 	: 
+
+		: [H]		: #xE003	:	: OUTPUTONLY
+
+// M and " touch, making it difficult to read. Output m instead
+//		: ["]+[M]	: #xF176+#x092E+#x094D	: 	: INPUTONLY
+//		: [M]+["]	: #x092E+#x094D+#xF176	: 	: INPUTONLY
+//		: ["]+[M]	: #x0902+#xF202		: 	: 
+//		: [M]+["]	: #x0902+#xF202		: 	: 
+//		: ["]+[M]	: #x0902+#xF1FA		: 	: 
+//		: [M]+["]	: #x0902+#xF1FA		: 	: 
+
+
+
+// reordering of swaras 'M becomes M'
+		: [']+[M]	: #x0902+#x0951	:	: 
+		: [_]+[M]	: #x0902+#x0952 :	: 
+
+// chandas has nice glyphs combining gM ggM and swaras
+
+		: [gM]+[']	: #xE004	: 	: 
+		: [gM]+["]	: #xE005	: 	: 
+		: [gM]+[_]	: #xE006	: 	: 
+
+		: [ggM]+[_]	: #xF205	:	: 
+		: [ggM]+[']	: #xF206	:	: 
+		: [ggM]+["]	: #xF207	: 	: 
+
+// swaras. Note that #x08 is a logical backspace which removes the virama
+// logically a part of the simple "k", "kh" etc rules. A real backspace is not emitted,
+// but it is simpler to reason about it this way.
+
+CONJUNCT	: [a-hrasva]	: #x08		:	: 
+CONJUNCT	: [a-dirgha]	: #x08+#x093E	: 	: 
+CONJUNCT	: [i-hrasva]	: #x08+#x093F	: 	: 
+CONJUNCT	: [i-dirgha]	: #x08+#x0940	: 	: 
+CONJUNCT	: [u-hrasva]	: #x08+#x0941	: 	: 
+CONJUNCT	: [u-dirgha]	: #x08+#x0942	: 	: 
+CONJUNCT	: [R-hrasva]	: #x08+#x0943	: 	: 
+CONJUNCT	: [R-dirgha]	: #x08+#x0944	: 	: 
+CONJUNCT	: [L-hrasva]	: #x08+#x0962	: 	: 
+CONJUNCT	: [L-dirgha]	: #x08+#x0963	: 	: 
+CONJUNCT	: [e-dirgha]	: #x08+#x0947	: 	: 
+CONJUNCT	: [ai]	                  : #x08+#x0948	: 	: 
+CONJUNCT	: [o-dirgha]	: #x08+#x094B	: 	: 
+CONJUNCT	: [au]		: #x08+#x094C	: 	: 
+
+
+

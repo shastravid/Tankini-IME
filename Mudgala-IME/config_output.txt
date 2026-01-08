@@ -1,0 +1,4 @@
+Devanagari:#dev:output_devanagari.txt:Sanskrit 2003
+Tamil:#tam:output_tamil.txt:Lohit Tamil
+Grantha:#gra:output_grantha.txt:e-Grantamil,iitmuni
+Diartic:#rom:output_roman.txt:URW Palladio ITU

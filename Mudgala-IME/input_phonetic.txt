@@ -1,0 +1,115 @@
+// This file specifies standard input mappings for well-known characters
+// so that they don't have to be copy-pasted in all the script specific 
+// files. However, mappings can also be made directly in font-specific files.
+// i.e. these "standard keys" have no semantic meaning, and can be changed
+// freely.
+// This file specifies the mappings as per pure itrans schema
+// Edited By Neelakantha Shastri (shastravid@gmail.com)
+// Last updated at: 18-Feb-2014 05:30 am.
+
+[AUM]		: OM, AUM
+
+[a-hrasva]	: a
+[a-dirgha]	: aa, A
+[i-hrasva]	: i
+[i-dirgha]	: ii, I, ee
+[u-hrasva]	: u
+[u-dirgha]	: uu, U, oo
+[R-hrasva]	: R
+[R-dirgha]	: RR
+[L-hrasva]	: lR
+[L-dirgha]	: lRR
+[e-hrasva]	: e
+[e-dirgha]	: E
+[ai]		: ai
+[o-hrasva]	: o
+[o-dirgha]	: O
+[au]		: au
+
+[0]	: 0
+[1]	: 1
+[2]	: 2
+[3]	: 3
+[4]	: 4
+[5]	: 5
+[6]	: 6
+[7]	: 7
+[8]	: 8
+[9]	: 9
+[|]	: |, .
+[||]	: ||, ..
+
+[k]	: k
+[kh]	: kh, K
+[g]	: g
+[gh]	: gh, G
+[~N]	: ng
+[ch]	: c
+[Ch]	: ch,C
+[j]	: j
+[GY]	: gY
+[jh]	: jh, J
+[~n]	: nj
+[T]	: T
+[Th]	: Th
+[D]	: D
+[Dh]	: Dh
+[N]	: N
+[t]	: t
+[th]	: th
+[d]	: d
+[dh]	: dh
+[n]	: n
+[p]	: p
+[ph]	: ph, P
+[b]	: b
+[bh]	: bh, B
+[m]	: m
+[y]	: y
+[r]	: r
+[l]	: l
+[L]	: L
+[z]	: z
+[v]	: v, w, V, W
+[sh]	: sh, S
+[shh]	: Sh, shh
+[s]	: s
+[h]	: h
+[x]	: x
+
+// non-joiner, joiner, and other punctuation.
+
+[ZWNJ]	: {}
+[ZWJ]	: []
+[M]	: M, .n, .m
+[H]	: H
+[.h]	: .h
+[.N]	: .N
+[.a]	: .a
+[.c]	: .c
+[\.]	: \.
+
+// swaras
+
+[']	: \', ', $, X
+["]	: \'', \", '', "XX
+[_]	: \_, _, \`, `, $$, Z
+
+[gM]	: \m, {\m+}, gM, q
+[ggM]	: \M, {\mm+}, ggM, \mm, \M+,  Q
+
+// guru, laghu, samaveda svaras, 1kampa etc
+
+[\g]	: \g
+[\l]	: \l
+[\1]	: \1
+[\3]	: \3
+[\s1]	: \s1
+[\s2]	: \s2
+[\s3]	: \s3
+[\s4]	: \s4
+[\s5]	: \s5
+[\s6]	: \s6
+[\s7]	: \s7
+[\s8]	: \s8
+[\s9]	: \s9

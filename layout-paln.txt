@@ -1,0 +1,105 @@
+make A Clear Layout Plan:
+
+TANKINI-SANSKRIT MAPPINGS
+========================
+
+Devanagari  | Input(s)
+----------- | --------
+ अ          | a
+ आ          | aa, A
+ इ          | i
+ ई          | ii, I, ee
+ उ          | u
+ ऊ          | uu, U, oo
+ ऋ          | R
+ ॠ          | RR
+ ऌ          | lR
+ ॡ          | lRR
+ ए          | e, E
+ ऐ          | ai
+ ओ          | o, O
+ औ          | au
+  ं              | M
+  ः            | H
+  ँ             | M.
+
+Gutturals (Kanthya)
+ क          | k
+ ख          | kh, K
+ ग          | g
+ घ          | gh, G
+ ङ          | ng
+
+Palatals (Talavya)
+ च          | c
+ छ          | ch, C
+ ज          | j
+ झ          | jh, J
+ ञ          | nj
+
+Cerebrals (Murdhanya)
+ ट          | T
+ ठ          | Th
+ ड          | D
+ ढ          | Dh
+ ण          | N
+
+Dentals (Dantya)
+ त          | t
+ थ          | th
+ द          | d
+ ध          | dh
+ न          | n
+
+Labials (Oshthya)
+ प          | p
+ फ          | ph, P
+ ब          | b
+ भ          | bh, B
+ म          | m
+
+Semi-vowels (Antahstha)
+ य          | y
+ र          | r
+ ल          | l
+ ळ          | L
+ व          | v, w
+
+Sibilants & Aspirate
+ श          | sh, S
+ ष          | Sh, shh
+ स          | s
+ ह          | h
+
+Conjuncts
+ क्ष        | x
+ ज्ञ        | gY 
+
+
+NUMBERS
+-------
+Char | Input
+---- | -----
+ ०   | 0
+ १   | 1
+ २   | 2
+ ३   | 3
+ ४   | 4
+ ५   | 5
+ ६   | 6
+ ७   | 7
+ ८   | 8
+ ९   | 9
+
+
+SPECIAL SYMBOLS
+
+ ॐ   | OM, AUM    (pranava)
+ ।   | .            (Danda)
+ ॥   | ..          (Double Danda)
+ ऽ   | .a         (Avagraha)
+ ॰   | q, z        (Abbreviation)
+
+॒  | \_           (Anudatta)
+ ॑ | X           (Svarita)
+ ᳚ | XX        (Deergha Svarita)
