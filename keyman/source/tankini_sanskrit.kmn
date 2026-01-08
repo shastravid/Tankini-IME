@@ -106,10 +106,12 @@ c Special Special
 'ल' '्' + 'R' > 'ऌ' 
 
 c 2. Implicit A (Removes Virama)
-'्' + 'a' > nul
+c Explicitly replace Consonant+Virama with Consonant to ensure deletion.
+any(Consonants) '्' + 'a' > index(Consonants, 1)
 
 c 3. Matras (Remove Virama, Add Matra)
-'्' + any(MatraKeys) > index(Matras, 2)
+c Explicitly replace Consonant+Virama with Consonant+Matra.
+any(Consonants) '्' + any(MatraKeys) > index(Consonants, 1) index(Matras, 3)
 
 c 4. Generic Consonants (Always output with Virama)
 + any(ConsonantKeys) > index(Consonants, 1) '्'
