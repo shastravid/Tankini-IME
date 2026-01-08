@@ -148,13 +148,14 @@ c Homorganic Nasals (Preserve Buffer Key for Context)
 'n' + 'c' > 'ञ' '्' 'c'
 'n' + 'j' > 'ञ' '्' 'j'
 
-c Dedup Logic (Handle double-typing e.g. ngg -> ङ्g + g -> ङ्g)
-'ङ' '्' 'k' + 'k' > context
-'ङ' '्' 'g' + 'g' > context
-'ञ' '्' 'c' + 'c' > context
-'ञ' '्' 'j' + 'j' > context
+c Dedup Logic (Handle double-typing e.g. ngg -> ङ्g + g -> ङ्g -> ङ्ग)
+'ङ' '्' 'k' + 'k' > 'ङ' '्'
+'ङ' '्' 'g' + 'g' > 'ङ' '्'
+'ञ' '्' 'c' + 'c' > 'ञ' '्'
+'ञ' '्' 'j' + 'j' > 'ञ' '्'
 
 c Punctuation Commit Rules
+'k' + ',' > 'क' '्' ','  c DEBUG RULE for k,
 any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
 any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
 any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
