@@ -107,11 +107,12 @@ c Special Special
 
 c 2. Implicit A (Removes Virama)
 c Explicitly replace Consonant+Virama with Consonant to ensure deletion.
-any(Consonants) '्' + 'a' > index(Consonants, 1)
+c Use context(1) to avoid re-typing the consonant (reduces backspace count).
+any(Consonants) '्' + 'a' > context(1)
 
 c 3. Matras (Remove Virama, Add Matra)
 c Explicitly replace Consonant+Virama with Consonant+Matra.
-any(Consonants) '्' + any(MatraKeys) > index(Consonants, 1) index(Matras, 3)
+any(Consonants) '्' + any(MatraKeys) > context(1) index(Matras, 3)
 
 c 4. Generic Consonants (Always output with Virama)
 + any(ConsonantKeys) > index(Consonants, 1) '्'
