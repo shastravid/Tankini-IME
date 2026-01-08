@@ -122,8 +122,13 @@ c If Modifier -> Add Modifier
 deadkey(asp) + 'M' > 'ं'
 deadkey(asp) + 'H' > 'ः'
 
-c 3.7 Homorganic Nasals & Special Logic (Must be BEFORE generic Consumer rules)
+c Punctuation Commit Rules (Explicitly at Top)
+any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
+any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
+any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
+any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
 
+c Homorganic Nasals & Special Logic
 c Explicit Y (Nya) - Halant Default / Buffer
 'n' + 'Y' > 'ञ' '्'
 + 'Y' > 'ञ' '्'
@@ -149,17 +154,10 @@ c Homorganic Nasals (Preserve Buffer Key for Context)
 'n' + 'j' > 'ञ' '्' 'j'
 
 c Dedup Logic (Handle double-typing e.g. ngg -> ङ्g + g -> ङ्g -> ङ्ग)
-'ङ' '्' 'k' + 'k' > 'ङ' '्'
-'ङ' '्' 'g' + 'g' > 'ङ' '्'
-'ञ' '्' 'c' + 'c' > 'ञ' '्'
-'ञ' '्' 'j' + 'j' > 'ञ' '्'
-
-c Punctuation Commit Rules
-'k' + ',' > 'क' '्' ','  c DEBUG RULE for k,
-any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
-any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
-any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
-any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
+'ङ' '्' 'k' + 'k' > 'ङ' '्' 'k'
+'ङ' '्' 'g' + 'g' > 'ङ' '्' 'g'
+'ञ' '्' 'c' + 'c' > 'ञ' '्' 'c'
+'ञ' '्' 'j' + 'j' > 'ञ' '्' 'j'
 
 c Explicit Matra Rules (Expanded to avoid KM02032)
 'ञ' '्' + 'A' > 'ञ' 'ा'
