@@ -188,14 +188,25 @@ deadkey(asp) + '\' > '्'
 
 c Special Special
 'न' '्' + 'g' > 'ङ' '्'
+'न' '्' 'g' + 'g' > 'ङ' '्' 'g'
 'न' '्' + 'j' > 'ञ' '्'
+
+c Jnya Formation (j/g + Y) - Moved UP (Halant Default)
+'j' + 'Y' > 'ज्ञ' '्'
+'g' + 'Y' > 'ज्ञ' '्'
+'ज्ञ' '्' + 'a' > 'ज्ञ' 
+'ज्ञ' '्' + any(MatraKeys) > 'ज्ञ' index(Matras, 1)
+
 'ग' '्' + 'Y' > 'ज्ञ' '्'
 'ल' '्' + 'R' > 'ऌ'
 
 c Explicit Y (Nya) Logic - Halant Default!
 + 'Y' > 'ञ' '्'
 'ञ' '्' + 'a' > 'ञ'
-any(AllDevaConsonants) + 'Y' > context '्' 'ञ' '्'
+
+c Buffer/Deadkey Logic for Y
+any(ConsonantKeys) + 'Y' > index(Consonants, 1) '्' 'ञ' '्'
+deadkey(asp) + 'Y' > '्' 'ञ' '्'
 
 c Nya Matras (Explicit)
 'ञ' '्' + 'A' > 'ञ' 'ा'
@@ -208,11 +219,6 @@ c Nya Matras (Explicit)
 'ञ' '्' + 'E' > 'ञ' 'े'
 'ञ' '्' + 'o' > 'ञ' 'ो'
 'ञ' '्' + 'O' > 'ञ' 'ो'
-
-c Jnya Formation (j/g + Y) - Halant Default!
-'j' + 'Y' > 'ज्ञ' '्'
-'g' + 'Y' > 'ज्ञ' '्'
-'ज्ञ' '्' + 'a' > 'ज्ञ' 
 
 c Jnya Matras (Explicit)
 'ज्ञ' '्' + 'A' > 'ज्ञ' 'ा'
@@ -229,8 +235,10 @@ c Jnya Matras (Explicit)
 c Explicit x (Ksha) Logic - Halant Default!
 + 'x' > 'क्ष' '्'
 'क्ष' '्' + 'a' > 'क्ष'
+
+c Buffer/Deadkey Logic for x
 any(ConsonantKeys) + 'x' > index(Consonants, 1) '्' 'क्ष' '्'
-any(AllDevaConsonants) + 'x' > context '्' 'क्ष' '्'
+deadkey(asp) + 'x' > '्' 'क्ष' '्'
 
 c Ksha Matras (Explicit)
 'क्ष' '्' + 'A' > 'क्ष' 'ा'
