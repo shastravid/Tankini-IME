@@ -160,10 +160,39 @@ any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
 any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
 any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
 
-c Matras for Explicit Consonants (Y, x, Jnya)
-'ञ' '्' + any(MatraKeys) > 'ञ' index(Matras, 1)
-'ज्ञ' '्' + any(MatraKeys) > 'ज्ञ' index(Matras, 1)
-'क्ष' '्' + any(MatraKeys) > 'क्ष' index(Matras, 1)
+c Explicit Matra Rules (Expanded to avoid KM02032)
+'ञ' '्' + 'A' > 'ञ' 'ा'
+'ञ' '्' + 'i' > 'ञ' 'ि'
+'ञ' '्' + 'I' > 'ञ' 'ी'
+'ञ' '्' + 'u' > 'ञ' 'ु'
+'ञ' '्' + 'U' > 'ञ' 'ू'
+'ञ' '्' + 'R' > 'ञ' 'ृ'
+'ञ' '्' + 'e' > 'ञ' 'े'
+'ञ' '्' + 'E' > 'ञ' 'े'
+'ञ' '्' + 'o' > 'ञ' 'ो'
+'ञ' '्' + 'O' > 'ञ' 'ो'
+
+'ज्ञ' '्' + 'A' > 'ज्ञ' 'ा'
+'ज्ञ' '्' + 'i' > 'ज्ञ' 'ि'
+'ज्ञ' '्' + 'I' > 'ज्ञ' 'ी'
+'ज्ञ' '्' + 'u' > 'ज्ञ' 'ु'
+'ज्ञ' '्' + 'U' > 'ज्ञ' 'ू'
+'ज्ञ' '्' + 'R' > 'ज्ञ' 'ृ'
+'ज्ञ' '्' + 'e' > 'ज्ञ' 'े'
+'ज्ञ' '्' + 'E' > 'ज्ञ' 'े'
+'ज्ञ' '्' + 'o' > 'ज्ञ' 'ो'
+'ज्ञ' '्' + 'O' > 'ज्ञ' 'ो'
+
+'क्ष' '्' + 'A' > 'क्ष' 'ा'
+'क्ष' '्' + 'i' > 'क्ष' 'ि'
+'क्ष' '्' + 'I' > 'क्ष' 'ी'
+'क्ष' '्' + 'u' > 'क्ष' 'ु'
+'क्ष' '्' + 'U' > 'क्ष' 'ू'
+'क्ष' '्' + 'R' > 'क्ष' 'ृ'
+'क्ष' '्' + 'e' > 'क्ष' 'े'
+'क्ष' '्' + 'E' > 'क्ष' 'े'
+'क्ष' '्' + 'o' > 'क्ष' 'ो'
+'क्ष' '्' + 'O' > 'क्ष' 'ो'
 
 c 4. Latin + Latin -> Deva + Virama + Latin
 any(ConsonantKeys) + any(ConsonantKeys) > index(Consonants, 1) '्' index(ConsonantKeys, 2)
