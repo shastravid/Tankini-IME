@@ -81,11 +81,42 @@ c ----------------------------------------------------------------------------
 '॑' + 'X' > '᳚'
 
 c ----------------------------------------------------------------------------
-c Halant-Default Logic
+c Latin-Buffer Logic (Solves Mac Backspace Bug)
 c ----------------------------------------------------------------------------
 
-c 1. Aspirates (Context: Consonant + Virama + 'h')
-c Note: We match the DISPLAYED chars from previous rule
+c 1. Latin Output for Consonants (Initial State)
++ any(ConsonantKeys) > index(ConsonantKeys, 1)
+
+c 2. Latin + 'a' -> Devanagari (Explicit A)
+any(ConsonantKeys) + 'a' > index(Consonants, 1)
+
+c 3. Latin + Matra -> Deva + Matra
+any(ConsonantKeys) + any(MatraKeys) > index(Consonants, 1) index(Matras, 2)
+
+c 4. Latin + Latin -> Deva + Virama + Latin (Conjunct Formation)
+any(ConsonantKeys) + any(ConsonantKeys) > index(Consonants, 1) '्' index(ConsonantKeys, 2)
+
+c 5. Latin + Space/Punctuation -> Deva + Virama + Space (Word Ending)
+c We need specific rules for space and common punctuation to "commit" the halant.
+any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
+any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
+any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
+any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
+
+c 6. Double Vowels (aa/ii/uu)
+c Handle 'aa' specifically after Latin Consonant?
+c 'k' + 'a' -> 'क'. 'क' + 'a' > 'का'.
+'अ' + 'a' > 'आ'
+any(Consonants) + 'a' > context 'ा'
+any(Consonants) + 'i' > context 'ै'
+any(Consonants) + 'u' > context 'ौ'
+
+c 7. Explicit Virama (Commit)
+any(ConsonantKeys) + '\' > index(Consonants, 1) '्'
+
+c 8. Aspirates (Handling 'h' if 'h' is in ConsonantKeys)
+c Use standard logic since 'h' is a key. 'k'+'h' -> 'k'+'h' -> 'क्'+'h' -> Special Aspirate Rule?
+c Re-implement Aspirates matching DEVANAGARI context (since 'k'+'h' becomes 'क्'+'h')
 'क' '्' + 'h' > 'ख' '्' 
 'ग' '्' + 'h' > 'घ' '्'
 'च' '्' + 'h' > 'छ' '्'
@@ -105,45 +136,5 @@ c Special Special
 'ग' '्' + 'Y' > 'ज्ञ' '्'
 'ल' '्' + 'R' > 'ऌ' 
 
-store(BKSP) U+0008
-
-c 2. Implicit A (Removes Virama)
-c Use explicit BKSP char to force deletion in Mac editors where context deletion fails.
-'्' + 'a' > outs(BKSP)
-
-c 3. Matras (Remove Virama, Add Matra)
-c Delete Virama physically, then add Matra.
-'्' + any(MatraKeys) > outs(BKSP) index(Matras, 2)
-
-c 4. Generic Consonants (Always output with Virama)
-+ any(ConsonantKeys) > index(Consonants, 1) '्'
-
-c 6. AI / AU / Double Vowel Logic
-c Note: 'k' -> 'क्'. 'k'+'a' -> 'क'.
-c 'k'+'a'+'i' -> 'क'+'i' -> 'कै'
-c New multi-input support: aa->A, ii->I, uu->U, ee->I, oo->U.
-
-any(Consonants) + 'i' > context 'ै'
-any(Consonants) + 'u' > context 'ौ'
-
-c aa -> A (After full consonant)
-c If we simply type 'a', it falls back to 'अ'. But if preceded by full consonant, it means 'aa' -> 'ा'.
-any(Consonants) + 'a' > context 'ा'
-
-c aa -> A (Independent / Initial logic handled by 'a'+'a')
-'अ' + 'a' > 'आ'
-
-c ii -> I (matra)
-'ि' + 'i' > 'ी'
-
-c uu -> U (matra)
-'ु' + 'u' > 'ू'
-
-c ee -> I (matra, alt) (Usually 'e' is 'े')
-'े' + 'e' > 'ी'
-
-c oo -> U (matra, alt) (Usually 'o' is 'ो')
-'ो' + 'o' > 'ू'
-
-c 7. Numbers
+c Numbers
 + any(NumberKeys) > index(Numbers, 1)
