@@ -19,8 +19,8 @@ store(MatraKeys)    'A'    'i'    'I'    'u'    'U'    'R'    'e'    'E'    'o' 
 store(Matras)       'ा'    'ि'    'ी'    'ु'    'ू'    'ृ'    'े'    'े'    'ो'    'ो'
 
 c Consonant Keys (For Buffer Logic)
-store(ConsonantKeys) 'k' 'g' 'c' 'j' 'T' 'D' 'N' 't' 'd' 'n' 'p' 'b' 'm' 'y' 'r' 'l' 'v' 'w' 's' 'h' 'L' 'K' 'G' 'C' 'J' 'S' 'P' 'B' 'x'
-store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न' 'प' 'ब' 'म' 'य' 'र' 'ल' 'व' 'व' 'स' 'ह' 'ळ' 'ख' 'घ' 'छ' 'झ' 'श' 'फ' 'भ' 'क्ष'
+store(ConsonantKeys) 'k' 'g' 'c' 'j' 'T' 'D' 'N' 't' 'd' 'n' 'p' 'b' 'm' 'y' 'r' 'l' 'v' 'w' 's' 'h' 'L' 'K' 'G' 'C' 'J' 'S' 'P' 'B'
+store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न' 'प' 'ब' 'म' 'य' 'र' 'ल' 'व' 'व' 'स' 'ह' 'ळ' 'ख' 'घ' 'छ' 'झ' 'श' 'फ' 'भ'
 
 c All Devanagari Consonants (For Matra/Vowel Context Rules)
 store(AllDevaConsonants) 'क' 'ख' 'ग' 'घ' 'ङ' 'च' 'छ' 'ज' 'झ' 'ञ' 'ट' 'ठ' 'ड' 'ढ' 'ण' 'त' 'थ' 'द' 'ध' 'न' 'प' 'फ' 'ब' 'भ' 'म' 'य' 'र' 'ल' 'व' 'श' 'ष' 'स' 'ह' 'क्ष' 'ज्ञ' 'ळ'
@@ -225,6 +225,24 @@ c Jnya Matras (Explicit)
 'ज्ञ' '्' + 'E' > 'ज्ञ' 'े'
 'ज्ञ' '्' + 'o' > 'ज्ञ' 'ो'
 'ज्ञ' '्' + 'O' > 'ज्ञ' 'ो'
+
+c Explicit x (Ksha) Logic - Halant Default!
++ 'x' > 'क्ष' '्'
+'क्ष' '्' + 'a' > 'क्ष'
+any(ConsonantKeys) + 'x' > index(Consonants, 1) '्' 'क्ष' '्'
+any(AllDevaConsonants) + 'x' > context '्' 'क्ष' '्'
+
+c Ksha Matras (Explicit)
+'क्ष' '्' + 'A' > 'क्ष' 'ा'
+'क्ष' '्' + 'i' > 'क्ष' 'ि'
+'क्ष' '्' + 'I' > 'क्ष' 'ी'
+'क्ष' '्' + 'u' > 'क्ष' 'ु'
+'क्ष' '्' + 'U' > 'क्ष' 'ू'
+'क्ष' '्' + 'R' > 'क्ष' 'ृ'
+'क्ष' '्' + 'e' > 'क्ष' 'े'
+'क्ष' '्' + 'E' > 'क्ष' 'े'
+'क्ष' '्' + 'o' > 'क्ष' 'ो'
+'क्ष' '्' + 'O' > 'क्ष' 'ो'
 
 c Numbers
 + any(NumberKeys) > index(Numbers, 1)
