@@ -33,6 +33,23 @@ store(BKSP) U+0008
 group(main) using keys
 
 c ----------------------------------------------------------------------------
+c ----------------------------------------------------------------------------
+c Punctuation Commit Rules (Explicitly at Top)
+c ----------------------------------------------------------------------------
+any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
+any(ConsonantKeys) + [K_SPACE] > index(Consonants, 1) '्' ' '
+any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
+any(ConsonantKeys) + [K_COMMA] > index(Consonants, 1) '्' ','
+any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
+any(ConsonantKeys) + [K_PERIOD] > index(Consonants, 1) '्' '। '
+any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
+'k' + ',' > 'क' '्' ','  c Explicit fallback for k
+
+c Default Punctuation Output (if no context)
++ ',' > ','
++ '.' > '।'
+
+c ----------------------------------------------------------------------------
 c Vowels (Independent)
 c ----------------------------------------------------------------------------
 + 'a' > 'अ'
@@ -41,11 +58,13 @@ c ----------------------------------------------------------------------------
 + 'i' > 'इ'
 'इ' + 'i' > 'ई'
 + 'I' > 'ई'
-'e' + 'e' > 'ई'
+'e' + 'e' > 'ई'  c This matches literal 'e'. Since +e outputs 'ए', we need 'ए'+e
+'ए' + 'e' > 'ई'
 + 'u' > 'उ'
 'उ' + 'u' > 'ऊ'
 + 'U' > 'ऊ'
 'o' + 'o' > 'ऊ'
+'ओ' + 'o' > 'ऊ'
 + 'R' > 'ऋ'
 'ऋ' + 'R' > 'ॠ'
 + 'e' > 'ए'
@@ -122,19 +141,7 @@ c If Modifier -> Add Modifier
 deadkey(asp) + 'M' > 'ं'
 deadkey(asp) + 'H' > 'ः'
 
-c Punctuation Commit Rules (Explicit Output for Debugging)
-'k' + ' ' > 'क' '्' ' '
-'k' + ',' > 'क' '्' ','
-'k' + '.' > 'क' '्' '।'
-'k' + U+000D > 'क' '्' U+000D
 
-any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
-any(ConsonantKeys) + [K_SPACE] > index(Consonants, 1) '्' ' '
-any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
-any(ConsonantKeys) + [K_COMMA] > index(Consonants, 1) '्' ','
-any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
-any(ConsonantKeys) + [K_PERIOD] > index(Consonants, 1) '्' '। '
-any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
 
 c Jnya Formation (j/g + Y) - Must be BEFORE generic Y rules
 'j' + 'Y' > 'ज्ञ' '्'
