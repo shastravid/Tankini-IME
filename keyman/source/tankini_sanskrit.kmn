@@ -191,19 +191,6 @@ c Special Special
 'न' '्' 'g' + 'g' > 'ङ' '्' 'g'
 'न' '्' + 'j' > 'ञ' '्'
 
-c Jnya Formation (j/g + Y) - Moved UP (Halant Default)
-'j' + 'Y' > 'ज्ञ' '्'
-'g' + 'Y' > 'ज्ञ' '्'
-'ज्ञ' '्' + 'a' > 'ज्ञ' 
-'ज्ञ' '्' + any(MatraKeys) > 'ज्ञ' index(Matras, 1)
-
-'ग' '्' + 'Y' > 'ज्ञ' '्'
-'ल' '्' + 'R' > 'ऌ'
-
-c Explicit Y (Nya) Logic - Halant Default!
-+ 'Y' > 'ञ' '्'
-'ञ' '्' + 'a' > 'ञ'
-
 c Explicit Buffer/Deadkey Logic for Y
 any(ConsonantKeys) + 'Y' > index(Consonants, 1) '्' 'ञ' '्'
 deadkey(asp) + 'Y' > '्' 'ञ' '्'
@@ -253,17 +240,11 @@ c Ksha Matras (Explicit)
 'क्ष' '्' + 'o' > 'क्ष' 'ो'
 'क्ष' '्' + 'O' > 'क्ष' 'ो'
 
-c Homorganic Nasals (Latin Buffer)
-'n' + 'k' > 'ङ' '्' 'k'
-'n' + 'g' > 'ङ' '्' 'g'
-'n' + 'c' > 'ञ' '्' 'c'
-'n' + 'j' > 'ञ' '्' 'j'
-
-c Dedup Logic for Homorganic Inputs (e.g. ngg -> ङ्ग्ग -> ङ्ग)
-'ङ' '्' 'k' + 'k' > context
-'ङ' '्' 'g' + 'g' > context
-'ञ' '्' 'c' + 'c' > context
-'ञ' '्' 'j' + 'j' > context
+c Homorganic Nasals (Pure Nasal - Consumes Buffer Key)
+'n' + 'k' > 'ङ' '्'
+'n' + 'g' > 'ङ' '्'
+'n' + 'c' > 'ञ' '्'
+'n' + 'j' > 'ञ' '्'
 
 c Punctuation Commit Rules
 any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
