@@ -26,6 +26,8 @@ store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न'
 store(NumberKeys) '0'..'9'
 store(Numbers)    '०'..'९'
 
+store(BKSP) U+0008
+
 group(main) using keys
 
 c ----------------------------------------------------------------------------
@@ -93,21 +95,32 @@ any(ConsonantKeys) + 'a' > index(Consonants, 1)
 c 3. Latin + Matra -> Deva + Matra
 any(ConsonantKeys) + any(MatraKeys) > index(Consonants, 1) index(Matras, 2)
 
-c 3.5 Aspirates (Specific Latin + h -> Deva Aspirate)
-'k' + 'h' > 'ख'
-'g' + 'h' > 'घ'
-'c' + 'h' > 'छ'
-'j' + 'h' > 'झ'
-'T' + 'h' > 'ठ'
-'D' + 'h' > 'ढ'
-'t' + 'h' > 'थ'
-'d' + 'h' > 'ध'
-'p' + 'h' > 'फ'
-'b' + 'h' > 'भ'
-'s' + 'h' > 'ष'
-'S' + 'h' > 'ष'
+c 3.5 Aspirates (Specific Latin + h -> Deva Aspirate + Deadkey)
+c The deadkey signals "We just formed an aspirate, so next 'a' should be consumed".
+'k' + 'h' > 'ख' deadkey(asp)
+'g' + 'h' > 'घ' deadkey(asp)
+'c' + 'h' > 'छ' deadkey(asp)
+'j' + 'h' > 'झ' deadkey(asp)
+'T' + 'h' > 'ठ' deadkey(asp)
+'D' + 'h' > 'ढ' deadkey(asp)
+'t' + 'h' > 'थ' deadkey(asp)
+'d' + 'h' > 'ध' deadkey(asp)
+'p' + 'h' > 'फ' deadkey(asp)
+'b' + 'h' > 'भ' deadkey(asp)
+'s' + 'h' > 'ष' deadkey(asp)
+'S' + 'h' > 'ष' deadkey(asp)
 
-c 4. Latin + Latin -> Deva + Virama + Latin (Conjunct Formation)
+c 3.6 Deadkey Handling
+c If 'a' typed after aspirate -> Remove deadkey, Keep Aspirate (Implicit 'a').
+deadkey(asp) + 'a' > nul
+
+c If Matra typed after aspirate -> Remove deadkey, Add Matra.
+deadkey(asp) + any(MatraKeys) > index(Matras, 2)
+
+c If Consonant typed after aspirate -> Remove deadkey, Insert Virama, Add New Consonant (Latin).
+deadkey(asp) + any(ConsonantKeys) > '्' index(ConsonantKeys, 2)
+
+c 4. Latin + Latin -> Deva + Virama + Latin (Conjunct Formation - Non-Aspirate)
 any(ConsonantKeys) + any(ConsonantKeys) > index(Consonants, 1) '्' index(ConsonantKeys, 2)
 
 c 5. Latin + Space/Punctuation -> Deva + Virama + Space (Word Ending)
@@ -116,27 +129,30 @@ any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
 any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
 any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
 
-c 6. Double Vowels (aa/ii/uu)
+c 6. Double Vowels (aa/ii/uu) - Strict Backspace for Mac
 c aa -> A (After full consonant)
+c If Deva Consonant is already on screen (no latin buffer), we can append matra.
 any(Consonants) + 'a' > context 'ा'
 'अ' + 'a' > 'आ'
 
 c ii -> I (matra)
-'ि' + 'i' > 'ी'
+c 'ि' + 'i' -> [BKSP] 'ी'
+'ि' + 'i' > outs(BKSP) 'ी'
 
 c uu -> U (matra)
-'ु' + 'u' > 'ू'
-'ू' + 'u' > 'ू' 
-c (handle ru case if different?)
+c 'ु' + 'u' -> [BKSP] 'ू'
+'ु' + 'u' > outs(BKSP) 'ू'
+'ू' + 'u' > context
 
 c ee -> I (matra, alt)
-'े' + 'e' > 'ी'
+'े' + 'e' > outs(BKSP) 'ी'
 
 c oo -> U (matra, alt)
-'ो' + 'o' > 'ू'
+'ो' + 'o' > outs(BKSP) 'ू'
 
 c 7. Explicit Virama (Commit)
 any(ConsonantKeys) + '\' > index(Consonants, 1) '्'
+deadkey(asp) + '\' > '्'
 
 c Special Special
 'न' '्' + 'g' > 'ङ' '्'
