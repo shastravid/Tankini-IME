@@ -95,12 +95,12 @@
     "desc": "Line (Alt): कार्त्स्न्..."
   },
   {
-    "seq": "kimidaM kAraNaM brUhi jnjAtavyAMSo.asti vA punaH .",
+    "seq": "kimidaM kAraNaM brUhi jYAtavyAMSo.asti vA punaH .",
     "expect": "किमिदं कारणं ब्रूहि ज्ञातव्यांशोऽस्ति वा पुनः ।",
     "desc": "Line (Canon): किमिदं कार..."
   },
   {
-    "seq": "kimidaM kaaraNaM broohi jnjaatavyaaMSo.asti vaa punaH .",
+    "seq": "kimidaM kaaraNaM broohi jYaatavyaaMSo.asti vaa punaH .",
     "expect": "किमिदं कारणं ब्रूहि ज्ञातव्यांशोऽस्ति वा पुनः ।",
     "desc": "Line (Alt): किमिदं कार..."
   },
@@ -145,12 +145,12 @@
     "desc": "Line (Alt): हयाननो भीत..."
   },
   {
-    "seq": "munjcamunjceti taM coktvA cintAkrAnto baBUva saH .",
+    "seq": "muYcamuYceti taM coktvA cintAkrAnto baBUva saH .",
     "expect": "मुञ्चमुञ्चेति तं चोक्त्वा चिन्ताक्रान्तो बभूव सः ।",
     "desc": "Line (Canon): मुञ्चमुञ्च..."
   },
   {
-    "seq": "munjcamunjceti taM coktvaa cintaakraanto baBoova saH .",
+    "seq": "muYcamuYceti taM coktvaa cintaakraanto baBoova saH .",
     "expect": "मुञ्चमुञ्चेति तं चोक्त्वा चिन्ताक्रान्तो बभूव सः ।",
     "desc": "Line (Alt): मुञ्चमुञ्च..."
   },
@@ -165,12 +165,12 @@
     "desc": "Line (Alt): चिरं विचार..."
   },
   {
-    "seq": "tUShNIM sthitaH smarannAjnjAM lalitAmbAkRtAM purA .",
+    "seq": "tUShNIM sthitaH smarannAjYAM lalitAmbAkRtAM purA .",
     "expect": "तूष्णीं स्थितः स्मरन्नाज्ञां ललिताम्बाकृतां पुरा ।",
     "desc": "Line (Canon): तूष्णीं स्..."
   },
   {
-    "seq": "tooShNeeM sthitaH smarannaajnjaaM lalitaambaakRtaaM puraa .",
+    "seq": "tooShNeeM sthitaH smarannaajYaaM lalitaambaakRtaaM puraa .",
     "expect": "तूष्णीं स्थितः स्मरन्नाज्ञां ललिताम्बाकृतां पुरा ।",
     "desc": "Line (Alt): तूष्णीं स्..."
   },
@@ -285,12 +285,12 @@
     "desc": "Line (Alt): मया कामेश्..."
   },
   {
-    "seq": "madAjnjayA vacodevyaScatrararnAmasahasrakam .. 12..",
+    "seq": "madAjYayA vacodevyaScatrararnAmasahasrakam .. 12..",
     "expect": "मदाज्ञया वचोदेव्यश्चत्ररर्नामसहस्रकम् ॥ १२॥",
     "desc": "Line (Canon): मदाज्ञया व..."
   },
   {
-    "seq": "madaajnjayaa vacodevyaScatrararnaamasahasrakam .. 12..",
+    "seq": "madaajYayaa vacodevyaScatrararnaamasahasrakam .. 12..",
     "expect": "मदाज्ञया वचोदेव्यश्चत्ररर्नामसहस्रकम् ॥ १२॥",
     "desc": "Line (Alt): मदाज्ञया व..."
   },
@@ -345,32 +345,32 @@
     "desc": "Line (Alt): पत्न्यस्य ..."
   },
   {
-    "seq": "ayanjca nitarAM BaktastasmAdasya vadasva tat .. 15..",
+    "seq": "ayaYca nitarAM BaktastasmAdasya vadasva tat .. 15..",
     "expect": "अयञ्च नितरां भक्तस्तस्मादस्य वदस्व तत् ॥ १५॥",
     "desc": "Line (Canon): अयञ्च नितर..."
   },
   {
-    "seq": "ayanjca nitaraaM Baktastasmaadasya vadasva tat .. 15..",
+    "seq": "ayaYca nitaraaM Baktastasmaadasya vadasva tat .. 15..",
     "expect": "अयञ्च नितरां भक्तस्तस्मादस्य वदस्व तत् ॥ १५॥",
     "desc": "Line (Alt): अयञ्च नितर..."
   },
   {
-    "seq": "amunjcamAnastvatpAdau varShatrayamasau sthitaH .",
+    "seq": "amuYcamAnastvatpAdau varShatrayamasau sthitaH .",
     "expect": "अमुञ्चमानस्त्वत्पादौ वर्षत्रयमसौ स्थितः ।",
     "desc": "Line (Canon): अमुञ्चमानस..."
   },
   {
-    "seq": "amunjcamaanastvatpaadau varShatrayamasau sthitaH .",
+    "seq": "amuYcamaanastvatpaadau varShatrayamasau sthitaH .",
     "expect": "अमुञ्चमानस्त्वत्पादौ वर्षत्रयमसौ स्थितः ।",
     "desc": "Line (Alt): अमुञ्चमानस..."
   },
   {
-    "seq": "etajjnjAtumato BaktyA hitameva nidarSanam .. 16..",
+    "seq": "etajjYAtumato BaktyA hitameva nidarSanam .. 16..",
     "expect": "एतज्ज्ञातुमतो भक्त्या हितमेव निदर्शनम् ॥ १६॥",
     "desc": "Line (Canon): एतज्ज्ञातु..."
   },
   {
-    "seq": "etajjnjaatumato Baktyaa hitameva nidarSanam .. 16..",
+    "seq": "etajjYaatumato Baktyaa hitameva nidarSanam .. 16..",
     "expect": "एतज्ज्ञातुमतो भक्त्या हितमेव निदर्शनम् ॥ १६॥",
     "desc": "Line (Alt): एतज्ज्ञातु..."
   },
@@ -385,24 +385,14 @@
     "desc": "Line (Alt): चित्तपर्या..."
   },
   {
-    "seq": "sarvapUrtikaraM tasmAdanujnjAto mayA vada .. 17..",
+    "seq": "sarvapUrtikaraM tasmAdanujYAto mayA vada .. 17..",
     "expect": "सर्वपूर्तिकरं तस्मादनुज्ञातो मया वद ॥ १७॥",
     "desc": "Line (Canon): सर्वपूर्ति..."
   },
   {
-    "seq": "sarvapoortikaraM tasmaadanujnjaato mayaa vada .. 17..",
+    "seq": "sarvapoortikaraM tasmaadanujYaato mayaa vada .. 17..",
     "expect": "सर्वपूर्तिकरं तस्मादनुज्ञातो मया वद ॥ १७॥",
     "desc": "Line (Alt): सर्वपूर्ति..."
-  },
-  {
-    "seq": "sUta uvAca -",
-    "expect": "सूत उवाच -",
-    "desc": "Line (Canon): सूत उवाच -..."
-  },
-  {
-    "seq": "soota uvaaca -",
-    "expect": "सूत उवाच -",
-    "desc": "Line (Alt): सूत उवाच -..."
   },
   {
     "seq": "ityuktvA.antaradhAdambA kAmeSvarasamanvitA .",
@@ -545,12 +535,12 @@
     "desc": "Line (Alt): तदहं सम्प्..."
   },
   {
-    "seq": "SrImatpanjcadaSAkSharyAH kAdivarNAnkramAn mune .. 24..",
+    "seq": "SrImatpaYcadaSAkSharyAH kAdivarNAnkramAn mune .. 24..",
     "expect": "श्रीमत्पञ्चदशाक्षर्याः कादिवर्णान्क्रमान् मुने ॥ २४॥",
     "desc": "Line (Canon): श्रीमत्पञ्..."
   },
   {
-    "seq": "SreematpanjcadaSaakSharyaaH kaadivarNaankramaan mune .. 24..",
+    "seq": "SreematpaYcadaSaakSharyaaH kaadivarNaankramaan mune .. 24..",
     "expect": "श्रीमत्पञ्चदशाक्षर्याः कादिवर्णान्क्रमान् मुने ॥ २४॥",
     "desc": "Line (Alt): श्रीमत्पञ्..."
   },
@@ -623,16 +613,6 @@
     "seq": "tasmaadekaagra-manasaa SrotavyaM ca tvayaa sadaa .",
     "expect": "तस्मादेकाग्र-मनसा श्रोतव्यं च त्वया सदा ।",
     "desc": "Line (Alt): तस्मादेकाग..."
-  },
-  {
-    "seq": "sUta uvAca -",
-    "expect": "सूत उवाच -",
-    "desc": "Line (Canon): सूत उवाच -..."
-  },
-  {
-    "seq": "soota uvaaca -",
-    "expect": "सूत उवाच -",
-    "desc": "Line (Alt): सूत उवाच -..."
   },
   {
     "seq": "ityuktvA taM hayagrIvaH proce nAmaSatatrayam .. 28..",
@@ -865,12 +845,12 @@
     "desc": "Line (Alt): अरुणामतिशय..."
   },
   {
-    "seq": ".. laM ityAdi panjcapUjA ..",
+    "seq": ".. laM ityAdi paYcapUjA ..",
     "expect": "॥ लं इत्यादि पञ्चपूजा ॥",
     "desc": "Line (Canon): ॥ लं इत्या..."
   },
   {
-    "seq": ".. laM ityaadi panjcapoojaa ..",
+    "seq": ".. laM ityaadi paYcapoojaa ..",
     "expect": "॥ लं इत्यादि पञ्चपूजा ॥",
     "desc": "Line (Alt): ॥ लं इत्या..."
   },
@@ -1005,12 +985,12 @@
     "desc": "Line (Alt): कर्पूरवीटी..."
   },
   {
-    "seq": "kalidoShaharA kanjjalocanA kamravigrahA .",
+    "seq": "kalidoShaharA kaYjalocanA kamravigrahA .",
     "expect": "कलिदोषहरा कञ्जलोचना कम्रविग्रहा ।",
     "desc": "Line (Canon): कलिदोषहरा ..."
   },
   {
-    "seq": "kalidoShaharaa kanjjalocanaa kamravigrahaa .",
+    "seq": "kalidoShaharaa kaYjalocanaa kamravigrahaa .",
     "expect": "कलिदोषहरा कञ्जलोचना कम्रविग्रहा ।",
     "desc": "Line (Alt): कलिदोषहरा ..."
   },
@@ -1245,12 +1225,12 @@
     "desc": "Line (Alt): लक्ष्यार्थ..."
   },
   {
-    "seq": "lalAmarAjadalikA lambimuktAlatAnjcitA .",
+    "seq": "lalAmarAjadalikA lambimuktAlatAYcitA .",
     "expect": "ललामराजदलिका लम्बिमुक्तालताञ्चिता ।",
     "desc": "Line (Canon): ललामराजदलि..."
   },
   {
-    "seq": "lalaamaraajadalikaa lambimuktaalataanjcitaa .",
+    "seq": "lalaamaraajadalikaa lambimuktaalataaYcitaa .",
     "expect": "ललामराजदलिका लम्बिमुक्तालताञ्चिता ।",
     "desc": "Line (Alt): ललामराजदलि..."
   },
@@ -1405,12 +1385,12 @@
     "desc": "Line (Alt): हरिकेशसखी ..."
   },
   {
-    "seq": "sakArarUpA sarvajnjA sarveSI sarvamanggalA .",
+    "seq": "sakArarUpA sarvajYA sarveSI sarvamanggalA .",
     "expect": "सकाररूपा सर्वज्ञा सर्वेशी सर्वमङ्गला ।",
     "desc": "Line (Canon): सकाररूपा स..."
   },
   {
-    "seq": "sakaararoopaa sarvajnjaa sarveSee sarvamanggalaa .",
+    "seq": "sakaararoopaa sarvajYaa sarveSee sarvamanggalaa .",
     "expect": "सकाररूपा सर्वज्ञा सर्वेशी सर्वमङ्गला ।",
     "desc": "Line (Alt): सकाररूपा स..."
   },
@@ -1475,12 +1455,12 @@
     "desc": "Line (Alt): ककारार्था ..."
   },
   {
-    "seq": "kAmasanjjIvinI kalyA kaThinastanamaNDalA .. 27..",
+    "seq": "kAmasaYjIvinI kalyA kaThinastanamaNDalA .. 27..",
     "expect": "कामसञ्जीविनी कल्या कठिनस्तनमण्डला ॥ २७॥",
     "desc": "Line (Canon): कामसञ्जीवि..."
   },
   {
-    "seq": "kaamasanjjeevinee kalyaa kaThinastanamaNDalaa .. 27..",
+    "seq": "kaamasaYjeevinee kalyaa kaThinastanamaNDalaa .. 27..",
     "expect": "कामसञ्जीविनी कल्या कठिनस्तनमण्डला ॥ २७॥",
     "desc": "Line (Alt): कामसञ्जीवि..."
   },
@@ -1525,12 +1505,12 @@
     "desc": "Line (Alt): कलालापा कम..."
   },
   {
-    "seq": "kalpavallI-samaBujA kastUrI-tilakAnjcitA .",
+    "seq": "kalpavallI-samaBujA kastUrI-tilakAYcitA .",
     "expect": "कल्पवल्ली-समभुजा कस्तूरी-तिलकाञ्चिता ।",
     "desc": "Line (Canon): कल्पवल्ली-..."
   },
   {
-    "seq": "kalpavallee-samaBujaa kastooree-tilakaanjcitaa .",
+    "seq": "kalpavallee-samaBujaa kastooree-tilakaaYcitaa .",
     "expect": "कल्पवल्ली-समभुजा कस्तूरी-तिलकाञ्चिता ।",
     "desc": "Line (Alt): कल्पवल्ली-..."
   },
@@ -1635,12 +1615,12 @@
     "desc": "Line (Alt): लास्यदर्शन..."
   },
   {
-    "seq": "langGyetarAjnjA lAvaNya-SAlinI laGusiddhidA .. 35..",
+    "seq": "langGyetarAjYA lAvaNya-SAlinI laGusiddhidA .. 35..",
     "expect": "लङ्घ्येतराज्ञा लावण्य-शालिनी लघुसिद्धिदा ॥ ३५॥",
     "desc": "Line (Canon): लङ्घ्येतरा..."
   },
   {
-    "seq": "langGyetaraajnjaa laavaNya-Saalinee laGusiddhidaa .. 35..",
+    "seq": "langGyetaraajYaa laavaNya-Saalinee laGusiddhidaa .. 35..",
     "expect": "लङ्घ्येतराज्ञा लावण्य-शालिनी लघुसिद्धिदा ॥ ३५॥",
     "desc": "Line (Alt): लङ्घ्येतरा..."
   },
@@ -1715,12 +1695,12 @@
     "desc": "Line (Alt): ह्रींकार-क..."
   },
   {
-    "seq": "hrIMkAra-BAskararucirhrIMkArAmBoda-canjcalA .. 39..",
+    "seq": "hrIMkAra-BAskararucirhrIMkArAmBoda-caYcalA .. 39..",
     "expect": "ह्रींकार-भास्कररुचिर्ह्रींकाराम्भोद-चञ्चला ॥ ३९॥",
     "desc": "Line (Canon): ह्रींकार-भ..."
   },
   {
-    "seq": "hreeMkaara-BaaskararucirhreeMkaaraamBoda-canjcalaa .. 39..",
+    "seq": "hreeMkaara-BaaskararucirhreeMkaaraamBoda-caYcalaa .. 39..",
     "expect": "ह्रींकार-भास्कररुचिर्ह्रींकाराम्भोद-चञ्चला ॥ ३९॥",
     "desc": "Line (Alt): ह्रींकार-भ..."
   },
@@ -1755,12 +1735,12 @@
     "desc": "Line (Alt): ह्रींकारार..."
   },
   {
-    "seq": "hrIMkAra-panjjaraSukI hrIMkArAnggaNa-dIpikA .. 41..",
+    "seq": "hrIMkAra-paYjaraSukI hrIMkArAnggaNa-dIpikA .. 41..",
     "expect": "ह्रींकार-पञ्जरशुकी ह्रींकाराङ्गण-दीपिका ॥ ४१॥",
     "desc": "Line (Canon): ह्रींकार-प..."
   },
   {
-    "seq": "hreeMkaara-panjjaraSukee hreeMkaaraanggaNa-deepikaa .. 41..",
+    "seq": "hreeMkaara-paYjaraSukee hreeMkaaraanggaNa-deepikaa .. 41..",
     "expect": "ह्रींकार-पञ्जरशुकी ह्रींकाराङ्गण-दीपिका ॥ ४१॥",
     "desc": "Line (Alt): ह्रींकार-प..."
   },
@@ -1775,12 +1755,12 @@
     "desc": "Line (Alt): ह्रींकार-क..."
   },
   {
-    "seq": "hrIMkArasumano-mAdhvI hrIMkAra-tarumanjjarI .. 42..",
+    "seq": "hrIMkArasumano-mAdhvI hrIMkAra-tarumaYjarI .. 42..",
     "expect": "ह्रींकारसुमनो-माध्वी ह्रींकार-तरुमञ्जरी ॥ ४२॥",
     "desc": "Line (Canon): ह्रींकारसु..."
   },
   {
-    "seq": "hreeMkaarasumano-maadhvee hreeMkaara-tarumanjjaree .. 42..",
+    "seq": "hreeMkaarasumano-maadhvee hreeMkaara-tarumaYjaree .. 42..",
     "expect": "ह्रींकारसुमनो-माध्वी ह्रींकार-तरुमञ्जरी ॥ ४२॥",
     "desc": "Line (Alt): ह्रींकारसु..."
   },
@@ -1835,12 +1815,12 @@
     "desc": "Line (Alt): सकालाधिष्ठ..."
   },
   {
-    "seq": "sarvaprapanjca-nirmAtrI samAnAdhika-varjitA .. 45..",
+    "seq": "sarvaprapaYca-nirmAtrI samAnAdhika-varjitA .. 45..",
     "expect": "सर्वप्रपञ्च-निर्मात्री समानाधिक-वर्जिता ॥ ४५॥",
     "desc": "Line (Canon): सर्वप्रपञ्..."
   },
   {
-    "seq": "sarvaprapanjca-nirmaatree samaanaadhika-varjitaa .. 45..",
+    "seq": "sarvaprapaYca-nirmaatree samaanaadhika-varjitaa .. 45..",
     "expect": "सर्वप्रपञ्च-निर्मात्री समानाधिक-वर्जिता ॥ ४५॥",
     "desc": "Line (Alt): सर्वप्रपञ्..."
   },
@@ -1945,12 +1925,12 @@
     "desc": "Line (Alt): कामेश्वरी ..."
   },
   {
-    "seq": "lakAriNI labdharUpA labdhadhIrlabdhavAnjCitA .",
+    "seq": "lakAriNI labdharUpA labdhadhIrlabdhavAYCitA .",
     "expect": "लकारिणी लब्धरूपा लब्धधीर्लब्धवाञ्छिता ।",
     "desc": "Line (Canon): लकारिणी लब..."
   },
   {
-    "seq": "lakaariNee labdharoopaa labdhadheerlabdhavaanjCitaa .",
+    "seq": "lakaariNee labdharoopaa labdhadheerlabdhavaaYCitaa .",
     "expect": "लकारिणी लब्धरूपा लब्धधीर्लब्धवाञ्छिता ।",
     "desc": "Line (Alt): लकारिणी लब..."
   },
@@ -2230,16 +2210,6 @@
     "desc": "Line (Alt): लोकत्रयेऽप..."
   },
   {
-    "seq": "sUta uvAca -",
-    "expect": "सूत उवाच -",
-    "desc": "Line (Canon): सूत उवाच -..."
-  },
-  {
-    "seq": "soota uvaaca -",
-    "expect": "सूत उवाच -",
-    "desc": "Line (Alt): सूत उवाच -..."
-  },
-  {
     "seq": "iti hayamuKagItaM stotrarAjaM niSamya",
     "expect": "इति हयमुखगीतं स्तोत्रराजं निशम्य",
     "desc": "Line (Canon): इति हयमुखग..."
@@ -2270,24 +2240,14 @@
     "desc": "Line (Alt): निजगुरुमथ ..."
   },
   {
-    "seq": "punaradhika-rahasyaM jnjAtumevaM jagAda .. 5..",
+    "seq": "punaradhika-rahasyaM jYAtumevaM jagAda .. 5..",
     "expect": "पुनरधिक-रहस्यं ज्ञातुमेवं जगाद ॥ ५॥",
     "desc": "Line (Canon): पुनरधिक-रह..."
   },
   {
-    "seq": "punaradhika-rahasyaM jnjaatumevaM jagaada .. 5..",
+    "seq": "punaradhika-rahasyaM jYaatumevaM jagaada .. 5..",
     "expect": "पुनरधिक-रहस्यं ज्ञातुमेवं जगाद ॥ ५॥",
     "desc": "Line (Alt): पुनरधिक-रह..."
-  },
-  {
-    "seq": "agastya uvAca --",
-    "expect": "अगस्त्य उवाच --",
-    "desc": "Line (Canon): अगस्त्य उव..."
-  },
-  {
-    "seq": "agastya uvaaca --",
-    "expect": "अगस्त्य उवाच --",
-    "desc": "Line (Alt): अगस्त्य उव..."
   },
   {
     "seq": "aSvAnana mahABAga rahasyamapi me vada .",
@@ -2330,16 +2290,6 @@
     "desc": "Line (Alt): इति पृष्टः..."
   },
   {
-    "seq": "hayagrIva uvAca -",
-    "expect": "हयग्रीव उवाच -",
-    "desc": "Line (Canon): हयग्रीव उव..."
-  },
-  {
-    "seq": "hayagreeva uvaaca -",
-    "expect": "हयग्रीव उवाच -",
-    "desc": "Line (Alt): हयग्रीव उव..."
-  },
-  {
     "seq": "tava gopyaM kimastIha sAkShAdambAnuSAsanAt .",
     "expect": "तव गोप्यं किमस्तीह साक्षादम्बानुशासनात् ।",
     "desc": "Line (Canon): तव गोप्यं ..."
@@ -2360,12 +2310,12 @@
     "desc": "Line (Alt): इदं त्वतिर..."
   },
   {
-    "seq": "etadvijnjAna-mAtreNa SrIvidyA siddhidA Bavet .",
+    "seq": "etadvijYAna-mAtreNa SrIvidyA siddhidA Bavet .",
     "expect": "एतद्विज्ञान-मात्रेण श्रीविद्या सिद्धिदा भवेत् ।",
     "desc": "Line (Canon): एतद्विज्ञा..."
   },
   {
-    "seq": "etadvijnjaana-maatreNa Sreevidyaa siddhidaa Bavet .",
+    "seq": "etadvijYaana-maatreNa Sreevidyaa siddhidaa Bavet .",
     "expect": "एतद्विज्ञान-मात्रेण श्रीविद्या सिद्धिदा भवेत् ।",
     "desc": "Line (Alt): एतद्विज्ञा..."
   },
@@ -2390,12 +2340,12 @@
     "desc": "Line (Alt): शक्त्यक्षर..."
   },
   {
-    "seq": "evaM viBAgamajnjAtvA ye vidyAjapa-SAlinaH .. 10..",
+    "seq": "evaM viBAgamajYAtvA ye vidyAjapa-SAlinaH .. 10..",
     "expect": "एवं विभागमज्ञात्वा ये विद्याजप-शालिनः ॥ १०॥",
     "desc": "Line (Canon): एवं विभागम..."
   },
   {
-    "seq": "evaM viBaagamajnjaatvaa ye vidyaajapa-SaalinaH .. 10..",
+    "seq": "evaM viBaagamajYaatvaa ye vidyaajapa-SaalinaH .. 10..",
     "expect": "एवं विभागमज्ञात्वा ये विद्याजप-शालिनः ॥ १०॥",
     "desc": "Line (Alt): एवं विभागम..."
   },
@@ -2410,7 +2360,7 @@
     "desc": "Line (Alt): न तेषां सि..."
   },
   {
-    "seq": "caturBiH SivacakraiSca SakticakraiSca panjcaBiH .. 11..",
+    "seq": "caturBiH SivacakraiSca SakticakraiSca paYcaBiH .. 11..",
     "expect": "चतुर्भिः शिवचक्रैश्च शक्तिचक्रैश्च पञ्चभिः ॥ ११॥",
     "desc": "Line (Canon): चतुर्भिः श..."
   },
@@ -2435,12 +2385,12 @@
     "desc": "Line (Alt): त्रिकोणमष्..."
   },
   {
-    "seq": "caturdaSAraM caitAni SakticakrANi panjca ca .",
+    "seq": "caturdaSAraM caitAni SakticakrANi paYca ca .",
     "expect": "चतुर्दशारं चैतानि शक्तिचक्राणि पञ्च च ।",
     "desc": "Line (Canon): चतुर्दशारं..."
   },
   {
-    "seq": "caturdaSaaraM caitaani SakticakraaNi panjca ca .",
+    "seq": "caturdaSaaraM caitaani SakticakraaNi paYca ca .",
     "expect": "चतुर्दशारं चैतानि शक्तिचक्राणि पञ्च च ।",
     "desc": "Line (Alt): चतुर्दशारं..."
   },
@@ -2525,12 +2475,12 @@
     "desc": "Line (Alt): अविनाभाव-स..."
   },
   {
-    "seq": "evaM viBAgamajnjAtvA SrIcakraM yaH samarcayet .. 17..",
+    "seq": "evaM viBAgamajYAtvA SrIcakraM yaH samarcayet .. 17..",
     "expect": "एवं विभागमज्ञात्वा श्रीचक्रं यः समर्चयेत् ॥ १७॥",
     "desc": "Line (Canon): एवं विभागम..."
   },
   {
-    "seq": "evaM viBaagamajnjaatvaa SreecakraM yaH samarcayet .. 17..",
+    "seq": "evaM viBaagamajYaatvaa SreecakraM yaH samarcayet .. 17..",
     "expect": "एवं विभागमज्ञात्वा श्रीचक्रं यः समर्चयेत् ॥ १७॥",
     "desc": "Line (Alt): एवं विभागम..."
   },
@@ -2555,22 +2505,22 @@
     "desc": "Line (Alt): ये च जानन्..."
   },
   {
-    "seq": "sAmAnya-vedinaH sarve viSeShajnjo.atidurlaBaH .",
+    "seq": "sAmAnya-vedinaH sarve viSeShajYo.atidurlaBaH .",
     "expect": "सामान्य-वेदिनः सर्वे विशेषज्ञोऽतिदुर्लभः ।",
     "desc": "Line (Canon): सामान्य-वे..."
   },
   {
-    "seq": "saamaanya-vedinaH sarve viSeShajnjo.atidurlaBaH .",
+    "seq": "saamaanya-vedinaH sarve viSeShajYo.atidurlaBaH .",
     "expect": "सामान्य-वेदिनः सर्वे विशेषज्ञोऽतिदुर्लभः ।",
     "desc": "Line (Alt): सामान्य-वे..."
   },
   {
-    "seq": "svayaM vidyA-viSeShajnjo viSeShajnjaM samarcayet .. 19..",
+    "seq": "svayaM vidyA-viSeShajYo viSeShajYaM samarcayet .. 19..",
     "expect": "स्वयं विद्या-विशेषज्ञो विशेषज्ञं समर्चयेत् ॥ १९॥",
     "desc": "Line (Canon): स्वयं विद्..."
   },
   {
-    "seq": "svayaM vidyaa-viSeShajnjo viSeShajnjaM samarcayet .. 19..",
+    "seq": "svayaM vidyaa-viSeShajYo viSeShajYaM samarcayet .. 19..",
     "expect": "स्वयं विद्या-विशेषज्ञो विशेषज्ञं समर्चयेत् ॥ १९॥",
     "desc": "Line (Alt): स्वयं विद्..."
   },
@@ -2625,12 +2575,12 @@
     "desc": "Line (Alt): अश्रुता सश..."
   },
   {
-    "seq": "svaryanto nApekShante indramagninjca ye viduH .. 22..",
+    "seq": "svaryanto nApekShante indramagniYca ye viduH .. 22..",
     "expect": "स्वर्यन्तो नापेक्षन्ते इन्द्रमग्निञ्च ये विदुः ॥ २२॥",
     "desc": "Line (Canon): स्वर्यन्तो..."
   },
   {
-    "seq": "svaryanto naapekShante indramagninjca ye viduH .. 22..",
+    "seq": "svaryanto naapekShante indramagniYca ye viduH .. 22..",
     "expect": "स्वर्यन्तो नापेक्षन्ते इन्द्रमग्निञ्च ये विदुः ॥ २२॥",
     "desc": "Line (Alt): स्वर्यन्तो..."
   },
@@ -2665,12 +2615,12 @@
     "desc": "Line (Alt): यस्य नो पश..."
   },
   {
-    "seq": "tenaiva laByate vidyA SrImatpanjcadaSAkSharI .. 24..",
+    "seq": "tenaiva laByate vidyA SrImatpaYcadaSAkSharI .. 24..",
     "expect": "तेनैव लभ्यते विद्या श्रीमत्पञ्चदशाक्षरी ॥ २४॥",
     "desc": "Line (Canon): तेनैव लभ्य..."
   },
   {
-    "seq": "tenaiva laByate vidyaa SreematpanjcadaSaakSharee .. 24..",
+    "seq": "tenaiva laByate vidyaa SreematpaYcadaSaakSharee .. 24..",
     "expect": "तेनैव लभ्यते विद्या श्रीमत्पञ्चदशाक्षरी ॥ २४॥",
     "desc": "Line (Alt): तेनैव लभ्य..."
   },
@@ -2695,12 +2645,12 @@
     "desc": "Line (Alt): मोक्षैकहेत..."
   },
   {
-    "seq": "na SilpAdi-jnjAnayukte vidvacCabdaH prayujyate .",
+    "seq": "na SilpAdi-jYAnayukte vidvacCabdaH prayujyate .",
     "expect": "न शिल्पादि-ज्ञानयुक्ते विद्वच्छब्दः प्रयुज्यते ।",
     "desc": "Line (Canon): न शिल्पादि..."
   },
   {
-    "seq": "na Silpaadi-jnjaanayukte vidvacCabdaH prayujyate .",
+    "seq": "na Silpaadi-jYaanayukte vidvacCabdaH prayujyate .",
     "expect": "न शिल्पादि-ज्ञानयुक्ते विद्वच्छब्दः प्रयुज्यते ।",
     "desc": "Line (Alt): न शिल्पादि..."
   },
@@ -2735,12 +2685,12 @@
     "desc": "Line (Alt): स्वयं विद्..."
   },
   {
-    "seq": "svayaMvidyA-rahasyajnjo vidyA-mAhAtmya-vedyapi",
+    "seq": "svayaMvidyA-rahasyajYo vidyA-mAhAtmya-vedyapi",
     "expect": "स्वयंविद्या-रहस्यज्ञो विद्या-माहात्म्य-वेद्यपि",
     "desc": "Line (Canon): स्वयंविद्य..."
   },
   {
-    "seq": "svayaMvidyaa-rahasyajnjo vidyaa-maahaatmya-vedyapi",
+    "seq": "svayaMvidyaa-rahasyajYo vidyaa-maahaatmya-vedyapi",
     "expect": "स्वयंविद्या-रहस्यज्ञो विद्या-माहात्म्य-वेद्यपि",
     "desc": "Line (Alt): स्वयंविद्य..."
   },
@@ -2960,12 +2910,12 @@
     "desc": "Line (Alt): दिवसे दिवस..."
   },
   {
-    "seq": "daSaBiH panjcaBirvApi trIBirekena vA dinaiH .. 39..",
+    "seq": "daSaBiH paYcaBirvApi trIBirekena vA dinaiH .. 39..",
     "expect": "दशभिः पञ्चभिर्वापि त्रीभिरेकेन वा दिनैः ॥ ३९॥",
     "desc": "Line (Canon): दशभिः पञ्च..."
   },
   {
-    "seq": "daSaBiH panjcaBirvaapi treeBirekena vaa dinaiH .. 39..",
+    "seq": "daSaBiH paYcaBirvaapi treeBirekena vaa dinaiH .. 39..",
     "expect": "दशभिः पञ्चभिर्वापि त्रीभिरेकेन वा दिनैः ॥ ३९॥",
     "desc": "Line (Alt): दशभिः पञ्च..."
   },
@@ -3115,12 +3065,12 @@
     "desc": "Line (Alt): भवेच्चित्त..."
   },
   {
-    "seq": "na jnjAtavyamito.apyanyan-na japtavyaM ca kumBaja .. 47..",
+    "seq": "na jYAtavyamito.apyanyan-na japtavyaM ca kumBaja .. 47..",
     "expect": "न ज्ञातव्यमितोऽप्यन्यन्-न जप्तव्यं च कुम्भज ॥ ४७॥",
     "desc": "Line (Canon): न ज्ञातव्य..."
   },
   {
-    "seq": "na jnjaatavyamito.apyanyan-na japtavyaM ca kumBaja .. 47..",
+    "seq": "na jYaatavyamito.apyanyan-na japtavyaM ca kumBaja .. 47..",
     "expect": "न ज्ञातव्यमितोऽप्यन्यन्-न जप्तव्यं च कुम्भज ॥ ४७॥",
     "desc": "Line (Alt): न ज्ञातव्य..."
   },
@@ -3240,12 +3190,12 @@
     "desc": "Line (Alt): तस्मात् कु..."
   },
   {
-    "seq": "nAparaM kinjcidapi te boddhavyamavaSiShyate .",
+    "seq": "nAparaM kiYcidapi te boddhavyamavaSiShyate .",
     "expect": "नापरं किञ्चिदपि ते बोद्धव्यमवशिष्यते ।",
     "desc": "Line (Canon): नापरं किञ्..."
   },
   {
-    "seq": "naaparaM kinjcidapi te boddhavyamavaSiShyate .",
+    "seq": "naaparaM kiYcidapi te boddhavyamavaSiShyate .",
     "expect": "नापरं किञ्चिदपि ते बोद्धव्यमवशिष्यते ।",
     "desc": "Line (Alt): नापरं किञ्..."
   },
@@ -3290,12 +3240,12 @@
     "desc": "Line (Alt): यो ब्रूयात..."
   },
   {
-    "seq": "ityAjnjA SAngkarI proktA tasmAdgopyamidaM tvayA .. 57..",
+    "seq": "ityAjYA SAngkarI proktA tasmAdgopyamidaM tvayA .. 57..",
     "expect": "इत्याज्ञा शाङ्करी प्रोक्ता तस्माद्गोप्यमिदं त्वया ॥ ५७॥",
     "desc": "Line (Canon): इत्याज्ञा ..."
   },
   {
-    "seq": "ityaajnjaa Saangkaree proktaa tasmaadgopyamidaM tvayaa .. 57..",
+    "seq": "ityaajYaa Saangkaree proktaa tasmaadgopyamidaM tvayaa .. 57..",
     "expect": "इत्याज्ञा शाङ्करी प्रोक्ता तस्माद्गोप्यमिदं त्वया ॥ ५७॥",
     "desc": "Line (Alt): इत्याज्ञा ..."
   },
@@ -3318,16 +3268,6 @@
     "seq": "rahasyanaama-saahasraadapi gopyamidaM mune .. 58..",
     "expect": "रहस्यनाम-साहस्रादपि गोप्यमिदं मुने ॥ ५८॥",
     "desc": "Line (Alt): रहस्यनाम-स..."
-  },
-  {
-    "seq": "sUta uvAca -",
-    "expect": "सूत उवाच -",
-    "desc": "Line (Canon): सूत उवाच -..."
-  },
-  {
-    "seq": "soota uvaaca -",
-    "expect": "सूत उवाच -",
-    "desc": "Line (Alt): सूत उवाच -..."
   },
   {
     "seq": "evamuktvA hayagrIvaH kumBajaM tApasottamam .",

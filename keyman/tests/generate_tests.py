@@ -12,13 +12,13 @@ vowels = {
 
 consonants = {
     'क': 'k', 'ख': 'K', 'ग': 'g', 'घ': 'G', 'ङ': 'ng',
-    'च': 'c', 'छ': 'C', 'ज': 'j', 'झ': 'J', 'ञ': 'nj',
+    'च': 'c', 'छ': 'C', 'ज': 'j', 'झ': 'J', 'ञ': 'Y',
     'ट': 'T', 'ठ': 'Th', 'ड': 'D', 'ढ': 'Dh', 'ण': 'N',
     'त': 't', 'थ': 'th', 'द': 'd', 'ध': 'dh', 'न': 'n',
     'प': 'p', 'फ': 'P', 'ब': 'b', 'भ': 'B', 'म': 'm',
     'य': 'y', 'र': 'r', 'ल': 'l', 'ळ': 'L', 'व': 'v',
     'श': 'S', 'ष': 'Sh', 'स': 's', 'ह': 'h',
-    'क्ष': 'x', 'ज्ञ': 'gY'
+    'क्ष': 'x', 'ज्ञ': 'jY'
 }
 
 matras = {
@@ -143,7 +143,12 @@ def generate_variants(canonical_seq):
     return alt if changed else None
 
 def main():
-    with open('test.txt', 'r', encoding='utf-8') as f:
+    import os
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    input_path = os.path.join(base_dir, 'test.txt')
+    output_path = os.path.join(base_dir, 'test_cases.json')
+    
+    with open(input_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
         
     test_cases = []
@@ -175,7 +180,7 @@ def main():
                     "desc": f"Line (Alt): {line[:10]}..."
                 })
             
-    with open('test_cases.json', 'w', encoding='utf-8') as f:
+    with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(test_cases, f, indent=2, ensure_ascii=False)
         
     print(f"Generated {len(test_cases)} test cases.")

@@ -75,7 +75,7 @@
                     id: 'sa',
                     name: 'Sanskrit'
                 },
-                filename: '../build/tankini_sanskrit.js'
+                filename: '../build/tankini_sanskrit.js?v=' + new Date().getTime()
             });
 
             console.log("Setting active keyboard...");
@@ -105,7 +105,7 @@
             window.failedTests = [];
 
             // Fetch tests
-            let response = await fetch('test_cases.json');
+            let response = await fetch('test_cases.json?v=' + new Date().getTime());
             let tests = await response.json();
 
             // Add manual tests
@@ -187,7 +187,7 @@
                             ta.dispatchEvent(new KeyboardEvent('keyup', { key: 'Shift', code: 'ShiftLeft', keyCode: 16, which: 16, shiftKey: false, bubbles: true }));
                         }
 
-                        await new Promise(r => setTimeout(r, 50)); // Slower typing for stability
+                        await new Promise(r => setTimeout(r, 100)); // Slower typing for stability
                     }
 
                     await new Promise(r => setTimeout(r, 50));

@@ -20,8 +20,8 @@ store(Matras)       'ा'    'ि'    'ी'    'ु'    'ू'    'ृ'    'े' 
 
 c Consonant Keys (Standard)
 c Removed 'X' as it is Svarita, not a consonant base for virama logic.
-store(ConsonantKeys) 'k' 'g' 'c' 'j' 'T' 'D' 'N' 't' 'd' 'n' 'p' 'b' 'm' 'y' 'r' 'l' 'v' 'w' 's' 'h' 'L' 'K' 'G' 'C' 'J' 'S' 'P' 'B' 'x'
-store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न' 'प' 'ब' 'म' 'य' 'र' 'ल' 'व' 'व' 'स' 'ह' 'ळ' 'ख' 'घ' 'छ' 'झ' 'श' 'फ' 'भ' 'क्ष' 'ठ' 'ढ' 'थ' 'ध' 'ङ' 'ञ' 'ज्ञ' 'ष'
+store(ConsonantKeys) 'k' 'g' 'c' 'j' 'T' 'D' 'N' 't' 'd' 'n' 'p' 'b' 'm' 'y' 'r' 'l' 'v' 'w' 's' 'h' 'L' 'K' 'G' 'C' 'J' 'S' 'P' 'B' 'x' 'Y'
+store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न' 'प' 'ब' 'म' 'य' 'र' 'ल' 'व' 'व' 'स' 'ह' 'ळ' 'ख' 'घ' 'छ' 'झ' 'श' 'फ' 'भ' 'क्ष' 'ञ'
 
 store(NumberKeys) '0'..'9'
 store(Numbers)    '०'..'९'
