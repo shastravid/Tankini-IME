@@ -105,13 +105,15 @@ c Special Special
 'ग' '्' + 'Y' > 'ज्ञ' '्'
 'ल' '्' + 'R' > 'ऌ' 
 
+store(BKSP) U+0008
+
 c 2. Implicit A (Removes Virama)
-c Simplify to touch ONLY the Virama to prevent Consonant doubling in editors.
-'्' + 'a' > nul
+c Use explicit BKSP char to force deletion in Mac editors where context deletion fails.
+'्' + 'a' > outs(BKSP)
 
 c 3. Matras (Remove Virama, Add Matra)
-c Simplify to touch ONLY the Virama.
-'्' + any(MatraKeys) > index(Matras, 2)
+c Delete Virama physically, then add Matra.
+'्' + any(MatraKeys) > outs(BKSP) index(Matras, 2)
 
 c 4. Generic Consonants (Always output with Virama)
 + any(ConsonantKeys) > index(Consonants, 1) '्'
