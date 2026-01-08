@@ -191,6 +191,11 @@ c Special Special
 'न' '्' 'g' + 'g' > 'ङ' '्' 'g'
 'न' '्' + 'j' > 'ञ' '्'
 
+c Jnya Formation (j/g + Y) - Halant Default!
+'j' + 'Y' > 'ज्ञ' '्'
+'g' + 'Y' > 'ज्ञ' '्'
+'ज्ञ' '्' + 'a' > 'ज्ञ'
+
 c Explicit Buffer/Deadkey Logic for Y
 any(ConsonantKeys) + 'Y' > index(Consonants, 1) '्' 'ञ' '्'
 deadkey(asp) + 'Y' > '्' 'ञ' '्'
