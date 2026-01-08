@@ -192,15 +192,39 @@ c Special Special
 'ग' '्' + 'Y' > 'ज्ञ' '्'
 'ल' '्' + 'R' > 'ऌ'
 
-c Explicit Y (Nya) Logic
-+ 'Y' > 'ञ'
-'ञ' + 'a' > 'ञ'
-any(AllDevaConsonants) + 'Y' > index(AllDevaConsonants, 1) '्' 'ञ'
+c Explicit Y (Nya) Logic - Halant Default!
++ 'Y' > 'ञ' '्'
+'ञ' '्' + 'a' > 'ञ'
+any(AllDevaConsonants) + 'Y' > context '्' 'ञ' '्'
 
-c Jnya Formation (j/g + Y)
-'ज' '्' + 'Y' > 'ज्ञ' '्'
-'ग' '्' + 'Y' > 'ज्ञ' '्'
+c Nya Matras (Explicit)
+'ञ' '्' + 'A' > 'ञ' 'ा'
+'ञ' '्' + 'i' > 'ञ' 'ि'
+'ञ' '्' + 'I' > 'ञ' 'ी'
+'ञ' '्' + 'u' > 'ञ' 'ु'
+'ञ' '्' + 'U' > 'ञ' 'ू'
+'ञ' '्' + 'R' > 'ञ' 'ृ'
+'ञ' '्' + 'e' > 'ञ' 'े'
+'ञ' '्' + 'E' > 'ञ' 'े'
+'ञ' '्' + 'o' > 'ञ' 'ो'
+'ञ' '्' + 'O' > 'ञ' 'ो'
+
+c Jnya Formation (j/g + Y) - Halant Default!
+'j' + 'Y' > 'ज्ञ' '्'
+'g' + 'Y' > 'ज्ञ' '्'
 'ज्ञ' '्' + 'a' > 'ज्ञ' 
+
+c Jnya Matras (Explicit)
+'ज्ञ' '्' + 'A' > 'ज्ञ' 'ा'
+'ज्ञ' '्' + 'i' > 'ज्ञ' 'ि'
+'ज्ञ' '्' + 'I' > 'ज्ञ' 'ी'
+'ज्ञ' '्' + 'u' > 'ज्ञ' 'ु'
+'ज्ञ' '्' + 'U' > 'ज्ञ' 'ू'
+'ज्ञ' '्' + 'R' > 'ज्ञ' 'ृ'
+'ज्ञ' '्' + 'e' > 'ज्ञ' 'े'
+'ज्ञ' '्' + 'E' > 'ज्ञ' 'े'
+'ज्ञ' '्' + 'o' > 'ज्ञ' 'ो'
+'ज्ञ' '्' + 'O' > 'ज्ञ' 'ो'
 
 c Numbers
 + any(NumberKeys) > index(Numbers, 1)
