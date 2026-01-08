@@ -243,13 +243,11 @@ c Ksha Matras (Explicit)
 'क्ष' '्' + 'e' > 'क्ष' 'े'
 'क्ष' '्' + 'E' > 'क्ष' 'े'
 'क्ष' '्' + 'o' > 'क्ष' 'ो'
-'क्ष' '्' + 'O' > 'क्ष' 'ो'
-
-c Homorganic Nasals (Pure Nasal - Consumes Buffer Key)
-'n' + 'k' > 'ङ' '्'
-'n' + 'g' > 'ङ' '्'
-'n' + 'c' > 'ञ' '्'
-'n' + 'j' > 'ञ' '्'
+'क्ष' '्' + 'O' >c Dedup Logic for Homorganic Inputs (e.g. ngg -> ङ्ग्ग -> ङ्ग)
+'ङ' '्' + 'k' > context
+'ङ' '्' + 'g' > context
+'ञ' '्' + 'c' > context
+'ञ' '्' + 'j' > context'ञ' '्'
 
 c Punctuation Commit Rules
 any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '

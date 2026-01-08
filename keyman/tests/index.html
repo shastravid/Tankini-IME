@@ -109,14 +109,27 @@
             let tests = await response.json();
 
             // Add manual tests
-            tests.unshift(
-                { seq: 'k', expect: 'k', desc: 'Latin Buffer Check (k -> k)' },
-                { seq: 'k ', expect: 'क् ', desc: 'Explicit Halant (k+space -> क् )' },
-                { seq: 'ka', expect: 'क', desc: 'Implicit A (ka -> k)' },
-                { seq: 'ki', expect: 'कि', desc: 'Matra i' },
-                { seq: 'kai', expect: 'कै', desc: 'Matra ai (deadkey logic)' },
-                { seq: 'kau', expect: 'कौ', desc: 'Matra au (k+a+u)' }
-            );
+            const manualTests = [
+                { seq: 'k', expect: 'k', desc: 'Latin Buffer (k)' },
+                { seq: 'k ', expect: 'क् ', desc: 'Space Commit (k )' },
+                { seq: 'ka', expect: 'क', desc: 'Simple Consonant (ka)' },
+                { seq: 'kaa', expect: 'का', desc: 'Long Vowel (kaa)' },
+                { seq: 'ki', expect: 'कि', desc: 'Matra i (ki)' },
+                { seq: 'kI', expect: 'की', desc: 'Matra I (kI)' },
+                { seq: 'k.', expect: 'क्।', desc: 'Punctuation Commit (k.)' },
+                { seq: 'k,', expect: 'क्,', desc: 'Punctuation Commit (k,)' },
+                { seq: 'ngg', expect: 'ङ्ग', desc: 'Homorganic Dedup (ngg -> nga)' },
+                { seq: 'nk', expect: 'ङ्क्', desc: 'Homorganic (nk)' },
+                { seq: 'nc', expect: 'ञ्च्', desc: 'Homorganic (nc)' },
+                { seq: 'Y', expect: 'ञ्', desc: 'Explicit Nya (Y)' },
+                { seq: 'Ya', expect: 'ञ', desc: 'Nya + a (Ya)' },
+                { seq: 'jY', expect: 'ज्ञ्', desc: 'Jnya (jY)' },
+                { seq: 'jYa', expect: 'ज्ञ', desc: 'Jnya + a (jYa)' },
+                { seq: 'gY', expect: 'ज्ञ्', desc: 'Jnya Alt (gY)' },
+                { seq: 'x', expect: 'क्ष्', desc: 'Ksha (x)' },
+                { seq: 'xa', expect: 'क्ष', desc: 'Ksha + a (xa)' }
+            ];
+            tests.unshift(...manualTests);
 
             // Batch Logic
             const runBatch = async (batch, offset) => {

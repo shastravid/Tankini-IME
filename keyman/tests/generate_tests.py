@@ -30,7 +30,21 @@ special = {
     '०': '0', '१': '1', '२': '2', '३': '3', '४': '4',
     '५': '5', '६': '6', '७': '7', '८': '8', '९': '9',
     '।': '.', '॥': '..', 'ॐ': 'OM',
-    '॰': 'q', '॒': '_', '॑': 'X', '᳚': 'XX'
+    '॰': 'q', '॒': '_', '॑': 'X', '᳚': 'XX',
+    '\u200d': '', '\u200c': ''
+}
+
+# Consonant Map - Updated for Tankini Sanskrit
+# Specific mappings that match our KMN explicit rules
+consonants = {
+    'क': 'k', 'ख': 'K', 'ग': 'g', 'घ': 'G', 'ङ': 'ng',
+    'च': 'c', 'छ': 'C', 'ज': 'j', 'झ': 'J', 'ञ': 'Y',
+    'ट': 'T', 'ठ': 'Th', 'ड': 'D', 'ढ': 'Dh', 'ण': 'N',
+    'त': 't', 'थ': 'th', 'द': 'd', 'ध': 'dh', 'न': 'n',
+    'प': 'p', 'फ': 'P', 'ब': 'b', 'भ': 'B', 'म': 'm',
+    'य': 'y', 'र': 'r', 'ल': 'l', 'ळ': 'L', 'व': 'v',
+    'श': 'S', 'ष': 'Sh', 'स': 's', 'ह': 'h',
+    'क्ष': 'x', 'ज्ञ': 'jY', 'ऌ': 'lR'
 }
 
 def convert_line(line):
@@ -136,6 +150,11 @@ def generate_variants(canonical_seq):
         elif char == 'U':
             alt += 'oo' # Variant 1
             changed = True
+        elif char == 'j' and nxt == 'Y':
+            alt += 'gY'
+            changed = True
+            i += 2
+            continue
         else:
             alt += char
         i += 1
