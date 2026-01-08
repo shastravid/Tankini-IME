@@ -124,8 +124,11 @@ deadkey(asp) + 'H' > 'ः'
 
 c Punctuation Commit Rules (Explicitly at Top)
 any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
+any(ConsonantKeys) + [K_SPACE] > index(Consonants, 1) '्' ' '
 any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
+any(ConsonantKeys) + [K_COMMA] > index(Consonants, 1) '्' ','
 any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
+any(ConsonantKeys) + [K_PERIOD] > index(Consonants, 1) '्' '।'
 any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
 
 c Homorganic Nasals & Special Logic
