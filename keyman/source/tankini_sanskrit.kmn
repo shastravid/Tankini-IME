@@ -18,10 +18,12 @@ store(Vowels)       'अ'    'इ'    'उ'    'ऋ'    'ए'    'ओ'    'आ' 
 store(MatraKeys)    'A'    'i'    'I'    'u'    'U'    'R'    'e'    'E'    'o'    'O'
 store(Matras)       'ा'    'ि'    'ी'    'ु'    'ू'    'ृ'    'े'    'े'    'ो'    'ो'
 
-c Consonant Keys (Standard)
-c Removed 'X' as it is Svarita, not a consonant base for virama logic.
+c Consonant Keys (For Buffer Logic)
 store(ConsonantKeys) 'k' 'g' 'c' 'j' 'T' 'D' 'N' 't' 'd' 'n' 'p' 'b' 'm' 'y' 'r' 'l' 'v' 'w' 's' 'h' 'L' 'K' 'G' 'C' 'J' 'S' 'P' 'B' 'x' 'Y'
 store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न' 'प' 'ब' 'म' 'य' 'र' 'ल' 'व' 'व' 'स' 'ह' 'ळ' 'ख' 'घ' 'छ' 'झ' 'श' 'फ' 'भ' 'क्ष' 'ञ'
+
+c All Devanagari Consonants (For Matra/Vowel Context Rules)
+store(AllDevaConsonants) 'क' 'ख' 'ग' 'घ' 'ङ' 'च' 'छ' 'ज' 'झ' 'ञ' 'ट' 'ठ' 'ड' 'ढ' 'ण' 'त' 'थ' 'द' 'ध' 'न' 'प' 'फ' 'ब' 'भ' 'म' 'य' 'र' 'ल' 'व' 'श' 'ष' 'स' 'ह' 'क्ष' 'ज्ञ' 'ळ'
 
 store(NumberKeys) '0'..'9'
 store(Numbers)    '०'..'९'
@@ -154,30 +156,31 @@ any(ConsonantKeys) + 'M' > index(Consonants, 1) 'ं'
 any(ConsonantKeys) + 'H' > index(Consonants, 1) 'ः'
 
 c 6. Double Vowels (aa/ii/uu)
+c 6. Double Vowels (aa/ii/uu)
 c aa -> A (After full consonant)
-any(Consonants) + 'a' > context 'ा'
+any(AllDevaConsonants) + 'a' > context 'ा'
 'अ' + 'a' > 'आ'
 
 c ai -> Ai (matra)
-any(Consonants) + 'i' > context 'ै'
+any(AllDevaConsonants) + 'i' > context 'ै'
 
 c au -> Au (matra)
-any(Consonants) + 'u' > context 'ौ'
+any(AllDevaConsonants) + 'u' > context 'ौ'
 
 c ii -> I (matra)
 c Replace Consonant+ShortMatra with Consonant+LongMatra
-any(Consonants) 'ि' + 'i' > index(Consonants, 1) 'ी'
+any(AllDevaConsonants) 'ि' + 'i' > index(AllDevaConsonants, 1) 'ी'
 
 c uu -> U (matra)
 c Replace Consonant+ShortMatra with Consonant+LongMatra
-any(Consonants) 'ु' + 'u' > index(Consonants, 1) 'ू'
+any(AllDevaConsonants) 'ु' + 'u' > index(AllDevaConsonants, 1) 'ू'
 'ू' + 'u' > context
 
 c ee -> I (matra, alt)
-any(Consonants) 'े' + 'e' > index(Consonants, 1) 'ी'
+any(AllDevaConsonants) 'े' + 'e' > index(AllDevaConsonants, 1) 'ी'
 
 c oo -> U (matra, alt)
-any(Consonants) 'ो' + 'o' > index(Consonants, 1) 'ू'
+any(AllDevaConsonants) 'ो' + 'o' > index(AllDevaConsonants, 1) 'ू'
 
 c 7. Explicit Virama (Commit)
 any(ConsonantKeys) + '\' > index(Consonants, 1) '्'
