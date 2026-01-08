@@ -122,18 +122,48 @@ c If Modifier -> Add Modifier
 deadkey(asp) + 'M' > 'ं'
 deadkey(asp) + 'H' > 'ः'
 
-c 3.7 Homorganic Nasals (n -> ङ / n -> ञ)
-c 'n' followed by Velar (k, g) -> Nga
+c 3.7 Homorganic Nasals & Special Logic (Must be BEFORE generic Consumer rules)
+
+c Explicit Y (Nya) - Halant Default / Buffer
+'n' + 'Y' > 'ञ' '्'
++ 'Y' > 'ञ' '्'
+'ञ' '्' + 'a' > 'ञ'
+any(ConsonantKeys) + 'Y' > index(Consonants, 1) '्' 'ञ' '्'
+deadkey(asp) + 'Y' > '्' 'ञ' '्'
+
+c Explicit x (Ksha) - Halant Default / Buffer
++ 'x' > 'क्ष' '्'
+'क्ष' '्' + 'a' > 'क्ष'
+any(ConsonantKeys) + 'x' > index(Consonants, 1) '्' 'क्ष' '्'
+deadkey(asp) + 'x' > '्' 'क्ष' '्'
+
+c Jnya Formation (j/g + Y)
+'j' + 'Y' > 'ज्ञ' '्'
+'g' + 'Y' > 'ज्ञ' '्'
+'ज्ञ' '्' + 'a' > 'ज्ञ'
+
+c Homorganic Nasals (Preserve Buffer Key for Context)
 'n' + 'k' > 'ङ' '्' 'k'
 'n' + 'g' > 'ङ' '्' 'g'
-'n' + 'K' > 'ङ' '्' 'K'
-'n' + 'G' > 'ङ' '्' 'G'
-
-c 'n' followed by Palatal (c, j) -> Nya
 'n' + 'c' > 'ञ' '्' 'c'
 'n' + 'j' > 'ञ' '्' 'j'
-'n' + 'C' > 'ञ' '्' 'C'
-'n' + 'J' > 'ञ' '्' 'J'
+
+c Dedup Logic (Handle double-typing e.g. ngg -> ङ्g + g -> ङ्g)
+'ङ' '्' 'k' + 'k' > context
+'ङ' '्' 'g' + 'g' > context
+'ञ' '्' 'c' + 'c' > context
+'ञ' '्' 'j' + 'j' > context
+
+c Punctuation Commit Rules
+any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
+any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
+any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
+any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
+
+c Matras for Explicit Consonants (Y, x, Jnya)
+'ञ' '्' + any(MatraKeys) > 'ञ' index(Matras, 1)
+'ज्ञ' '्' + any(MatraKeys) > 'ज्ञ' index(Matras, 1)
+'क्ष' '्' + any(MatraKeys) > 'क्ष' index(Matras, 1)
 
 c 4. Latin + Latin -> Deva + Virama + Latin
 any(ConsonantKeys) + any(ConsonantKeys) > index(Consonants, 1) '्' index(ConsonantKeys, 2)
@@ -187,75 +217,5 @@ any(ConsonantKeys) + '\' > index(Consonants, 1) '्'
 deadkey(asp) + '\' > '्'
 
 c Special Special
-'न' '्' + 'g' > 'ङ' '्'
-'न' '्' 'g' + 'g' > 'ङ' '्' 'g'
-'न' '्' + 'j' > 'ञ' '्'
-
-c Jnya Formation (j/g + Y) - Halant Default!
-'j' + 'Y' > 'ज्ञ' '्'
-'g' + 'Y' > 'ज्ञ' '्'
-'ज्ञ' '्' + 'a' > 'ज्ञ'
-
-c Explicit Buffer/Deadkey Logic for Y
-any(ConsonantKeys) + 'Y' > index(Consonants, 1) '्' 'ञ' '्'
-deadkey(asp) + 'Y' > '्' 'ञ' '्'
-'n' + 'Y' > 'ञ' '्'
-
-c Nya Matras (Explicit)
-'ञ' '्' + 'A' > 'ञ' 'ा'
-'ञ' '्' + 'i' > 'ञ' 'ि'
-'ञ' '्' + 'I' > 'ञ' 'ी'
-'ञ' '्' + 'u' > 'ञ' 'ु'
-'ञ' '्' + 'U' > 'ञ' 'ू'
-'ञ' '्' + 'R' > 'ञ' 'ृ'
-'ञ' '्' + 'e' > 'ञ' 'े'
-'ञ' '्' + 'E' > 'ञ' 'े'
-'ञ' '्' + 'o' > 'ञ' 'ो'
-'ञ' '्' + 'O' > 'ञ' 'ो'
-
-c Jnya Matras (Explicit)
-'ज्ञ' '्' + 'A' > 'ज्ञ' 'ा'
-'ज्ञ' '्' + 'i' > 'ज्ञ' 'ि'
-'ज्ञ' '्' + 'I' > 'ज्ञ' 'ी'
-'ज्ञ' '्' + 'u' > 'ज्ञ' 'ु'
-'ज्ञ' '्' + 'U' > 'ज्ञ' 'ू'
-'ज्ञ' '्' + 'R' > 'ज्ञ' 'ृ'
-'ज्ञ' '्' + 'e' > 'ज्ञ' 'े'
-'ज्ञ' '्' + 'E' > 'ज्ञ' 'े'
-'ज्ञ' '्' + 'o' > 'ज्ञ' 'ो'
-'ज्ञ' '्' + 'O' > 'ज्ञ' 'ो'
-
-c Explicit x (Ksha) Logic - Halant Default!
-+ 'x' > 'क्ष' '्'
-'क्ष' '्' + 'a' > 'क्ष'
-
-c Buffer/Deadkey Logic for x
-any(ConsonantKeys) + 'x' > index(Consonants, 1) '्' 'क्ष' '्'
-deadkey(asp) + 'x' > '्' 'क्ष' '्'
-
-c Ksha Matras (Explicit)
-'क्ष' '्' + 'A' > 'क्ष' 'ा'
-'क्ष' '्' + 'i' > 'क्ष' 'ि'
-'क्ष' '्' + 'I' > 'क्ष' 'ी'
-'क्ष' '्' + 'u' > 'क्ष' 'ु'
-'क्ष' '्' + 'U' > 'क्ष' 'ू'
-'क्ष' '्' + 'R' > 'क्ष' 'ृ'
-'क्ष' '्' + 'e' > 'क्ष' 'े'
-'क्ष' '्' + 'E' > 'क्ष' 'े'
-'क्ष' '्' + 'o' > 'क्ष' 'ो'
-'क्ष' '्' + 'O' > 'क्ष' 'ो'
-
-c Dedup Logic for Homorganic Inputs (e.g. ngg -> ङ्ग्ग -> ङ्ग)
-'ङ' '्' + 'k' > context
-'ङ' '्' + 'g' > context
-'ञ' '्' + 'c' > context
-'ञ' '्' + 'j' > context
-
-c Punctuation Commit Rules
-any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
-any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
-any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
-any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
-
 c Numbers
 + any(NumberKeys) > index(Numbers, 1)
