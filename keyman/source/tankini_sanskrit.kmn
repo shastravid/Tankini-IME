@@ -106,13 +106,12 @@ c Special Special
 'ल' '्' + 'R' > 'ऌ' 
 
 c 2. Implicit A (Removes Virama)
-c Explicitly replace Consonant+Virama with Consonant to ensure deletion.
-c Use context(1) to avoid re-typing the consonant (reduces backspace count).
-any(Consonants) '्' + 'a' > context(1)
+c Simplify to touch ONLY the Virama to prevent Consonant doubling in editors.
+'्' + 'a' > nul
 
 c 3. Matras (Remove Virama, Add Matra)
-c Explicitly replace Consonant+Virama with Consonant+Matra.
-any(Consonants) '्' + any(MatraKeys) > context(1) index(Matras, 3)
+c Simplify to touch ONLY the Virama.
+'्' + any(MatraKeys) > index(Matras, 2)
 
 c 4. Generic Consonants (Always output with Virama)
 + any(ConsonantKeys) > index(Consonants, 1) '्'
