@@ -259,6 +259,12 @@ c Homorganic Nasals (Latin Buffer)
 'n' + 'c' > 'ञ' '्' 'c'
 'n' + 'j' > 'ञ' '्' 'j'
 
+c Dedup Logic for Homorganic Inputs (e.g. ngg -> ङ्ग्ग -> ङ्ग)
+'ङ' '्' 'k' + 'k' > context
+'ङ' '्' 'g' + 'g' > context
+'ञ' '्' 'c' + 'c' > context
+'ञ' '्' 'j' + 'j' > context
+
 c Punctuation Commit Rules
 any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
 any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
