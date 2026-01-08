@@ -114,11 +114,24 @@ c If 'a' typed after aspirate -> Remove deadkey, Keep Aspirate (Implicit 'a').
 deadkey(asp) + 'a' > nul
 c If Matra -> Add Matra
 deadkey(asp) + any(MatraKeys) > index(Matras, 2)
-c If Consonant -> Add Virama + New Consonant
+c If Consonant typed after aspirate -> Remove deadkey, Insert Virama, Add New Consonant (Latin).
 deadkey(asp) + any(ConsonantKeys) > '्' index(ConsonantKeys, 2)
 c If Modifier -> Add Modifier
 deadkey(asp) + 'M' > 'ं'
 deadkey(asp) + 'H' > 'ः'
+
+c 3.7 Homorganic Nasals (n -> ङ / n -> ञ)
+c 'n' followed by Velar (k, g) -> Nga
+'n' + 'k' > 'ङ' '्' 'k'
+'n' + 'g' > 'ङ' '्' 'g'
+'n' + 'K' > 'ङ' '्' 'K'
+'n' + 'G' > 'ङ' '्' 'G'
+
+c 'n' followed by Palatal (c, j) -> Nya
+'n' + 'c' > 'ञ' '्' 'c'
+'n' + 'j' > 'ञ' '्' 'j'
+'n' + 'C' > 'ञ' '्' 'C'
+'n' + 'J' > 'ञ' '्' 'J'
 
 c 4. Latin + Latin -> Deva + Virama + Latin
 any(ConsonantKeys) + any(ConsonantKeys) > index(Consonants, 1) '्' index(ConsonantKeys, 2)
