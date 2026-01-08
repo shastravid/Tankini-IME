@@ -110,7 +110,8 @@
 
             // Add manual tests
             tests.unshift(
-                { seq: 'k', expect: 'क्', desc: 'Simple Consonant' },
+                { seq: 'k', expect: 'k', desc: 'Latin Buffer Check (k -> k)' },
+                { seq: 'k ', expect: 'क् ', desc: 'Explicit Halant (k+space -> क् )' },
                 { seq: 'ka', expect: 'क', desc: 'Implicit A (ka -> k)' },
                 { seq: 'ki', expect: 'कि', desc: 'Matra i' },
                 { seq: 'kai', expect: 'कै', desc: 'Matra ai (deadkey logic)' },

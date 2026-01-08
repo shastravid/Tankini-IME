@@ -158,6 +158,12 @@ c aa -> A (After full consonant)
 any(Consonants) + 'a' > context 'ा'
 'अ' + 'a' > 'आ'
 
+c ai -> Ai (matra)
+any(Consonants) + 'i' > context 'ै'
+
+c au -> Au (matra)
+any(Consonants) + 'u' > context 'ौ'
+
 c ii -> I (matra)
 c Replace Consonant+ShortMatra with Consonant+LongMatra
 any(Consonants) 'ि' + 'i' > index(Consonants, 1) 'ी'
