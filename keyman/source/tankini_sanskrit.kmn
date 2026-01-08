@@ -122,13 +122,18 @@ c If Modifier -> Add Modifier
 deadkey(asp) + 'M' > 'ं'
 deadkey(asp) + 'H' > 'ः'
 
-c Punctuation Commit Rules (Explicitly at Top)
+c Punctuation Commit Rules (Explicit Output for Debugging)
+'k' + ' ' > 'क' '्' ' '
+'k' + ',' > 'क' '्' ','
+'k' + '.' > 'क' '्' '।'
+'k' + U+000D > 'क' '्' U+000D
+
 any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
 any(ConsonantKeys) + [K_SPACE] > index(Consonants, 1) '्' ' '
 any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
 any(ConsonantKeys) + [K_COMMA] > index(Consonants, 1) '्' ','
 any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
-any(ConsonantKeys) + [K_PERIOD] > index(Consonants, 1) '्' '।'
+any(ConsonantKeys) + [K_PERIOD] > index(Consonants, 1) '्' '। '
 any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
 
 c Jnya Formation (j/g + Y) - Must be BEFORE generic Y rules
