@@ -96,7 +96,6 @@ c 3. Latin + Matra -> Deva + Matra
 any(ConsonantKeys) + any(MatraKeys) > index(Consonants, 1) index(Matras, 2)
 
 c 3.5 Aspirates (Specific Latin + h -> Deva Aspirate + Deadkey)
-c The deadkey signals "We just formed an aspirate, so next 'a' should be consumed".
 'k' + 'h' > 'ख' deadkey(asp)
 'g' + 'h' > 'घ' deadkey(asp)
 'c' + 'h' > 'छ' deadkey(asp)
@@ -107,40 +106,49 @@ c The deadkey signals "We just formed an aspirate, so next 'a' should be consume
 'd' + 'h' > 'ध' deadkey(asp)
 'p' + 'h' > 'फ' deadkey(asp)
 'b' + 'h' > 'भ' deadkey(asp)
-'s' + 'h' > 'ष' deadkey(asp)
+'s' + 'h' > 'श' deadkey(asp)
 'S' + 'h' > 'ष' deadkey(asp)
 
 c 3.6 Deadkey Handling
 c If 'a' typed after aspirate -> Remove deadkey, Keep Aspirate (Implicit 'a').
 deadkey(asp) + 'a' > nul
-
-c If Matra typed after aspirate -> Remove deadkey, Add Matra.
+c If Matra -> Add Matra
 deadkey(asp) + any(MatraKeys) > index(Matras, 2)
-
-c If Consonant typed after aspirate -> Remove deadkey, Insert Virama, Add New Consonant (Latin).
+c If Consonant -> Add Virama + New Consonant
 deadkey(asp) + any(ConsonantKeys) > '्' index(ConsonantKeys, 2)
+c If Modifier -> Add Modifier
+deadkey(asp) + 'M' > 'ं'
+deadkey(asp) + 'H' > 'ः'
 
-c 4. Latin + Latin -> Deva + Virama + Latin (Conjunct Formation - Non-Aspirate)
+c 4. Latin + Latin -> Deva + Virama + Latin
 any(ConsonantKeys) + any(ConsonantKeys) > index(Consonants, 1) '्' index(ConsonantKeys, 2)
 
-c 5. Latin + Space/Punctuation -> Deva + Virama + Space (Word Ending)
+c 5. Latin + Space/Punctuation/Modifiers -> Deva + Virama + Char (Word Ending)
 any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
 any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
 any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
 any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
+c Modifiers commit the previous consonant (with implicit a? No, Consonant buffer implies NO 'a' yet).
+c If I type 'k' then 'M'. 'k' -> 'क्' + 'M' -> 'कं' is usually expected?
+c NO. 'k' means 'k' (halant-default logic).
+c So 'k'+'M' -> 'क्' + 'ं' (invalid).
+c Usually 'a'+'M' -> 'अं'. 'ka' + 'M' -> 'कं'.
+c If I type 'k' (Latin) then 'M'. 'k' SHOULD become 'क' (Implicit A) + 'ं'?
+c Or 'k' (Halant) + 'ं'?
+c Standard ITRANS: 'kM' -> 'कं'. 'k' implies 'ka' context for modifiers?
+c Let's assume 'k'+'M' -> 'कं'.
+any(ConsonantKeys) + 'M' > index(Consonants, 1) 'ं'
+any(ConsonantKeys) + 'H' > index(Consonants, 1) 'ः'
 
-c 6. Double Vowels (aa/ii/uu) - Strict Backspace for Mac
+c 6. Double Vowels (aa/ii/uu)
 c aa -> A (After full consonant)
-c If Deva Consonant is already on screen (no latin buffer), we can append matra.
 any(Consonants) + 'a' > context 'ा'
 'अ' + 'a' > 'आ'
 
 c ii -> I (matra)
-c 'ि' + 'i' -> [BKSP] 'ी'
 'ि' + 'i' > outs(BKSP) 'ी'
 
 c uu -> U (matra)
-c 'ु' + 'u' -> [BKSP] 'ू'
 'ु' + 'u' > outs(BKSP) 'ू'
 'ू' + 'u' > context
 
