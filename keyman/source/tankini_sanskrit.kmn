@@ -204,9 +204,10 @@ c Explicit Y (Nya) Logic - Halant Default!
 + 'Y' > 'ञ' '्'
 'ञ' '्' + 'a' > 'ञ'
 
-c Buffer/Deadkey Logic for Y
+c Explicit Buffer/Deadkey Logic for Y
 any(ConsonantKeys) + 'Y' > index(Consonants, 1) '्' 'ञ' '्'
 deadkey(asp) + 'Y' > '्' 'ञ' '्'
+'n' + 'Y' > 'ञ' '्'
 
 c Nya Matras (Explicit)
 'ञ' '्' + 'A' > 'ञ' 'ा'
@@ -251,6 +252,18 @@ c Ksha Matras (Explicit)
 'क्ष' '्' + 'E' > 'क्ष' 'े'
 'क्ष' '्' + 'o' > 'क्ष' 'ो'
 'क्ष' '्' + 'O' > 'क्ष' 'ो'
+
+c Homorganic Nasals (Latin Buffer)
+'n' + 'k' > 'ङ' '्' 'k'
+'n' + 'g' > 'ङ' '्' 'g'
+'n' + 'c' > 'ञ' '्' 'c'
+'n' + 'j' > 'ञ' '्' 'j'
+
+c Punctuation Commit Rules
+any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
+any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
+any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
+any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
 
 c Numbers
 + any(NumberKeys) > index(Numbers, 1)
