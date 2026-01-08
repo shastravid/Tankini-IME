@@ -93,42 +93,50 @@ any(ConsonantKeys) + 'a' > index(Consonants, 1)
 c 3. Latin + Matra -> Deva + Matra
 any(ConsonantKeys) + any(MatraKeys) > index(Consonants, 1) index(Matras, 2)
 
+c 3.5 Aspirates (Specific Latin + h -> Deva Aspirate)
+'k' + 'h' > 'ख'
+'g' + 'h' > 'घ'
+'c' + 'h' > 'छ'
+'j' + 'h' > 'झ'
+'T' + 'h' > 'ठ'
+'D' + 'h' > 'ढ'
+'t' + 'h' > 'थ'
+'d' + 'h' > 'ध'
+'p' + 'h' > 'फ'
+'b' + 'h' > 'भ'
+'s' + 'h' > 'ष'
+'S' + 'h' > 'ष'
+
 c 4. Latin + Latin -> Deva + Virama + Latin (Conjunct Formation)
 any(ConsonantKeys) + any(ConsonantKeys) > index(Consonants, 1) '्' index(ConsonantKeys, 2)
 
 c 5. Latin + Space/Punctuation -> Deva + Virama + Space (Word Ending)
-c We need specific rules for space and common punctuation to "commit" the halant.
 any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
 any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
 any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
 any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
 
 c 6. Double Vowels (aa/ii/uu)
-c Handle 'aa' specifically after Latin Consonant?
-c 'k' + 'a' -> 'क'. 'क' + 'a' > 'का'.
-'अ' + 'a' > 'आ'
+c aa -> A (After full consonant)
 any(Consonants) + 'a' > context 'ा'
-any(Consonants) + 'i' > context 'ै'
-any(Consonants) + 'u' > context 'ौ'
+'अ' + 'a' > 'आ'
+
+c ii -> I (matra)
+'ि' + 'i' > 'ी'
+
+c uu -> U (matra)
+'ु' + 'u' > 'ू'
+'ू' + 'u' > 'ू' 
+c (handle ru case if different?)
+
+c ee -> I (matra, alt)
+'े' + 'e' > 'ी'
+
+c oo -> U (matra, alt)
+'ो' + 'o' > 'ू'
 
 c 7. Explicit Virama (Commit)
 any(ConsonantKeys) + '\' > index(Consonants, 1) '्'
-
-c 8. Aspirates (Handling 'h' if 'h' is in ConsonantKeys)
-c Use standard logic since 'h' is a key. 'k'+'h' -> 'k'+'h' -> 'क्'+'h' -> Special Aspirate Rule?
-c Re-implement Aspirates matching DEVANAGARI context (since 'k'+'h' becomes 'क्'+'h')
-'क' '्' + 'h' > 'ख' '्' 
-'ग' '्' + 'h' > 'घ' '्'
-'च' '्' + 'h' > 'छ' '्'
-'ज' '्' + 'h' > 'झ' '्'
-'ट' '्' + 'h' > 'ठ' '्'
-'ड' '्' + 'h' > 'ढ' '्'
-'त' '्' + 'h' > 'थ' '्'
-'द' '्' + 'h' > 'ध' '्'
-'प' '्' + 'h' > 'फ' '्'
-'ब' '्' + 'h' > 'भ' '्'
-'स' '्' + 'h' > 'श' '्'
-'श' '्' + 'h' > 'ष' '्'
 
 c Special Special
 'न' '्' + 'g' > 'ङ' '्'
