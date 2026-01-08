@@ -131,7 +131,11 @@ any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
 any(ConsonantKeys) + [K_PERIOD] > index(Consonants, 1) '्' '।'
 any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
 
-c Homorganic Nasals & Special Logic
+c Jnya Formation (j/g + Y) - Must be BEFORE generic Y rules
+'j' + 'Y' > 'ज्ञ' '्'
+'g' + 'Y' > 'ज्ञ' '्'
+'ज्ञ' '्' + 'a' > 'ज्ञ'
+
 c Explicit Y (Nya) - Halant Default / Buffer
 'n' + 'Y' > 'ञ' '्'
 + 'Y' > 'ञ' '्'
@@ -145,13 +149,8 @@ c Explicit x (Ksha) - Halant Default / Buffer
 any(ConsonantKeys) + 'x' > index(Consonants, 1) '्' 'क्ष' '्'
 deadkey(asp) + 'x' > '्' 'क्ष' '्'
 
-c Jnya Formation (j/g + Y)
-'j' + 'Y' > 'ज्ञ' '्'
-'g' + 'Y' > 'ज्ञ' '्'
-'ज्ञ' '्' + 'a' > 'ज्ञ'
-
 c Homorganic Nasals (Preserve Buffer Key for Context)
-'n' + 'k' > 'ङ' '्' 'k'
+c 'n' + 'k' > 'ङ' '्' 'k'  c Removed to allow dental n+k (varNAnkramAn)
 'n' + 'g' > 'ङ' '्' 'g'
 'n' + 'c' > 'ञ' '्' 'c'
 'n' + 'j' > 'ञ' '्' 'j'
