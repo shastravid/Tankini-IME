@@ -3,8 +3,8 @@ store(&NAME) 'Tankini Sanskrit'
 store(&TARGETS) 'any'
 store(&COPYRIGHT) '© 2026'
 store(&KEYBOARDVERSION) '1.0'
-c store(&VISUALKEYBOARD) 'tankini_sanskrit.kvks'
-c store(&LAYOUTFILE) 'tankini_sanskrit.keyman-touch-layout'
+store(&VISUALKEYBOARD) 'tankini_sanskrit.kvks'
+store(&LAYOUTFILE) 'tankini_sanskrit.keyman-touch-layout'
 
 begin Unicode > use(main)
 
