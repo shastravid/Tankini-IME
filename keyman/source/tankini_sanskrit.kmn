@@ -166,12 +166,20 @@ c 'n' + 'k' > 'ङ' '्' 'k'  c Removed to allow dental n+k (varNAnkramAn)
 'n' + 'g' > 'ङ' '्' 'g'
 'n' + 'c' > 'ञ' '्' 'c'
 'n' + 'j' > 'ञ' '्' 'j'
+'n' + 'G' > 'ङ' '्' 'G'
+'n' + 'K' > 'ङ' '्' 'K'
+'n' + 'C' > 'ञ' '्' 'C'
+'n' + 'J' > 'ञ' '्' 'J'
 
 c Dedup Logic (Handle double-typing e.g. ngg -> ङ्g + g -> ङ्g -> ङ्ग)
 'ङ' '्' 'k' + 'k' > 'ङ' '्' 'k'
 'ङ' '्' 'g' + 'g' > 'ङ' '्' 'g'
 'ञ' '्' 'c' + 'c' > 'ञ' '्' 'c'
 'ञ' '्' 'j' + 'j' > 'ञ' '्' 'j'
+'ङ' '्' 'k' + 'K' > 'ङ' '्' 'K'
+'ङ' '्' 'g' + 'G' > 'ङ' '्' 'G'
+'ञ' '्' 'c' + 'C' > 'ञ' '्' 'C'
+'ञ' '्' 'j' + 'J' > 'ञ' '्' 'J'
 
 c Explicit Matra Rules (Expanded to avoid KM02032)
 'ञ' '्' + 'A' > 'ञ' 'ा'
@@ -221,7 +229,6 @@ c NO. 'k' means 'k' (halant-default logic).
 c So 'k'+'M' -> 'क्' + 'ं' (invalid).
 c Usually 'a'+'M' -> 'अं'. 'ka' + 'M' -> 'कं'.
 c If I type 'k' (Latin) then 'M'. 'k' SHOULD become 'क' (Implicit A) + 'ं'?
-c Or 'k' (Halant) + 'ं'?
 c Standard ITRANS: 'kM' -> 'कं'. 'k' implies 'ka' context for modifiers?
 c Let's assume 'k'+'M' -> 'कं'.
 any(ConsonantKeys) + 'M' > index(Consonants, 1) 'ं'
