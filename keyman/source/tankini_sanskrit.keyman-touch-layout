@@ -81,16 +81,16 @@
           {
              "id": 1,
              "key": [
-               { "id": "K_BANG", "text": "!" },
-               { "id": "K_AT", "text": "@" },
-               { "id": "K_HASH", "text": "#" },
-               { "id": "K_DOLLAR", "text": "$" },
-               { "id": "K_PERCENT", "text": "%" },
-               { "id": "K_CARET", "text": "^" },
-               { "id": "K_AMPERSAND", "text": "&" },
-               { "id": "K_ASTERISK", "text": "*" },
-               { "id": "K_LPAREN", "text": "(" },
-               { "id": "K_RPAREN", "text": ")" },
+               { "id": "U_0021", "text": "!" },
+               { "id": "U_0040", "text": "@" },
+               { "id": "U_0023", "text": "#" },
+               { "id": "U_0024", "text": "$" },
+               { "id": "U_0025", "text": "%" },
+               { "id": "U_005E", "text": "^" },
+               { "id": "U_0026", "text": "&" },
+               { "id": "U_002A", "text": "*" },
+               { "id": "U_0028", "text": "(" },
+               { "id": "U_0029", "text": ")" },
                { "id": "K_BKSP", "text": "bksp" }
              ]
           },
@@ -136,8 +136,8 @@
               { "id": "K_B", "text": "B" },
               { "id": "K_N", "text": "N" },
               { "id": "K_M", "text": "M" },
-              { "id": "K_COMMA", "text": "<" },
-              { "id": "K_PERIOD", "text": ">" },
+              { "id": "U_003C", "text": "<" },
+              { "id": "U_003E", "text": ">" },
               { "id": "K_ENTER", "text": "enter" }
             ]
           },
@@ -202,7 +202,7 @@
           {
             "id": 4,
             "key": [
-               { "id": "K_123", "text": "123" },
+               { "id": "T_NUM", "text": "123", "nextlayer": "numeric" },
                { "id": "K_COMMA", "text": "," },
                { "id": "K_SPACE", "text": "space" },
                { "id": "K_PERIOD", "text": "." },
@@ -260,7 +260,63 @@
           {
              "id": 4,
              "key": [
-               { "id": "K_123", "text": "123" },
+               { "id": "T_NUM", "text": "123", "nextlayer": "numeric" },
+               { "id": "K_COMMA", "text": "," },
+               { "id": "K_SPACE", "text": "space" },
+               { "id": "K_PERIOD", "text": "." },
+               { "id": "K_ENTER", "text": "enter" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "numeric",
+        "row": [
+          {
+            "id": 1,
+            "key": [
+              { "id": "K_1", "text": "1" },
+              { "id": "K_2", "text": "2" },
+              { "id": "K_3", "text": "3" },
+              { "id": "K_4", "text": "4" },
+              { "id": "K_5", "text": "5" },
+              { "id": "K_6", "text": "6" },
+              { "id": "K_7", "text": "7" },
+              { "id": "K_8", "text": "8" },
+              { "id": "K_9", "text": "9" },
+              { "id": "K_0", "text": "0" }
+            ]
+          },
+          {
+             "id": 2,
+            "key": [
+               { "id": "U_002D", "text": "-" },
+               { "id": "U_002F", "text": "/" },
+               { "id": "U_003A", "text": ":" },
+               { "id": "U_003B", "text": ";" },
+               { "id": "U_0028", "text": "(" },
+               { "id": "U_0029", "text": ")" },
+               { "id": "U_0024", "text": "$" },
+               { "id": "U_0026", "text": "&" },
+               { "id": "U_0040", "text": "@" },
+               { "id": "U_0022", "text": "\"" }
+            ]
+          },
+          {
+             "id": 3,
+            "key": [
+               { "id": "U_002E", "text": "." },
+               { "id": "U_002C", "text": "," },
+               { "id": "U_003F", "text": "?" },
+               { "id": "U_0021", "text": "!" },
+               { "id": "U_0027", "text": "'" },
+               { "id": "K_BKSP", "text": "bksp" }
+            ]
+           },
+           {
+            "id": 4,
+            "key": [
+               { "id": "T_ABC", "text": "ABC", "nextlayer": "default" },
                { "id": "K_COMMA", "text": "," },
                { "id": "K_SPACE", "text": "space" },
                { "id": "K_PERIOD", "text": "." },

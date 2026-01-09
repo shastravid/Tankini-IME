@@ -45,7 +45,7 @@
       <key vkey="K_LBRKT">[</key>
       <key vkey="K_RBRKT">]</key>
       <key vkey="K_BKSLASH">\</key>
-      <key vkey="K_GRAVE">`</key>
+      <key vkey="K_BKQUOTE">`</key>
       <key vkey="K_0">०</key>
       <key vkey="K_1">१</key>
       <key vkey="K_2">२</key>
@@ -94,7 +94,7 @@
       <key vkey="K_LBRKT">{</key>
       <key vkey="K_RBRKT">}</key>
       <key vkey="K_BKSLASH">|</key>
-      <key vkey="K_GRAVE">~</key>
+      <key vkey="K_BKQUOTE">~</key>
       <key vkey="K_0">)</key>
       <key vkey="K_1">!</key>
       <key vkey="K_2">@</key>
