@@ -178,6 +178,8 @@ c Dedup Logic (Handle double-typing e.g. ngg -> ङ्g + g -> ङ्g -> ङ्
 'ञ' '्' 'j' + 'j' > 'ञ' '्' 'j'
 'ङ' '्' 'k' + 'K' > 'ङ' '्' 'K'
 'ङ' '्' 'g' + 'G' > 'ङ' '्' 'G'
+'ङ' '्' 'g' + 'k' > 'ङ' '्' 'k'
+'ङ' '्' 'g' + 'K' > 'ङ' '्' 'K'
 'ञ' '्' 'c' + 'C' > 'ञ' '्' 'C'
 'ञ' '्' 'j' + 'J' > 'ञ' '्' 'J'
 
@@ -218,11 +220,7 @@ c Explicit Matra Rules (Expanded to avoid KM02032)
 c 4. Latin + Latin -> Deva + Virama + Latin
 any(ConsonantKeys) + any(ConsonantKeys) > index(Consonants, 1) '्' index(ConsonantKeys, 2)
 
-c 5. Latin + Space/Punctuation/Modifiers -> Deva + Virama + Char (Word Ending)
-any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
-any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
-any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
-any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
+
 c Modifiers commit the previous consonant (with implicit a? No, Consonant buffer implies NO 'a' yet).
 c If I type 'k' then 'M'. 'k' -> 'क्' + 'M' -> 'कं' is usually expected?
 c NO. 'k' means 'k' (halant-default logic).
