@@ -98,8 +98,8 @@ SPECIAL SYMBOLS
  ।   | .            (Danda)
  ॥   | ..          (Double Danda)
  ऽ   | .a         (Avagraha)
- ॰   | q, z        (Abbreviation)
+ ॰   | q        (Abbreviation)
 
-॒  | \_           (Anudatta)
+॒ ॒ | Z           (Anudatta)
  ॑ | X           (Svarita)
  ᳚ | XX        (Deergha Svarita)

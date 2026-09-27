@@ -3,286 +3,493 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Tankini Sanskrit Automation Test</title>
+    <title>Tankini Sanskrit — Full Test Suite</title>
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: sans-serif;
-            padding: 20px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            padding: 24px;
+            background: #0f0f13;
+            color: #e0e0e0;
         }
 
-        #log {
-            white-space: pre-wrap;
-            background: #f0f0f0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin-top: 20px;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-
-        .pass {
-            color: green;
-        }
-
-        .fail {
-            color: red;
-            font-weight: bold;
+        h1 {
+            font-size: 1.6em;
+            margin-bottom: 16px;
+            color: #fff;
         }
 
         textarea {
             width: 100%;
-            height: 100px;
-            font-family: 'Times New Roman', serif;
-            font-size: 24px;
+            height: 80px;
+            font-family: 'Noto Sans Devanagari', 'Times New Roman', serif;
+            font-size: 22px;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #1a1a24;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        #controls {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
         }
 
         button {
-            padding: 10px;
-            margin: 5px;
+            padding: 8px 16px;
             cursor: pointer;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background: #1e1e2e;
+            color: #e0e0e0;
+            font-size: 13px;
         }
+        button:hover { background: #2a2a3e; }
+
+        #status {
+            padding: 10px 14px;
+            background: #1a1a24;
+            border: 1px solid #333;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        #summary {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .summary-card {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        .summary-pass { background: #0a2f1a; color: #4caf50; border: 1px solid #1b5e20; }
+        .summary-fail { background: #2f0a0a; color: #f44336; border: 1px solid #b71c1c; }
+        .summary-total { background: #1a1a2e; color: #90caf9; border: 1px solid #1565c0; }
+
+        #log {
+            white-space: pre-wrap;
+            background: #12121a;
+            padding: 14px;
+            border: 1px solid #222;
+            border-radius: 8px;
+            max-height: 600px;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .pass { color: #4caf50; }
+        .fail { color: #ff5252; font-weight: bold; }
+        .section { color: #90caf9; font-weight: bold; margin-top: 8px; }
     </style>
     <script src='https://s.keyman.com/kmw/engine/18.0.245/keymanweb.js'></script>
 </head>
 
 <body>
-    <h1>Tankini Sanskrit Test Harness</h1>
-    <textarea id="ta1" placeholder="Type here..."></textarea>
+    <h1>🕉️ Tankini Sanskrit — Full Test Suite</h1>
+    <textarea id="ta1" placeholder="Type here to test manually..."></textarea>
     <div id="controls">
-        <button onclick="window.runFailed()">Retry Failed Tests</button>
+        <button onclick="window.runAllTests()">▶ Run All Tests</button>
+        <button onclick="window.runFailed()">🔄 Retry Failed</button>
+        <button onclick="window.runManualOnly()">📋 Manual Tests Only</button>
+        <button onclick="document.getElementById('log').innerHTML=''">🗑 Clear Log</button>
     </div>
     <div id="status">Initializing...</div>
+    <div id="summary"></div>
     <div id="log"></div>
 
     <script>
         window.failedTests = [];
+        let passes = 0, fails = 0;
 
-        window.runTests = async function () {
+        // ====================================================================
+        // COMPREHENSIVE MANUAL TEST CASES
+        // ====================================================================
+        const manualTests = [
+            // --- SECTION: Latin Buffer ---
+            { seq: 'k', expect: 'k', desc: 'Buffer: k stays Latin' },
+            { seq: 't', expect: 't', desc: 'Buffer: t stays Latin' },
+            { seq: 's', expect: 's', desc: 'Buffer: s stays Latin' },
+
+            // --- SECTION: Simple Consonants (C+a) ---
+            { seq: 'ka', expect: 'क', desc: 'Simple: ka → क' },
+            { seq: 'ga', expect: 'ग', desc: 'Simple: ga → ग' },
+            { seq: 'ca', expect: 'च', desc: 'Simple: ca → च' },
+            { seq: 'ja', expect: 'ज', desc: 'Simple: ja → ज' },
+            { seq: 'Ta', expect: 'ट', desc: 'Simple: Ta → ट' },
+            { seq: 'Da', expect: 'ड', desc: 'Simple: Da → ड' },
+            { seq: 'Na', expect: 'ण', desc: 'Simple: Na → ण' },
+            { seq: 'ta', expect: 'त', desc: 'Simple: ta → त' },
+            { seq: 'da', expect: 'द', desc: 'Simple: da → द' },
+            { seq: 'na', expect: 'न', desc: 'Simple: na → न' },
+            { seq: 'pa', expect: 'प', desc: 'Simple: pa → प' },
+            { seq: 'ba', expect: 'ब', desc: 'Simple: ba → ब' },
+            { seq: 'ma', expect: 'म', desc: 'Simple: ma → म' },
+            { seq: 'ya', expect: 'य', desc: 'Simple: ya → य' },
+            { seq: 'ra', expect: 'र', desc: 'Simple: ra → र' },
+            { seq: 'la', expect: 'ल', desc: 'Simple: la → ल' },
+            { seq: 'va', expect: 'व', desc: 'Simple: va → व' },
+            { seq: 'wa', expect: 'व', desc: 'Simple: wa → व' },
+            { seq: 'sa', expect: 'स', desc: 'Simple: sa → स' },
+            { seq: 'ha', expect: 'ह', desc: 'Simple: ha → ह' },
+            { seq: 'La', expect: 'ळ', desc: 'Simple: La → ळ' },
+
+            // --- SECTION: Direct Shifted Consonants ---
+            { seq: 'Ka', expect: 'ख', desc: 'Direct: Ka → ख (shifted)' },
+            { seq: 'Ga', expect: 'घ', desc: 'Direct: Ga → घ (shifted)' },
+            { seq: 'Ca', expect: 'छ', desc: 'Direct: Ca → छ (shifted)' },
+            { seq: 'Ja', expect: 'झ', desc: 'Direct: Ja → झ (shifted)' },
+            { seq: 'Sa', expect: 'श', desc: 'Direct: Sa → श (shifted)' },
+            { seq: 'Pa', expect: 'फ', desc: 'Direct: Pa → फ (shifted)' },
+            { seq: 'Ba', expect: 'भ', desc: 'Direct: Ba → भ (shifted)' },
+
+            // --- SECTION: Aspirates (C+h) ---
+            { seq: 'kha', expect: 'ख', desc: 'Aspirate: kha → ख' },
+            { seq: 'gha', expect: 'घ', desc: 'Aspirate: gha → घ' },
+            { seq: 'cha', expect: 'छ', desc: 'Aspirate: cha → छ' },
+            { seq: 'jha', expect: 'झ', desc: 'Aspirate: jha → झ' },
+            { seq: 'Tha', expect: 'ठ', desc: 'Aspirate: Tha → ठ' },
+            { seq: 'Dha', expect: 'ढ', desc: 'Aspirate: Dha → ढ' },
+            { seq: 'tha', expect: 'थ', desc: 'Aspirate: tha → थ' },
+            { seq: 'dha', expect: 'ध', desc: 'Aspirate: dha → ध' },
+            { seq: 'pha', expect: 'फ', desc: 'Aspirate: pha → फ' },
+            { seq: 'bha', expect: 'भ', desc: 'Aspirate: bha → भ' },
+            { seq: 'sha', expect: 'श', desc: 'Aspirate: sha → श' },
+            { seq: 'Sha', expect: 'ष', desc: 'Aspirate: Sha → ष' },
+
+            // --- SECTION: Aspirate + Matra ---
+            { seq: 'khi', expect: 'खि', desc: 'Asp+Matra: khi → खि' },
+            { seq: 'ghI', expect: 'घी', desc: 'Asp+Matra: ghI → घी' },
+            { seq: 'thu', expect: 'थु', desc: 'Asp+Matra: thu → थु' },
+            { seq: 'dhU', expect: 'धू', desc: 'Asp+Matra: dhU → धू' },
+            { seq: 'she', expect: 'शे', desc: 'Asp+Matra: she → शे' },
+            { seq: 'Sho', expect: 'षो', desc: 'Asp+Matra: Sho → षो' },
+            { seq: 'bhR', expect: 'भृ', desc: 'Asp+Matra: bhR → भृ' },
+
+            // --- SECTION: Independent Vowels ---
+            { seq: 'a', expect: 'अ', desc: 'Vowel: a → अ' },
+            { seq: 'aa', expect: 'आ', desc: 'Vowel: aa → आ' },
+            { seq: 'A', expect: 'आ', desc: 'Vowel: A → आ' },
+            { seq: 'i', expect: 'इ', desc: 'Vowel: i → इ' },
+            { seq: 'ii', expect: 'ई', desc: 'Vowel: ii → ई' },
+            { seq: 'I', expect: 'ई', desc: 'Vowel: I → ई' },
+            { seq: 'ee', expect: 'ई', desc: 'Vowel: ee → ई' },
+            { seq: 'u', expect: 'उ', desc: 'Vowel: u → उ' },
+            { seq: 'uu', expect: 'ऊ', desc: 'Vowel: uu → ऊ' },
+            { seq: 'U', expect: 'ऊ', desc: 'Vowel: U → ऊ' },
+            { seq: 'oo', expect: 'ऊ', desc: 'Vowel: oo → ऊ' },
+            { seq: 'R', expect: 'ऋ', desc: 'Vowel: R → ऋ' },
+            { seq: 'RR', expect: 'ॠ', desc: 'Vowel: RR → ॠ' },
+            { seq: 'e', expect: 'ए', desc: 'Vowel: e → ए' },
+            { seq: 'E', expect: 'ए', desc: 'Vowel: E → ए' },
+            { seq: 'ai', expect: 'ऐ', desc: 'Vowel: ai → ऐ' },
+            { seq: 'o', expect: 'ओ', desc: 'Vowel: o → ओ' },
+            { seq: 'O', expect: 'ओ', desc: 'Vowel: O → ओ' },
+            { seq: 'au', expect: 'औ', desc: 'Vowel: au → औ' },
+
+            // --- SECTION: Vocalic L ---
+            { seq: 'lR', expect: 'ऌ', desc: 'Vocalic L: lR → ऌ' },
+            { seq: 'lRR', expect: 'ॡ', desc: 'Vocalic L: lRR → ॡ' },
+
+            // --- SECTION: Matras (Vowel Signs) ---
+            { seq: 'kaa', expect: 'का', desc: 'Matra: kaa → का' },
+            { seq: 'ki', expect: 'कि', desc: 'Matra: ki → कि' },
+            { seq: 'kI', expect: 'की', desc: 'Matra: kI → की' },
+            { seq: 'kii', expect: 'की', desc: 'Matra: kii → की' },
+            { seq: 'ku', expect: 'कु', desc: 'Matra: ku → कु' },
+            { seq: 'kU', expect: 'कू', desc: 'Matra: kU → कू' },
+            { seq: 'kuu', expect: 'कू', desc: 'Matra: kuu → कू' },
+            { seq: 'kR', expect: 'कृ', desc: 'Matra: kR → कृ' },
+            { seq: 'ke', expect: 'के', desc: 'Matra: ke → के' },
+            { seq: 'kE', expect: 'के', desc: 'Matra: kE → के' },
+            { seq: 'kai', expect: 'कै', desc: 'Matra: kai → कै' },
+            { seq: 'ko', expect: 'को', desc: 'Matra: ko → को' },
+            { seq: 'kO', expect: 'को', desc: 'Matra: kO → को' },
+            { seq: 'kau', expect: 'कौ', desc: 'Matra: kau → कौ' },
+            { seq: 'kee', expect: 'की', desc: 'Matra: kee → की' },
+            { seq: 'koo', expect: 'कू', desc: 'Matra: koo → कू' },
+
+            // --- SECTION: Consonant Clusters ---
+            { seq: 'kta', expect: 'क्त', desc: 'Cluster: kta → क्त' },
+            { seq: 'sta', expect: 'स्त', desc: 'Cluster: sta → स्त' },
+            { seq: 'tra', expect: 'त्र', desc: 'Cluster: tra → त्र' },
+            { seq: 'kra', expect: 'क्र', desc: 'Cluster: kra → क्र' },
+            { seq: 'pra', expect: 'प्र', desc: 'Cluster: pra → प्र' },
+            { seq: 'stha', expect: 'स्थ', desc: 'Cluster: stha → स्थ' },
+            { seq: 'stra', expect: 'स्त्र', desc: 'Cluster: stra → स्त्र' },
+
+            // --- SECTION: Modifiers ---
+            { seq: 'M', expect: 'ं', desc: 'Modifier: M → ं (Anusvara)' },
+            { seq: 'H', expect: 'ः', desc: 'Modifier: H → ः (Visarga)' },
+            { seq: 'kaM', expect: 'कं', desc: 'Modifier: kaM → कं' },
+            { seq: 'kaH', expect: 'कः', desc: 'Modifier: kaH → कः' },
+
+            // --- SECTION: Space/Punctuation Commit ---
+            { seq: 'k ', expect: 'क् ', desc: 'Commit: k+space → क् (halant+space)' },
+            { seq: 'k,', expect: 'क्,', desc: 'Commit: k+comma → क्,' },
+            { seq: 'k.', expect: 'क्।', desc: 'Commit: k+period → क्।' },
+
+            // --- SECTION: Numbers ---
+            { seq: '0', expect: '०', desc: 'Number: 0 → ०' },
+            { seq: '1', expect: '१', desc: 'Number: 1 → १' },
+            { seq: '2', expect: '२', desc: 'Number: 2 → २' },
+            { seq: '3', expect: '३', desc: 'Number: 3 → ३' },
+            { seq: '4', expect: '४', desc: 'Number: 4 → ४' },
+            { seq: '5', expect: '५', desc: 'Number: 5 → ५' },
+            { seq: '6', expect: '६', desc: 'Number: 6 → ६' },
+            { seq: '7', expect: '७', desc: 'Number: 7 → ७' },
+            { seq: '8', expect: '८', desc: 'Number: 8 → ८' },
+            { seq: '9', expect: '९', desc: 'Number: 9 → ९' },
+
+            // --- SECTION: Danda / Double Danda / Avagraha ---
+            { seq: '.', expect: '।', desc: 'Punctuation: . → । (Danda)' },
+            { seq: '..', expect: '॥', desc: 'Punctuation: .. → ॥ (Double Danda)' },
+            { seq: '.a', expect: 'ऽ', desc: 'Punctuation: .a → ऽ (Avagraha)' },
+
+            // --- SECTION: Special Symbols ---
+            { seq: 'q', expect: '॰', desc: 'Special: q → ॰ (Abbreviation)' },
+            { seq: 'OM', expect: 'ॐ', desc: 'Special: OM → ॐ (Pranava)' },
+
+            // --- SECTION: Vedic Accents ---
+            { seq: 'Z', expect: '॒', desc: 'Vedic: Z → ॒ (Anudatta)' },
+            { seq: 'X', expect: '॑', desc: 'Vedic: X → ॑ (Svarita)' },
+            { seq: 'XX', expect: '᳚', desc: 'Vedic: XX → ᳚ (Deergha Svarita)' },
+
+            // --- SECTION: Homorganic Nasals ---
+            { seq: 'ngg', expect: 'ङ्g', desc: 'Homorganic: ngg → ङ्g (buffer g)' },
+            { seq: 'ngga', expect: 'ङ्ग', desc: 'Homorganic: ngga → ङ्ग' },
+            { seq: 'ngka', expect: 'ङ्क', desc: 'Homorganic: ngka → ङ्क' },
+            { seq: 'nca', expect: 'ञ्च', desc: 'Homorganic: nca → ञ्च' },
+            { seq: 'nja', expect: 'ञ्ज', desc: 'Homorganic: nja → ञ्ज' },
+            { seq: 'nk', expect: 'न्k', desc: 'Homorganic: nk → न्k (dental n, not ङ)' },
+
+            // --- SECTION: Conjuncts ---
+            { seq: 'Y', expect: 'ञ्', desc: 'Conjunct: Y → ञ् (Nya halant)' },
+            { seq: 'Ya', expect: 'ञ', desc: 'Conjunct: Ya → ञ' },
+            { seq: 'jY', expect: 'ज्ञ्', desc: 'Conjunct: jY → ज्ञ् (Jnya halant)' },
+            { seq: 'jYa', expect: 'ज्ञ', desc: 'Conjunct: jYa → ज्ञ (Jnya)' },
+            { seq: 'gY', expect: 'ज्ञ्', desc: 'Conjunct: gY → ज्ञ् (Jnya alt)' },
+            { seq: 'gYa', expect: 'ज्ञ', desc: 'Conjunct: gYa → ज्ञ (Jnya alt)' },
+            { seq: 'x', expect: 'क्ष्', desc: 'Conjunct: x → क्ष् (Ksha halant)' },
+            { seq: 'xa', expect: 'क्ष', desc: 'Conjunct: xa → क्ष (Ksha)' },
+            { seq: 'xi', expect: 'क्षि', desc: 'Conjunct: xi → क्षि (Ksha+i)' },
+            { seq: 'jYi', expect: 'ज्ञि', desc: 'Conjunct: jYi → ज्ञि (Jnya+i)' },
+
+            // --- SECTION: Aspirate + Consonant Cluster ---
+            { seq: 'khya', expect: 'ख्य', desc: 'AspCluster: khya → ख्य' },
+            { seq: 'shva', expect: 'श्व', desc: 'AspCluster: shva → श्व' },
+            { seq: 'shra', expect: 'श्र', desc: 'AspCluster: shra → श्र' },
+
+            // --- SECTION: Words ---
+            { seq: 'namaste', expect: 'नमस्ते', desc: 'Word: namaste → नमस्ते' },
+            { seq: 'rAma', expect: 'राम', desc: 'Word: rAma → राम' },
+            { seq: 'kRShNa', expect: 'कृष्ण', desc: 'Word: kRShNa → कृष्ण' },
+            { seq: 'dharma', expect: 'धर्म', desc: 'Word: dharma → धर्म' },
+            { seq: 'yoga', expect: 'योग', desc: 'Word: yoga → योग' },
+            { seq: 'guru', expect: 'गुरु', desc: 'Word: guru → गुरु' },
+            { seq: 'deva', expect: 'देव', desc: 'Word: deva → देव' },
+            { seq: 'saMskRta', expect: 'संस्कृत', desc: 'Word: saMskRta → संस्कृत' },
+            { seq: 'shiva', expect: 'शिव', desc: 'Word: shiva → शिव' },
+            { seq: 'viShNu', expect: 'विष्णु', desc: 'Word: viShNu → विष्णु' },
+            { seq: 'brahmA', expect: 'ब्रह्मा', desc: 'Word: brahmA → ब्रह्मा' },
+            { seq: 'gaNeSa', expect: 'गणेश', desc: 'Word: gaNeSa → गणेश' },
+            { seq: 'jYAna', expect: 'ज्ञान', desc: 'Word: jYAna → ज्ञान' },
+            { seq: 'xetra', expect: 'क्षेत्र', desc: 'Word: xetra → क्षेत्र' },
+        ];
+
+        // ====================================================================
+        // KEY SIMULATION ENGINE
+        // ====================================================================
+        const codeMap = {
+            '.': 'Period', '-': 'Minus', ' ': 'Space', ',': 'Comma',
+            '?': 'Slash', '\\': 'Backslash', '\n': 'Enter',
+            '_': 'Minus', '+': 'Equal', '=': 'Equal',
+            ':': 'Semicolon', ';': 'Semicolon', '"': 'Quote', "'": 'Quote',
+            '(': 'Digit9', ')': 'Digit0', '!': 'Digit1', '@': 'Digit2',
+            '#': 'Digit3', '$': 'Digit4', '%': 'Digit5', '^': 'Digit6',
+            '&': 'Digit7', '*': 'Digit8',
+        };
+        const shiftChars = "!@#$%^&*()_+{}:\"<>?~|";
+
+        async function simulateTyping(ta, seq, kmw) {
+            kmw.setActiveElement(ta);
+            ta.value = '';
+            ta.focus();
+
+            for (let char of seq) {
+                let isUpper = (char === char.toUpperCase() && char !== char.toLowerCase()) || shiftChars.includes(char);
+                let code = codeMap[char] || ('Key' + char.toUpperCase());
+                let charCode = char.charCodeAt(0);
+                let keyCode = char.toUpperCase().charCodeAt(0);
+
+                if (char === '.') keyCode = 190;
+                if (char === '-') keyCode = 189;
+                if (char === ' ') keyCode = 32;
+                if (char === '\n') keyCode = 13;
+                if (char === '\\') keyCode = 220;
+                if (char === ',') keyCode = 188;
+                if (char === '(') keyCode = 57;
+                if (char === ')') keyCode = 48;
+
+                if (isUpper) {
+                    ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift', code: 'ShiftLeft', keyCode: 16, which: 16, shiftKey: true, bubbles: true }));
+                }
+
+                ta.dispatchEvent(new KeyboardEvent('keydown', { key: char, code: code, charCode: 0, keyCode: keyCode, which: keyCode, shiftKey: isUpper, bubbles: true }));
+                ta.dispatchEvent(new KeyboardEvent('keypress', { key: char, charCode: charCode, keyCode: charCode, which: charCode, shiftKey: isUpper, bubbles: true }));
+                ta.dispatchEvent(new KeyboardEvent('keyup', { key: char, keyCode: keyCode, which: keyCode, shiftKey: isUpper, bubbles: true }));
+
+                if (isUpper) {
+                    ta.dispatchEvent(new KeyboardEvent('keyup', { key: 'Shift', code: 'ShiftLeft', keyCode: 16, which: 16, shiftKey: false, bubbles: true }));
+                }
+
+                await new Promise(r => setTimeout(r, 80));
+            }
+
+            await new Promise(r => setTimeout(r, 40));
+        }
+
+        // ====================================================================
+        // TEST RUNNER
+        // ====================================================================
+        async function runBatch(tests, label, offset) {
             const log = document.getElementById('log');
             const ta = document.getElementById('ta1');
             const kmw = window.keyman;
 
-            if (!kmw) {
-                log.innerHTML += "<div class='fail'>KeymanWeb not found!</div>";
-                return;
-            }
+            log.innerHTML += `<div class='section'>━━━ ${label} (${tests.length} tests) ━━━</div>`;
 
-            console.log("Registering keyboard...");
-            kmw.addKeyboards({
-                id: 'Keyboard_tankini_sanskrit',
-                name: 'Tankini Sanskrit',
-                languages: {
-                    id: 'sa',
-                    name: 'Sanskrit'
-                },
-                filename: '../build/tankini_sanskrit.js?v=' + new Date().getTime()
-            });
+            for (let i = 0; i < tests.length; i++) {
+                let t = tests[i];
+                await simulateTyping(ta, t.seq, kmw);
 
-            console.log("Setting active keyboard...");
-            let activated = false;
-            for (let attempt = 0; attempt < 10; attempt++) {
-                try {
-                    await kmw.setActiveKeyboard('Keyboard_tankini_sanskrit', 'sa');
-                    activated = true;
-                    log.innerHTML += `<div>Keyboard activated.</div>`;
-                    break;
-                } catch (e) {
-                    console.log(`Attempt ${attempt + 1} failed: ${e.message}`);
-                    await new Promise(r => setTimeout(r, 50));
+                let actual = ta.value.trim();
+                let expected = t.expect.trim();
+
+                if (actual === expected) {
+                    passes++;
+                } else {
+                    log.innerHTML += `<div class='fail'>✗ FAIL: ${t.desc}\n  Input:    "${t.seq}"\n  Expected: "${expected}"\n  Got:      "${actual}"</div>`;
+                    fails++;
+                    window.failedTests.push(t);
+                }
+
+                if ((i + 1) % 20 === 0) {
+                    document.getElementById('status').innerText = `Running ${label}... (${offset + i + 1} done)`;
+                    await new Promise(r => setTimeout(r, 0));
                 }
             }
 
-            if (!activated) {
-                log.innerHTML += `<div class='fail'>Error activating keyboard: Timed out waiting for keyboard registration.</div>`;
-                return;
-            }
+            updateSummary();
+        }
 
-            const activeKp = kmw.getActiveKeyboard();
-            log.innerHTML += `<div>Active Keyboard: ${activeKp ? activeKp : 'None'}</div>`;
+        function updateSummary() {
+            const total = passes + fails;
+            document.getElementById('summary').innerHTML = `
+                <div class="summary-card summary-total">Total: ${total}</div>
+                <div class="summary-card summary-pass">✓ Pass: ${passes}</div>
+                <div class="summary-card summary-fail">✗ Fail: ${fails}</div>
+            `;
+        }
 
-            let passes = 0;
-            let fails = 0;
+        window.runAllTests = async function () {
+            const log = document.getElementById('log');
+            const kmw = window.keyman;
+            log.innerHTML = '';
+            passes = 0; fails = 0;
             window.failedTests = [];
 
-            // Fetch tests
+            // Fetch generated tests
             let response = await fetch('test_cases.json?v=' + new Date().getTime());
-            let tests = await response.json();
+            let genTests = await response.json();
 
-            // Add manual tests
-            const manualTests = [
-                { seq: 'k', expect: 'k', desc: 'Latin Buffer (k)' },
-                { seq: 'k ', expect: 'क् ', desc: 'Space Commit (k )' },
-                { seq: 'ka', expect: 'क', desc: 'Simple Consonant (ka)' },
-                { seq: 'kaa', expect: 'का', desc: 'Long Vowel (kaa)' },
-                { seq: 'ki', expect: 'कि', desc: 'Matra i (ki)' },
-                { seq: 'kI', expect: 'की', desc: 'Matra I (kI)' },
-                { seq: 'k.', expect: 'क्।', desc: 'Punctuation Commit (k.)' },
-                { seq: 'k,', expect: 'क्,', desc: 'Punctuation Commit (k,)' },
-                { seq: 'ngg', expect: 'ङ्g', desc: 'Homorganic Dedup (ngg -> nga + buffer g)' },
-                { seq: 'ngka', expect: 'ङ्क', desc: 'Homorganic Dedup (ngka -> nga + ka)' },
-                { seq: 'nk', expect: 'न्k', desc: 'Homorganic (nk -> dental n + k)' },
-                { seq: 'nc', expect: 'ञ्c', desc: 'Homorganic (nc -> nya + c)' },
-                { seq: 'Y', expect: 'ञ्', desc: 'Explicit Nya (Y)' },
-                { seq: 'Ya', expect: 'ञ', desc: 'Nya + a (Ya)' },
-                { seq: 'jY', expect: 'ज्ञ्', desc: 'Jnya (jY)' },
-                { seq: 'jYa', expect: 'ज्ञ', desc: 'Jnya + a (jYa)' },
-                { seq: 'gY', expect: 'ज्ञ्', desc: 'Jnya Alt (gY)' },
-                { seq: 'x', expect: 'क्ष्', desc: 'Ksha (x)' },
-                { seq: 'xa', expect: 'क्ष', desc: 'Ksha + a (xa)' }
-            ];
-            tests.unshift(...manualTests);
+            // Run manual tests first
+            await runBatch(manualTests, 'Manual Tests', 0);
 
-            // Batch Logic
-            const runBatch = async (batch, offset) => {
-                const codeMap = {
-                    '.': 'Period',
-                    '-': 'Minus',
-                    ' ': 'Space',
-                    ',': 'Comma',
-                    '?': 'Slash',
-                    '!': 'Digit1',
-                    '@': 'Digit2',
-                    '#': 'Digit3',
-                    '$': 'Digit4',
-                    '%': 'Digit5',
-                    '^': 'Digit6',
-                    '&': 'Digit7',
-                    '*': 'Digit8',
-                    '(': 'Digit9',
-                    ')': 'Digit0',
-                    '_': 'Minus',
-                    '+': 'Equal',
-                    '=': 'Equal',
-                    ':': 'Semicolon',
-                    ';': 'Semicolon',
-                    '"': 'Quote',
-                    "'": 'Quote',
-                    '\\': 'Backslash',
-                    '\n': 'Enter'
-                };
+            // Run generated tests in batches
+            const batchSize = 50;
+            for (let i = 0; i < genTests.length; i += batchSize) {
+                let batch = genTests.slice(i, i + batchSize);
+                await runBatch(batch, `Generated Batch ${Math.floor(i/batchSize) + 1}`, manualTests.length + i);
 
-                const shiftChars = "!@#$%^&*()_+{}:\"<>?~|";
-
-                for (let i = 0; i < batch.length; i++) {
-                    let t = batch[i];
-                    kmw.setActiveElement(ta);
-                    ta.value = '';
-                    ta.focus();
-
-                    let seq = t.seq || "";
-
-                    for (let char of seq) {
-                        let isUpper = (char === char.toUpperCase() && char !== char.toLowerCase()) || shiftChars.includes(char);
-                        let key = char;
-                        let code = codeMap[char] || ('Key' + char.toUpperCase());
-
-                        let charCode = char.charCodeAt(0);
-                        let keyCode = char.toUpperCase().charCodeAt(0);
-
-                        // Adjust keyCode
-                        if (char === '.') keyCode = 190;
-                        if (char === '-') keyCode = 189;
-                        if (char === ' ') keyCode = 32;
-                        if (char === '\n') keyCode = 13;
-                        if (char === '\\') keyCode = 220;
-                        if (codeMap[char] && codeMap[char].startsWith('Digit')) keyCode = char.charCodeAt(0);
-
-                        // Simulate Shift Down
-                        if (isUpper) {
-                            ta.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift', code: 'ShiftLeft', keyCode: 16, which: 16, shiftKey: true, bubbles: true }));
-                        }
-
-                        ta.dispatchEvent(new KeyboardEvent('keydown', { key: key, code: code, charCode: 0, keyCode: keyCode, which: keyCode, shiftKey: isUpper, bubbles: true }));
-                        ta.dispatchEvent(new KeyboardEvent('keypress', { key: key, charCode: charCode, keyCode: charCode, which: charCode, shiftKey: isUpper, bubbles: true }));
-                        ta.dispatchEvent(new KeyboardEvent('keyup', { key: key, keyCode: keyCode, which: keyCode, shiftKey: isUpper, bubbles: true }));
-
-                        // Simulate Shift Up
-                        if (isUpper) {
-                            ta.dispatchEvent(new KeyboardEvent('keyup', { key: 'Shift', code: 'ShiftLeft', keyCode: 16, which: 16, shiftKey: false, bubbles: true }));
-                        }
-
-                        await new Promise(r => setTimeout(r, 100)); // Slower typing for stability
-                    }
-
-                    await new Promise(r => setTimeout(r, 50));
-
-                    let actual = ta.value.trim();
-                    let expected = t.expect.trim();
-
-                    if (actual === expected) {
-                        // Only log failures to keep log clean for large batches
-                        // log.innerHTML += `<div class='pass'>PASS: ${t.desc}</div>`;
-                        passes++;
-                    } else {
-                        log.innerHTML += `<div class='fail'>FAIL: ${t.desc} <br>Input: ${t.seq}<br>Expected: '${expected}'<br>Got:      '${actual}'</div>`;
-                        fails++;
-                        window.failedTests.push(t);
-                    }
-
-                    // Progress update every 10 tests
-                    if ((i + 1) % 10 === 0) {
-                        document.getElementById('status').innerText = `Running... (${offset + i + 1}/${tests.length})`;
-                        await new Promise(r => setTimeout(r, 0)); // Yield to UI
-                    }
-                }
-            };
-
-            // Staged Execution Strategy: 10 -> 50 -> 100 -> All
-            const stages = [10, 50, 100, tests.length];
-            let currentOffset = 0;
-
-            for (let limit of stages) {
-                if (currentOffset >= tests.length) break;
-
-                let count = Math.min(limit - currentOffset, tests.length - currentOffset);
-                if (count <= 0) continue;
-
-                log.innerHTML += `<div><strong>Starting batch of ${count} tests (Total so far: ${currentOffset + count})...</strong></div>`;
-
-                let batch = tests.slice(currentOffset, currentOffset + count);
-                await runBatch(batch, currentOffset);
-
-                currentOffset += count;
-                let rate = passes / currentOffset;
-
-                log.innerHTML += `<div>Batch Result: ${passes}/${currentOffset} passed. (Failed: ${fails})</div>`;
-
-                // Stop if failure rate is too high (e.g. < 90%)
-                if (rate < 0.90 && currentOffset < tests.length) {
-                    log.innerHTML += `<div class='fail'>Success rate low (${Math.round(rate * 100)}%). Aborting further tests.</div>`;
+                // Abort if failure rate too high
+                let rate = passes / (passes + fails);
+                if (rate < 0.85 && (passes + fails) > 20) {
+                    log.innerHTML += `<div class='fail'>⚠ Success rate ${Math.round(rate * 100)}% — aborting remaining tests.</div>`;
                     break;
                 }
 
-                await new Promise(r => setTimeout(r, 500));
+                await new Promise(r => setTimeout(r, 300));
             }
 
-            document.getElementById('status').innerText = `Tests Complete. Total Pass: ${passes}, Fail: ${fails}`;
-            log.innerHTML += `<div><strong>Tests Complete. Total Pass: ${passes}, Fail: ${fails}</strong></div>`;
-
-            // Expose helper to retry failed
-            window.runFailed = async function () {
-                if (window.failedTests.length === 0) {
-                    alert("No failed tests to retry.");
-                    return;
-                }
-                log.innerHTML = "";
-                log.innerHTML += `<div><strong>Retrying ${window.failedTests.length} failed tests...</strong></div>`;
-                passes = 0; fails = 0;
-                let retryBatch = [...window.failedTests]; // copy
-                window.failedTests = []; // reset for new failures
-                await runBatch(retryBatch, 0);
-                document.getElementById('status').innerText = `Retry Complete. Pass: ${passes}, Fail: ${fails}`;
-                log.innerHTML += `<div><strong>Retry Complete. Pass: ${passes}, Fail: ${fails}</strong></div>`;
-            };
+            document.getElementById('status').innerText = `Complete. Pass: ${passes}, Fail: ${fails}`;
+            log.innerHTML += `<div class='section'>━━━ FINAL: Pass ${passes}, Fail ${fails} ━━━</div>`;
         };
 
+        window.runManualOnly = async function () {
+            const log = document.getElementById('log');
+            log.innerHTML = '';
+            passes = 0; fails = 0;
+            window.failedTests = [];
+            await runBatch(manualTests, 'Manual Tests', 0);
+            document.getElementById('status').innerText = `Manual Tests Complete. Pass: ${passes}, Fail: ${fails}`;
+            log.innerHTML += `<div class='section'>━━━ FINAL: Pass ${passes}, Fail ${fails} ━━━</div>`;
+        };
+
+        window.runFailed = async function () {
+            if (window.failedTests.length === 0) {
+                alert("No failed tests to retry.");
+                return;
+            }
+            const log = document.getElementById('log');
+            log.innerHTML = '';
+            let retryBatch = [...window.failedTests];
+            passes = 0; fails = 0;
+            window.failedTests = [];
+            await runBatch(retryBatch, 'Retry Failed', 0);
+            document.getElementById('status').innerText = `Retry Complete. Pass: ${passes}, Fail: ${fails}`;
+        };
+
+        // ====================================================================
+        // INITIALIZATION
+        // ====================================================================
         window.onload = function () {
             if (window.keyman) {
                 window.keyman.init({ attachType: 'auto' }).then(function () {
-                    setTimeout(window.runTests, 1000);
+                    const kmw = window.keyman;
+                    kmw.addKeyboards({
+                        id: 'Keyboard_tankini_sanskrit',
+                        name: 'Tankini Sanskrit',
+                        languages: { id: 'sa', name: 'Sanskrit' },
+                        filename: '../build/tankini_sanskrit.js?v=' + new Date().getTime()
+                    });
+
+                    let attempts = 0;
+                    const activate = setInterval(async () => {
+                        attempts++;
+                        try {
+                            await kmw.setActiveKeyboard('Keyboard_tankini_sanskrit', 'sa');
+                            clearInterval(activate);
+                            document.getElementById('status').innerText = 'Keyboard loaded. Click "Run All Tests" to start.';
+                        } catch (e) {
+                            if (attempts > 20) {
+                                clearInterval(activate);
+                                document.getElementById('status').innerText = 'Failed to activate keyboard: ' + e.message;
+                            }
+                        }
+                    }, 100);
                 });
             } else {
-                document.getElementById('status').innerText = "Keyman not loaded";
+                document.getElementById('status').innerText = "KeymanWeb not loaded.";
             }
         };
     </script>

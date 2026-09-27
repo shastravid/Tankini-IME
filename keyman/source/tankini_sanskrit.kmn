@@ -8,115 +8,146 @@ store(&LAYOUTFILE) 'tankini_sanskrit.keyman-touch-layout'
 
 begin Unicode > use(main)
 
-c ----------------------------------------------------------------------------
-c Stores
-c ----------------------------------------------------------------------------
+c ============================================================================
+c STORES
+c ============================================================================
 
-store(VowelKeys)    'a'    'i'    'u'    'R'    'e'    'o'    'A'    'I'    'U'    'E'    'O'
-store(Vowels)       'अ'    'इ'    'उ'    'ऋ'    'ए'    'ओ'    'आ'    'ई'    'ऊ'    'ए'    'ओ'
-
-store(MatraKeys)    'A'    'i'    'I'    'u'    'U'    'R'    'e'    'E'    'o'    'O'
-store(Matras)       'ा'    'ि'    'ी'    'ु'    'ू'    'ृ'    'े'    'े'    'ो'    'ो'
-
-c Consonant Keys (For Buffer Logic)
+c Consonant Latin Keys (Buffer Logic)
 store(ConsonantKeys) 'k' 'g' 'c' 'j' 'T' 'D' 'N' 't' 'd' 'n' 'p' 'b' 'm' 'y' 'r' 'l' 'v' 'w' 's' 'h' 'L' 'K' 'G' 'C' 'J' 'S' 'P' 'B'
 store(Consonants)    'क' 'ग' 'च' 'ज' 'ट' 'ड' 'ण' 'त' 'द' 'न' 'प' 'ब' 'म' 'य' 'र' 'ल' 'व' 'व' 'स' 'ह' 'ळ' 'ख' 'घ' 'छ' 'झ' 'श' 'फ' 'भ'
 
-c All Devanagari Consonants (For Matra/Vowel Context Rules)
+c Matra Keys and Matras (applied after consonants)
+store(MatraKeys)    'A'    'i'    'I'    'u'    'U'    'R'    'e'    'E'    'o'    'O'
+store(Matras)       'ा'    'ि'    'ी'    'ु'    'ू'    'ृ'    'े'    'े'    'ो'    'ो'
+
+c All Devanagari Consonants (for context matching after Deva output)
 store(AllDevaConsonants) 'क' 'ख' 'ग' 'घ' 'ङ' 'च' 'छ' 'ज' 'झ' 'ञ' 'ट' 'ठ' 'ड' 'ढ' 'ण' 'त' 'थ' 'द' 'ध' 'न' 'प' 'फ' 'ब' 'भ' 'म' 'य' 'र' 'ल' 'व' 'श' 'ष' 'स' 'ह' 'क्ष' 'ज्ञ' 'ळ'
 
+c Numbers
 store(NumberKeys) '0'..'9'
 store(Numbers)    '०'..'९'
 
-store(BKSP) U+0008
-
 group(main) using keys
 
-c ----------------------------------------------------------------------------
-c ----------------------------------------------------------------------------
-c Punctuation Commit Rules (Explicitly at Top)
-c ----------------------------------------------------------------------------
-any(ConsonantKeys) + ' ' > index(Consonants, 1) '्' ' '
+c ============================================================================
+c SECTION 1: PUNCTUATION COMMIT RULES
+c (When consonant is in buffer and punctuation/space typed, commit it first)
+c ============================================================================
+
+c Space commits consonant with halant
 any(ConsonantKeys) + [K_SPACE] > index(Consonants, 1) '्' ' '
-any(ConsonantKeys) + ',' > index(Consonants, 1) '्' ','
+
+c Comma commits consonant with halant
 any(ConsonantKeys) + [K_COMMA] > index(Consonants, 1) '्' ','
-any(ConsonantKeys) + '.' > index(Consonants, 1) '्' '।'
-any(ConsonantKeys) + [K_PERIOD] > index(Consonants, 1) '्' '। '
-any(ConsonantKeys) + U+000D > index(Consonants, 1) '्' U+000D
-'k' + ',' > 'क' '्' ','  c Explicit fallback for k
 
-c Default Punctuation Output (if no context)
-+ ',' > ','
-+ '.' > '।'
+c Period commits consonant with halant + danda
+any(ConsonantKeys) + [K_PERIOD] > index(Consonants, 1) '्' '।'
 
-c ----------------------------------------------------------------------------
-c Vowels (Independent)
-c ----------------------------------------------------------------------------
+c Enter commits consonant with halant
+any(ConsonantKeys) + [K_ENTER] > index(Consonants, 1) '्' U+000D
+
+c Hyphen commits consonant with halant (for compound words)
+any(ConsonantKeys) + [K_HYPHEN] > index(Consonants, 1) '्' '-'
+
+c Parentheses commit consonant with halant
+any(ConsonantKeys) + '(' > index(Consonants, 1) '्' '('
+any(ConsonantKeys) + ')' > index(Consonants, 1) '्' ')'
+
+c Default punctuation (no consonant context)
++ [K_COMMA] > ','
++ [K_PERIOD] > '।'
++ [K_HYPHEN] > '-'
++ '(' > '('
++ ')' > ')'
+
+c ============================================================================
+c SECTION 2: NUMBERS
+c ============================================================================
+
++ any(NumberKeys) > index(Numbers, 1)
+
+c ============================================================================
+c SECTION 3: INDEPENDENT VOWELS
+c ============================================================================
+
 + 'a' > 'अ'
 'अ' + 'a' > 'आ'
 + 'A' > 'आ'
+
 + 'i' > 'इ'
 'इ' + 'i' > 'ई'
 + 'I' > 'ई'
-'e' + 'e' > 'ई'  c This matches literal 'e'. Since +e outputs 'ए', we need 'ए'+e
-'ए' + 'e' > 'ई'
+
 + 'u' > 'उ'
 'उ' + 'u' > 'ऊ'
 + 'U' > 'ऊ'
-'o' + 'o' > 'ऊ'
-'ओ' + 'o' > 'ऊ'
+
 + 'R' > 'ऋ'
 'ऋ' + 'R' > 'ॠ'
+
 + 'e' > 'ए'
 + 'E' > 'ए'
+'ए' + 'e' > 'ई'
 
 + 'o' > 'ओ'
 + 'O' > 'ओ'
+'ओ' + 'o' > 'ऊ'
 
+c Diphthongs from 'अ'
 'अ' + 'i' > 'ऐ'
 'अ' + 'u' > 'औ'
 
-c 'l' + 'R' > 'ऌ' c Handled below
+c ============================================================================
+c SECTION 4: VOCALIC L (lR/lRR)
+c Must come BEFORE generic consonant rules since 'l' is a ConsonantKey
+c ============================================================================
 
-c ----------------------------------------------------------------------------
-c Modifiers
-c ----------------------------------------------------------------------------
+'l' + 'R' > 'ऌ'
+'ऌ' + 'R' > 'ॡ'
+
+c ============================================================================
+c SECTION 5: MODIFIERS & SPECIAL SYMBOLS
+c ============================================================================
+
 + 'M' > 'ं'
 + 'H' > 'ः'
-+ '\' > '्'
-'ं' + '.' > 'ँ'
++ [K_BKSLASH] > '्'
+'ं' + [K_PERIOD] > 'ँ'
 
-c ----------------------------------------------------------------------------
-c Special & Vedic
-c ----------------------------------------------------------------------------
-+ 'q' > '॰'
-+ 'z' > '॰'
-+ '.' > '।'
-'।' + '.' > '॥'
+c Danda / Double Danda / Avagraha
+'।' + [K_PERIOD] > '॥'
 '।' + 'a' > 'ऽ'
-'.' + 'a' > 'ऽ'
+
+c Abbreviation
++ 'q' > '॰'
+
+c OM (Pranava)
 'ओ' + 'M' > 'ॐ'
 'औ' + 'm' > 'ॐ'
-'आ' 'ऊ' + 'M' > 'ॐ'
 
-+ '_' > '॒'
+c Vedic Accents
++ 'Z' > '॒'
 + 'X' > '॑'
 '॑' + 'X' > '᳚'
 
-c ----------------------------------------------------------------------------
-c Latin-Buffer Logic (Solves Mac Backspace Bug)
-c ----------------------------------------------------------------------------
+c ============================================================================
+c SECTION 6: LATIN-BUFFER CONSONANT LOGIC
+c (Core of Tankini: consonant keys output Latin first, then resolve)
+c ============================================================================
 
-c 1. Latin Output for Consonants (Initial State)
+c 6.1 Initial Latin output for any consonant key
 + any(ConsonantKeys) > index(ConsonantKeys, 1)
 
-c 2. Latin + 'a' -> Devanagari (Explicit A)
+c 6.2 Latin + 'a' -> Devanagari (implicit 'a' vowel)
 any(ConsonantKeys) + 'a' > index(Consonants, 1)
 
-c 3. Latin + Matra -> Deva + Matra
+c 6.3 Latin + Matra -> Devanagari + Matra
 any(ConsonantKeys) + any(MatraKeys) > index(Consonants, 1) index(Matras, 2)
 
-c 3.5 Aspirates (Specific Latin + h -> Deva Aspirate + Deadkey)
+c ============================================================================
+c SECTION 7: ASPIRATES (Latin + h -> Aspirated Consonant + Deadkey)
+c ============================================================================
+
 'k' + 'h' > 'ख' deadkey(asp)
 'g' + 'h' > 'घ' deadkey(asp)
 'c' + 'h' > 'छ' deadkey(asp)
@@ -130,60 +161,51 @@ c 3.5 Aspirates (Specific Latin + h -> Deva Aspirate + Deadkey)
 's' + 'h' > 'श' deadkey(asp)
 'S' + 'h' > 'ष' deadkey(asp)
 
-c 3.6 Deadkey Handling
-c If 'a' typed after aspirate -> Remove deadkey, Keep Aspirate (Implicit 'a').
+c shh -> ष (alternate: sh then h re-triggers to give ष)
+c shh -> ष handled by: after sh produces श+deadkey(asp), typing 'h' again
+c Since 'h' is in ConsonantKeys, the generic rule deadkey(asp)+ConsonantKeys fires,
+c outputting '्' + 'h'. The 'h' buffer then stays for next input.
+c For explicit Sh support, 'S'+'h' -> ष+deadkey is already present above.
+
+c Deadkey(asp) follow-up rules
 deadkey(asp) + 'a' > nul
-c If Matra -> Add Matra
 deadkey(asp) + any(MatraKeys) > index(Matras, 2)
-c If Consonant typed after aspirate -> Remove deadkey, Insert Virama, Add New Consonant (Latin).
 deadkey(asp) + any(ConsonantKeys) > '्' index(ConsonantKeys, 2)
-c If Modifier -> Add Modifier
 deadkey(asp) + 'M' > 'ं'
 deadkey(asp) + 'H' > 'ः'
+deadkey(asp) + [K_BKSLASH] > '्'
+deadkey(asp) + [K_SPACE] > '्' ' '
+deadkey(asp) + [K_COMMA] > '्' ','
+deadkey(asp) + [K_PERIOD] > '्' '।'
+deadkey(asp) + [K_HYPHEN] > '्' '-'
+deadkey(asp) + '(' > '्' '('
+deadkey(asp) + ')' > '्' ')'
 
 
 
-c Jnya Formation (j/g + Y) - Must be BEFORE generic Y rules
+c ============================================================================
+c SECTION 8: CONJUNCTS (jY/gY -> ज्ञ, x -> क्ष)
+c ============================================================================
+
+c Jnya Formation (j/g + Y)
 'j' + 'Y' > 'ज्ञ' '्'
 'g' + 'Y' > 'ज्ञ' '्'
 'ज्ञ' '्' + 'a' > 'ज्ञ'
 
-c Explicit Y (Nya) - Halant Default / Buffer
+c Explicit Nya (Y alone)
 'n' + 'Y' > 'ञ' '्'
 + 'Y' > 'ञ' '्'
 'ञ' '्' + 'a' > 'ञ'
 any(ConsonantKeys) + 'Y' > index(Consonants, 1) '्' 'ञ' '्'
 deadkey(asp) + 'Y' > '्' 'ञ' '्'
 
-c Explicit x (Ksha) - Halant Default / Buffer
+c Ksha Formation (x)
 + 'x' > 'क्ष' '्'
 'क्ष' '्' + 'a' > 'क्ष'
 any(ConsonantKeys) + 'x' > index(Consonants, 1) '्' 'क्ष' '्'
 deadkey(asp) + 'x' > '्' 'क्ष' '्'
 
-c Homorganic Nasals (Preserve Buffer Key for Context)
-c 'n' + 'k' > 'ङ' '्' 'k'  c Removed to allow dental n+k (varNAnkramAn)
-'n' + 'g' > 'ङ' '्' 'g'
-'n' + 'c' > 'ञ' '्' 'c'
-'n' + 'j' > 'ञ' '्' 'j'
-'n' + 'G' > 'ङ' '्' 'G'
-'n' + 'K' > 'ङ' '्' 'K'
-'n' + 'C' > 'ञ' '्' 'C'
-'n' + 'J' > 'ञ' '्' 'J'
-
-c Dedup Logic (Handle double-typing e.g. ngg -> ङ्g + g -> ङ्g -> ङ्ग)
-'ङ' '्' 'k' + 'k' > 'ङ' '्' 'k'
-'ङ' '्' 'g' + 'g' > 'ङ' '्' 'g'
-'ञ' '्' 'c' + 'c' > 'ञ' '्' 'c'
-'ञ' '्' 'j' + 'j' > 'ञ' '्' 'j'
-'ङ' '्' 'k' + 'K' > 'ङ' '्' 'K'
-'ङ' '्' 'g' + 'G' > 'ङ' '्' 'G'
-'ङ' '्' 'g' + 'k' > 'ङ' '्' 'k'
-'ङ' '्' 'g' + 'K' > 'ङ' '्' 'K'
-'ञ' '्' 'c' + 'C' > 'ञ' '्' 'C'
-'ञ' '्' 'j' + 'J' > 'ञ' '्' 'J'
-
-c Explicit Matra Rules (Expanded to avoid KM02032)
+c Matra rules for ञ (Explicit, avoids KM02032)
 'ञ' '्' + 'A' > 'ञ' 'ा'
 'ञ' '्' + 'i' > 'ञ' 'ि'
 'ञ' '्' + 'I' > 'ञ' 'ी'
@@ -195,6 +217,7 @@ c Explicit Matra Rules (Expanded to avoid KM02032)
 'ञ' '्' + 'o' > 'ञ' 'ो'
 'ञ' '्' + 'O' > 'ञ' 'ो'
 
+c Matra rules for ज्ञ
 'ज्ञ' '्' + 'A' > 'ज्ञ' 'ा'
 'ज्ञ' '्' + 'i' > 'ज्ञ' 'ि'
 'ज्ञ' '्' + 'I' > 'ज्ञ' 'ी'
@@ -206,6 +229,7 @@ c Explicit Matra Rules (Expanded to avoid KM02032)
 'ज्ञ' '्' + 'o' > 'ज्ञ' 'ो'
 'ज्ञ' '्' + 'O' > 'ज्ञ' 'ो'
 
+c Matra rules for क्ष
 'क्ष' '्' + 'A' > 'क्ष' 'ा'
 'क्ष' '्' + 'i' > 'क्ष' 'ि'
 'क्ष' '्' + 'I' > 'क्ष' 'ी'
@@ -217,52 +241,80 @@ c Explicit Matra Rules (Expanded to avoid KM02032)
 'क्ष' '्' + 'o' > 'क्ष' 'ो'
 'क्ष' '्' + 'O' > 'क्ष' 'ो'
 
-c 4. Latin + Latin -> Deva + Virama + Latin
+c ============================================================================
+c SECTION 9: HOMORGANIC NASALS
+c (n + guttural/palatal -> appropriate nasal)
+c ============================================================================
+
+c n + velar -> ङ (but NOT n+k, to allow dental n+k as in varNAnkramAn)
+'n' + 'g' > 'ङ' '्' 'g'
+'n' + 'G' > 'ङ' '्' 'G'
+'n' + 'K' > 'ङ' '्' 'K'
+
+c n + palatal -> ञ
+'n' + 'c' > 'ञ' '्' 'c'
+'n' + 'j' > 'ञ' '्' 'j'
+'n' + 'C' > 'ञ' '्' 'C'
+'n' + 'J' > 'ञ' '्' 'J'
+
+c Dedup logic (ngg -> ङ्g, ngkg -> ङ्k+g, etc.)
+'ङ' '्' 'k' + 'k' > 'ङ' '्' 'k'
+'ङ' '्' 'g' + 'g' > 'ङ' '्' 'g'
+'ञ' '्' 'c' + 'c' > 'ञ' '्' 'c'
+'ञ' '्' 'j' + 'j' > 'ञ' '्' 'j'
+'ङ' '्' 'k' + 'K' > 'ङ' '्' 'K'
+'ङ' '्' 'g' + 'G' > 'ङ' '्' 'G'
+'ङ' '्' 'g' + 'k' > 'ङ' '्' 'k'
+'ङ' '्' 'g' + 'K' > 'ङ' '्' 'K'
+'ङ' '्' 'g' + 'x' > 'ङ' '्' 'क्ष' '्'
+'ङ' '्' 'g' + [K_HYPHEN] > 'ङ' '्' '-'
+'ञ' '्' 'c' + 'C' > 'ञ' '्' 'C'
+'ञ' '्' 'j' + 'J' > 'ञ' '्' 'J'
+
+c ============================================================================
+c SECTION 10: CONSONANT CLUSTER (Latin + Latin -> Deva + Virama + Latin)
+c ============================================================================
+
 any(ConsonantKeys) + any(ConsonantKeys) > index(Consonants, 1) '्' index(ConsonantKeys, 2)
 
+c ============================================================================
+c SECTION 11: MODIFIER AFTER CONSONANT BUFFER
+c (kM -> कं, kH -> कः — implicit 'a' before modifier)
+c ============================================================================
 
-c Modifiers commit the previous consonant (with implicit a? No, Consonant buffer implies NO 'a' yet).
-c If I type 'k' then 'M'. 'k' -> 'क्' + 'M' -> 'कं' is usually expected?
-c NO. 'k' means 'k' (halant-default logic).
-c So 'k'+'M' -> 'क्' + 'ं' (invalid).
-c Usually 'a'+'M' -> 'अं'. 'ka' + 'M' -> 'कं'.
-c If I type 'k' (Latin) then 'M'. 'k' SHOULD become 'क' (Implicit A) + 'ं'?
-c Standard ITRANS: 'kM' -> 'कं'. 'k' implies 'ka' context for modifiers?
-c Let's assume 'k'+'M' -> 'कं'.
 any(ConsonantKeys) + 'M' > index(Consonants, 1) 'ं'
 any(ConsonantKeys) + 'H' > index(Consonants, 1) 'ः'
 
-c 6. Double Vowels (aa/ii/uu)
-c 6. Double Vowels (aa/ii/uu)
-c aa -> A (After full consonant)
-any(AllDevaConsonants) + 'a' > context 'ा'
-'अ' + 'a' > 'आ'
+c ============================================================================
+c SECTION 12: DOUBLE VOWELS AFTER DEVANAGARI CONSONANT
+c (consonant already resolved to Devanagari, now handle aa/ii/uu/ee/oo/ai/au)
+c ============================================================================
 
-c ai -> Ai (matra)
+c aa -> A (long vowel matra after consonant)
+any(AllDevaConsonants) + 'a' > context 'ा'
+
+c ai -> diphthong matra
 any(AllDevaConsonants) + 'i' > context 'ै'
 
-c au -> Au (matra)
+c au -> diphthong matra
 any(AllDevaConsonants) + 'u' > context 'ौ'
 
-c ii -> I (matra)
-c Replace Consonant+ShortMatra with Consonant+LongMatra
+c ii -> I (short matra -> long matra)
 any(AllDevaConsonants) 'ि' + 'i' > index(AllDevaConsonants, 1) 'ी'
 
-c uu -> U (matra)
-c Replace Consonant+ShortMatra with Consonant+LongMatra
+c uu -> U (short matra -> long matra)
 any(AllDevaConsonants) 'ु' + 'u' > index(AllDevaConsonants, 1) 'ू'
 'ू' + 'u' > context
 
-c ee -> I (matra, alt)
+c ee -> I (alternate for ii)
 any(AllDevaConsonants) 'े' + 'e' > index(AllDevaConsonants, 1) 'ी'
 
-c oo -> U (matra, alt)
+c oo -> U (alternate for uu)
 any(AllDevaConsonants) 'ो' + 'o' > index(AllDevaConsonants, 1) 'ू'
 
-c 7. Explicit Virama (Commit)
-any(ConsonantKeys) + '\' > index(Consonants, 1) '्'
-deadkey(asp) + '\' > '्'
+c ============================================================================
+c SECTION 13: EXPLICIT VIRAMA (backslash commit)
+c ============================================================================
 
-c Special Special
-c Numbers
-+ any(NumberKeys) > index(Numbers, 1)
+any(ConsonantKeys) + [K_BKSLASH] > index(Consonants, 1) '्'
+c Note: deadkey(asp) + [K_BKSLASH] is handled in Section 7 (aspirate deadkey rules)
